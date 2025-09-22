@@ -1,0 +1,133 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% block title %}Clubs | YCBN Uganda{% endblock %}
+{% block content %}
+
+
+<!--==============================
+Clubs Area  
+==============================-->
+<section class="space" id="clubs-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="title-area text-center mb-60">
+                    <span class="sub-title">Youth Clubs</span>
+                    <h2 class="sec-title">Empowering Communities Through School-Based Clubs</h2>
+                    <p class="sec-text">Our school-based clubs are at the heart of youth development, providing platforms for leadership, skill-building, and community engagement across Uganda.</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if clubs %}
+        <div class="row gy-30 gx-30">
+            {% for club in clubs %}
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card style3 club-card">
+                    <!-- Club Image/Thumbnail -->
+                    <div class="box-thumb">
+                        {% if club.image %}
+                            {% if club.image.url %}
+                                <img src="{{ club.image.url }}" alt="{{ club.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+                            {% else %}
+                                <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
+                            {% endif %}
+                        {% else %}
+                            <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Icon Container positioned between image and content -->
+                    <div class="club-icon-container">
+                        <div class="box-icon">
+                            {% if club.icon %}
+                                {% if club.icon.url %}
+                                    <img src="{{ club.icon.url }}" alt="{{ club.title }} Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                                    <i class="fas fa-users" style="display: none;"></i>
+                                {% else %}
+                                    <i class="fas fa-users"></i>
+                                {% endif %}
+                            {% else %}
+                                <i class="fas fa-users"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Club Content -->
+                    <div class="box-content">
+                        <h3 class="box-title">
+                            <a href="{% url 'charity:clubs' %}">{{ club.title }}</a>
+                        </h3>
+                        
+                        <!-- School Association -->
+                        {% if club.school %}
+                        <div class="club-school mb-2">
+                            <i class="fas fa-school text-theme"></i>
+                            <span class="school-text">
+                                <a href="{% url 'charity:school_detail' club.school.id %}" class="text-decoration-none">{{ club.school.name }}</a>
+                            </span>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Club Description -->
+                        {% if club.description %}
+                        <p class="box-text">
+                            {{ club.description|truncatewords:20 }}
+                        </p>
+                        {% else %}
+                        <p class="box-text">
+                            Join this dynamic club to develop leadership skills, engage with your community, and make a lasting impact.
+                        </p>
+                        {% endif %}
+                        
+                        <!-- Club Details -->
+                        <div class="club-info mt-3">
+                            {% if club.coordinator %}
+                            <small class="text-muted d-block">
+                                <i class="fas fa-user me-1"></i>Coordinator: {{ club.coordinator }}
+                            </small>
+                            {% endif %}
+                            
+                            {% if club.member_count %}
+                            <small class="text-muted d-block">
+                                <i class="fas fa-users me-1"></i>{{ club.member_count }} members
+                            </small>
+                            {% endif %}
+                            
+                            {% if club.meeting_schedule %}
+                            <small class="text-muted d-block">
+                                <i class="fas fa-calendar me-1"></i>{{ club.meeting_schedule }}
+                            </small>
+                            {% endif %}
+                            
+                            <small class="text-muted d-block mt-1">
+                                <i class="fas fa-clock me-1"></i>Established: {{ club.created_at|date:"Y" }}
+                            </small>
+                            
+                            {% if not club.is_active %}
+                            <span class="badge bg-secondary mt-2">Inactive</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- No Clubs Message -->
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <div class="empty-state">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No Clubs Available</h4>
+                        <p class="text-muted">We're working on establishing more youth clubs. Check back soon for updates!</p>
+                        <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

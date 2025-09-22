@@ -1,0 +1,56 @@
+/* YCBN Custom Social Media Icons Styling */
+.th-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+/* Social Media Icon Colors */
+.th-social a[href*="facebook"] {
+    background: linear-gradient(135deg, #1877f2, #42a5f5);
+}
+
+.th-social a[href*="twitter"] {
+    background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+}
+
+.th-social a[href*="instagram"] {
+    background: linear-gradient(135deg, #e4405f, #f77737, #fccc63);
+}
+
+.th-social a[href*="linkedin"] {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.th-social a[href*="youtube"] {
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+}
+
+.th-social a[href*="tiktok"] {
+    background: linear-gradient(135deg, #000000, #ff0050);
+}
+
+.th-social a[href*="whatsapp"] {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.th-social a[href*="telegram"] {
+    background: linear-gradient(135deg, #0088cc, #229ed9);
+}
+
+/* Hover Effects */
+.th-social a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Icon Colors */
+.th-social a i {
+    color: white;
+    font-size: 18px;
+}

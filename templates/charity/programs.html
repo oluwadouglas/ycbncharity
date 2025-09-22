@@ -1,0 +1,170 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% block title %}Programs | YCBN Uganda{% endblock %}
+{% block content %}
+<!--==============================
+Programs Area  
+==============================-->
+<section class="space overflow-hidden" data-bg-src="{% static 'assets/img/bg/gray-bg3.png' %}" id="programs-sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="title-area text-center">
+                    <span class="sub-title">Our Programs</span>
+                    <h2 class="sec-title">Empowering Uganda's Youth Through Comprehensive Development Programs</h2>
+                    <p class="sec-text">Building capacity through Education & Skills, Health & Awareness, Guidance & Counseling, School-Based Clubs, and Community Engagement initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% for category in categories %}
+    <div class="container th-container2 mb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-7">
+                <div class="title-area text-center">
+                    <span class="sub-title after-none">{{ category.name }}</span>
+                    {% if category.description %}
+                        <p class="sec-text">{{ category.description }}</p>
+                    {% endif %}
+                    <p class="category-count text-muted">({{ category.programs.count }} programs available)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-area">
+            <div class="row gy-30 gx-30 justify-content-center">
+                {% for program in category.programs.all %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="donation-card style4 program-card" data-theme-color="{% cycle '' 'var(--theme-color2)' '#FF5528' '#122F2A' %}">
+                        <div class="donation-card-shape" data-mask-src="{% static 'assets/img/donation/donation-card-bg-shape1-1.png' %}"></div>
+                        <div class="box-thumb">
+                            {% if program.image %}
+                                <img src="{{ program.image.url }}" alt="{{ program.title }}">
+                            {% else %}
+                                <img src="{% static 'assets/img/donation/donation4-1.png' %}" alt="{{ program.title }}">
+                            {% endif %}
+                        </div>
+                        <h3 class="box-title"><a href="{% url 'charity:program_detail' program.id %}">{{ program.title }}</a></h3>
+                        <div class="box-content">
+                            <h4 class="subtitle">{{ category.name }}</h4>
+                            
+                            <!-- Program Description -->
+                            <div class="program-description">
+                                <p class="program-text">{{ program.description|default:"Join this comprehensive program designed to empower youth and build essential life skills."|truncatewords:20 }}</p>
+                            </div>
+                            
+                            <a href="{% url 'charity:program_detail' program.id %}" class="th-btn style6">Learn More <i class="fas fa-arrow-up-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <h4 class="text-muted">No Programs Available</h4>
+                        <p class="text-muted">No programs available in this category yet. Stay tuned for upcoming Leadership & Life Skills, Entrepreneurship & Innovation, Digital Literacy & IT Skills, and more.</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="container">
+        <div class="text-center py-5">
+            <h3 class="text-muted">Coming Soon</h3>
+            <p class="text-muted">No program categories available at the moment. YCBN Uganda is working hard to bring you comprehensive youth development programs!</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- Custom CSS for Program Cards -->
+<style>
+.program-card .program-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.program-card .stat-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.program-card .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2px;
+}
+
+.program-card .stat-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.program-card .program-text {
+    color: rgba(15, 23, 42, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+.program-card .box-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.program-card .box-title a:hover {
+    color: var(--theme-color);
+}
+
+.category-count {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .program-card .program-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .program-card .stat-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .program-card .stat-label {
+        margin-bottom: 0;
+    }
+}
+
+/* Animation for progress bars */
+.program-card .progress-bar {
+    animation: progressAnimation 2s ease-in-out;
+}
+
+@keyframes progressAnimation {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: var(--progress-width, 85%);
+    }
+}
+</style>
+{% endblock %}

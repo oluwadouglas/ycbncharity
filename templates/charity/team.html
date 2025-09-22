@@ -1,0 +1,73 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/bg/breadcumb-bg.jpg' %}" data-overlay="global" data-opacity="8">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">{{ page_title|default:"Page" }}</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{% url 'charity:home' %}">Home</a></li>
+                <li>{{ page_title|default:"Page" }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="space" id="team-sec">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title after-none before-none"><i class="far fa-heart text-theme"></i> Our Volunteer</span>
+                <h2 class="sec-title">Meet The Optimistic Volunteer</h2>
+            </div>
+            <div class="row gy-40">
+                {% for member in youth_leaders %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="th-team team-card3">
+                        <div class="team-img">
+                            {% if member.image %}
+                                <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                            {% else %}
+                                <img src="{% static 'assets/img/team/default.png' %}" alt="{{ member.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="team-card-content" style="padding-bottom: 10px;">
+                            <h3 class="box-title" style="margin-bottom: 4px;"><a href="#">{{ member.name }}</a></h3>
+                            <span class="team-desig" style="margin-top: 0; font-size: 15px;">{{ member.title|default:'Volunteer' }}</span>
+                            {% if member.social_links %}
+                            <div class="th-social style2" style="margin-top: 8px;">
+                                {% for key, url in member.social_links.items %}
+                                    <a target="_blank" href="{{ url }}"><i class="fab fa-{{ key }}"></i></a>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <style>
+            /* Responsive fix for volunteer cards */
+            @media (max-width: 767.98px) {
+                .th-team.team-card3 .team-card-content {
+                    padding: 12px 8px 10px 8px !important;
+                }
+                .th-team.team-card3 .box-title {
+                    font-size: 1.1rem !important;
+                    margin-bottom: 2px !important;
+                }
+                .th-team.team-card3 .team-desig {
+                    font-size: 0.95rem !important;
+                    margin-top: 0 !important;
+                }
+            }
+            </style>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}

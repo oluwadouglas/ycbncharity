@@ -1,0 +1,114 @@
+{% load static %}
+<!-- Impact Highlights Section -->
+{% if impact_highlights %}
+<section class="impact-highlights-section space-top space-bottom" id="impact-highlights">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-12">
+                <div class="title-area text-center mb-50">
+                    <span class="sub-title">
+                        <i class="fas fa-trophy me-2"></i>
+                        Our Achievements
+                    </span>
+                    <h2 class="sec-title">Making a Real Difference</h2>
+                    <p class="sec-text">Every number represents lives touched, communities strengthened, and futures brightened through our dedicated efforts.</p>
+                </div>
+            </div>
+        </div>
+        
+        {% for section in impact_highlights %}
+        <div class="impact-story-card mb-5">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="impact-story-content">
+                        <div class="story-header mb-4">
+                            <span class="story-badge">Impact Story #{{ forloop.counter }}</span>
+                            <h3 class="story-title">{{ section.title }}</h3>
+                            {% if section.subtitle %}
+                            <h5 class="story-subtitle">{{ section.subtitle }}</h5>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="story-description mb-4">
+                            {{ section.description|linebreaks }}
+                        </div>
+                        
+                        <!-- Key Impact Numbers -->
+                        {% if section.highlight_1_number or section.highlight_2_number or section.highlight_3_number %}
+                        <div class="impact-metrics">
+                            <h6 class="metrics-title">Key Achievements:</h6>
+                            <div class="metrics-grid">
+                                {% if section.highlight_1_number %}
+                                <div class="metric-item animate-on-scroll animate-fade-up">
+                                    <div class="metric-number">{{ section.highlight_1_number }}</div>
+                                    <div class="metric-label">{{ section.highlight_1_description }}</div>
+                                </div>
+                                {% endif %}
+                                {% if section.highlight_2_number %}
+                                <div class="metric-item animate-on-scroll animate-fade-up" style="animation-delay: 0.2s;">
+                                    <div class="metric-number">{{ section.highlight_2_number }}</div>
+                                    <div class="metric-label">{{ section.highlight_2_description }}</div>
+                                </div>
+                                {% endif %}
+                                {% if section.highlight_3_number %}
+                                <div class="metric-item animate-on-scroll animate-fade-up" style="animation-delay: 0.4s;">
+                                    <div class="metric-number">{{ section.highlight_3_number }}</div>
+                                    <div class="metric-label">{{ section.highlight_3_description }}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="story-actions mt-4">
+                            <a href="{% url 'charity:impact' %}" class="th-btn">Learn More<i class="fas fa-arrow-right ms-2"></i></a>
+                            <a href="{% url 'charity:donate_now' %}" class="th-btn style3 ms-3">Support Us<i class="fas fa-heart ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-6 col-lg-6">
+                    <div class="impact-story-visual">
+                        {% if section.section_image %}
+                        <img src="{{ section.section_image.url }}" alt="{{ section.title }}" class="story-image">
+                        {% else %}
+                        <div class="story-placeholder">
+                            <i class="fas fa-hands-helping fa-4x"></i>
+                            <p>Impact Story Visual</p>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Floating Stats Cards -->
+                        {% if section.highlight_1_number or section.highlight_2_number %}
+                        <div class="floating-stats">
+                            {% if section.highlight_1_number %}
+                            <div class="floating-stat-card top-right animate-on-scroll animate-fade-up" style="animation-delay: 0.6s;">
+                                <div class="stat-number">{{ section.highlight_1_number }}</div>
+                                <div class="stat-text">{{ section.highlight_1_description|truncatewords:3 }}</div>
+                            </div>
+                            {% endif %}
+                            {% if section.highlight_2_number %}
+                            <div class="floating-stat-card bottom-left animate-on-scroll animate-fade-up" style="animation-delay: 0.8s;">
+                                <div class="stat-number">{{ section.highlight_2_number }}</div>
+                                <div class="stat-text">{{ section.highlight_2_description|truncatewords:3 }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Decorative Elements -->
+                        <div class="story-decoration">
+                            <img src="{% static 'assets/img/shape/about_shape_1.png' %}" alt="decoration" class="decoration-shape">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if not forloop.last %}
+        <hr class="story-divider">
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

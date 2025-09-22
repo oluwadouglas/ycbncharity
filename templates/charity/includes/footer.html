@@ -1,0 +1,194 @@
+{% load static %}
+<footer class="footer-wrapper footer-default" data-bg-src="{% static 'assets/img/bg/footer-default-bg-mask.png' %}">
+    <style>
+      /* Footer social icons: copy team section layout but keep icons white */
+      .footer-wrapper .th-social.style2 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        flex-wrap: nowrap;
+      }
+      /* Override default .th-social.style2 button styling for footer */
+      .footer-wrapper .th-social.style2 a {
+        background: transparent !important;
+        border: 0 !important;
+        color: #ffffff !important;
+        font-size: 20px; /* close to team icon size */
+        width: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+      .footer-wrapper .th-social.style2 a i {
+        color: #ffffff !important;
+      }
+      .footer-wrapper .th-social.style2 a:hover {
+        background: transparent !important;
+        color: rgba(255,255,255,0.9) !important;
+        transform: scale(1.08);
+      }
+      /* Footer layout refinements */
+      .footer-wrapper .widget-area { padding-top: 40px; padding-bottom: 20px; }
+      .footer-wrapper .footer-top { padding-top: 30px; padding-bottom: 10px; }
+      .footer-wrapper .widget_title { color: #fff; }
+      .footer-wrapper .menu a { color: #f1f1f1; }
+      .footer-wrapper .menu a:hover { color: #FFD700; }
+      .footer-wrapper .copyright-wrap { border-top: 1px solid rgba(255,255,255,0.15); padding: 16px 0; }
+      .footer-wrapper .copyright-wrap .th-social.style2 a { font-size: 18px; }
+      /* Mobile: center all footer content */
+      @media (max-width: 767.98px) {
+        .footer-wrapper .widget-area .row {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center !important;
+          gap: 14px;
+        }
+        .footer-wrapper .widget-area .row > [class*='col-'] {
+          width: 100%;
+          max-width: 640px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .footer-wrapper .th-widget-about,
+        .footer-wrapper .footer-widget,
+        .footer-wrapper .th-widget-contact,
+        .footer-wrapper .widget_title,
+        .footer-wrapper .menu,
+        .footer-wrapper .subscribe-box_title,
+        .footer-wrapper .subscribe-box_text { text-align: center; margin-left: auto; margin-right: auto; }
+        .footer-wrapper .subscribe-box .row { flex-direction: column; align-items: center; }
+        .footer-wrapper .subscribe-box .col-xl-6,
+        .footer-wrapper .subscribe-box .col-lg-8 { width: 100%; max-width: 640px; }
+        .footer-wrapper .th-social.style2 { justify-content: center; }
+        .footer-wrapper .copyright-wrap .row { justify-content: center !important; }
+        .footer-wrapper .copyright-wrap p { text-align: center; }
+      }
+    </style>
+    <div class="footer-bg-shape2 shape-mockup jump" data-top="20%" data-right="0">
+        <img src="{% static 'assets/img/shape/footer-bg-shape3.png' %}" alt="img">
+    </div>
+    <div class="footer-bg-shape3 shape-mockup d-none" data-bottom="0" data-right="0">
+        <img src="{% static 'assets/img/shape/footer-bg-shape2.png' %}" alt="img">
+    </div>
+    <div class="footer-top">
+        <div class="container">
+            <div class="subscribe-box">
+                <div class="row gy-40 align-items-center justify-content-center">
+                    <div class="col-xl-6">
+                        <h4 class="subscribe-box_title">Subscribe to Our Newsletter</h4>
+                        <p class="subscribe-box_text">Regular inspections and feedback mechanisms</p>
+                    </div>
+                    <div class="col-xl-6 col-lg-8">
+                        <form class="newsletter-form" method="post" action="{% url 'charity:newsletter_subscribe' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Enter Email Address" required="">
+                                <input type="hidden" name="name" value="">
+                            </div>
+                            <button type="submit" class="th-btn style3"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-area">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-6 col-xl-auto">
+                    <div class="widget footer-widget">
+                        <div class="th-widget-about">
+                            <div class="about-logo">
+                                <a href="{% url 'charity:home' %}"><img src="{% static 'assets/img/ycbn-logo.png' %}" alt="YCBN - Youth Capacity Building Network"></a>
+                            </div>
+                            <p class="about-text">Our secure online donation platform allows you to make contributions quickly and safely. Choose from various donation options.</p>
+                            <a href="{% url 'charity:donate_now' %}" class="th-btn"><i class="fas fa-heart me-2"></i> Donate Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-auto">
+                    <div class="widget widget_nav_menu footer-widget">
+                        <h3 class="widget_title">Quick Links</h3>
+                        <div class="menu-all-pages-container">
+                            <ul class="menu">
+                                <li><a href="{% url 'charity:about' %}">About Us</a></li>
+                                <li><a href="{% url 'charity:articles' %}">Articles</a></li>
+                                <li><a href="{% url 'charity:donations' %}">Our Campaign</a></li>
+                                <li><a href="{% url 'charity:contact' %}">Privacy policy</a></li>
+                                <li><a href="{% url 'charity:contact' %}">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-auto">
+                    <div class="widget widget_nav_menu footer-widget">
+                        <h3 class="widget_title">Our Service</h3>
+                        <div class="menu-all-pages-container">
+                            <ul class="menu">
+                                <li><a href="{% url 'charity:donate_now' %}">Give Donation</a></li>
+                                <li><a href="{% url 'charity:faq' %}">Education Support</a></li>
+                                <li><a href="{% url 'charity:faq' %}">Food Support</a></li>
+                                <li><a href="{% url 'charity:faq' %}">Health Support</a></li>
+                                <li><a href="{% url 'charity:gallery' %}">Our Campaign</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-auto">
+                    <div class="widget footer-widget">
+                        <div class="th-widget-contact" style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%); padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3); border: 3px solid #FFD700;">
+                            <h3 class="widget_title" style="color: #FFFFFF; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-size: 1.5rem; margin-bottom: 1.5rem;">🌟 Contact Us 🌟</h3>
+                            <div class="info-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; border-left: 5px solid #FF6B35; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <div class="box-icon" style="background: linear-gradient(45deg, #FF6B35, #F7931E); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; float: left; margin-right: 15px;">
+                                    <i class="fas fa-phone" style="color: white; font-size: 1.3rem;"></i>
+                                </div>
+                                <div class="box-content" style="overflow: hidden;">
+                                    <p class="box-text" style="color: #FF6B35; font-weight: 600; margin-bottom: 0.3rem;">Call us:</p>
+                                    <h4 class="box-title"><a href="tel:+256772573781" style="color: #1A685B; font-weight: 700; font-size: 1.1rem; text-decoration: none;">+256 772 573 781</a></h4>
+                                </div>
+                            </div>
+                            <div class="info-card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; border-left: 5px solid #F7931E; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <div class="box-icon" style="background: linear-gradient(45deg, #F7931E, #FFD700); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; float: left; margin-right: 15px;">
+                                    <i class="fas fa-envelope-open" style="color: white; font-size: 1.3rem;"></i>
+                                </div>
+                                <div class="box-content" style="overflow: hidden;">
+                                    <p class="box-text" style="color: #F7931E; font-weight: 600; margin-bottom: 0.3rem;">Email us:</p>
+                                    <h4 class="box-title"><a href="mailto:info@ycbn.org" style="color: #1A685B; font-weight: 700; font-size: 1.1rem; text-decoration: none;">info@ycbn.org</a></h4>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-wrap">
+        <div class="container">
+            <div class="row justify-content-center gy-2 align-items-center">
+                <div class="col-lg-12 text-center">
+                    <p class="mb-2" style="margin-bottom: 6px;">
+                        <i class="fas fa-copyright"></i>
+                        Copyright {% now "Y" %}
+                        <a href="{% url 'charity:home' %}" style="color: #fff; text-decoration: underline;">YCBN Uganda</a>.
+                        All Rights Reserved.
+                    </p>
+                    <div class="th-social style2" style="justify-content: center; margin-bottom: 6px;">
+                        <a target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook" href="https://www.facebook.com/profile.php?id=61579627535321"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" title="Twitter / X" href="https://x.com/YCBNetwork"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube" href="https://youtube.com/@youthcapacitybuildingnetwork?si=m2gIte8HQjiVzrmr"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/company/tiny-bit-wiser/"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    </div>
+                    <p class="mb-0" style="opacity: 0.95;">Powered by <strong>Luwa Technologies</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

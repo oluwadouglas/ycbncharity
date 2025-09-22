@@ -1,0 +1,80 @@
+/* SDG inline marquee animation (no cards) */
+
+.sdg-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 6px 0;
+}
+
+/* Optional subtle edge fade for polish */
+.sdg-marquee::before,
+.sdg-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+.sdg-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--th-body-background) 0%, rgba(255,255,255,0) 100%);
+}
+.sdg-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--th-body-background) 0%, rgba(255,255,255,0) 100%);
+}
+
+.sdg-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: sdg-inline-scroll-ltr 38s linear infinite;
+  animation-delay: -19s; /* start mid-way so it's visible immediately */
+}
+
+/* Pause on hover for accessibility */
+.sdg-marquee:hover .sdg-marquee-track { animation-play-state: paused; }
+
+@keyframes sdg-inline-scroll-ltr {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Inline goals row (previous styling preserved: icons + text only) */
+.sdg-goals-inline {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-inline: 12px;
+}
+
+.sdg-goal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: var(--title-color);
+}
+
+.sdg-goal-icon { font-size: 20px; line-height: 1; }
+.sdg-goal-title { font-weight: 600; font-size: 0.98rem; }
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .sdg-goal-icon { font-size: 19px; }
+  .sdg-goal-title { font-size: 0.95rem; }
+}
+@media (max-width: 768px) {
+  .sdg-goal-icon { font-size: 18px; }
+  .sdg-goal-title { font-size: 0.92rem; }
+}
+@media (max-width: 576px) {
+  .sdg-goals-inline { gap: 14px; }
+  .sdg-goal { gap: 6px; }
+}

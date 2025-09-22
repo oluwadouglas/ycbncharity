@@ -1,0 +1,33 @@
+/* Add margin to main content on non-hero pages */
+body:not(.home-page) .main-content {
+    margin-top: 20px;
+}
+
+/* Ensure hero section has no top margin */
+.hero-slider {
+    margin-top: 0 !important;
+}
+
+/* Navigation menu styles */
+.main-menu > ul > li > a {
+    color: #1A685B !important; /* Green color */
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.main-menu > ul > li > a:hover,
+.main-menu > ul > li.current-menu-item > a,
+.main-menu > ul > li > a.active { 
+    color: #FFD700 !important; /* Yellow color on hover/active */
+}
+
+/* Mobile menu styles */
+.th-menu-wrapper ul > li > a {
+    color: #1A685B !important;
+    font-weight: 500;
+}
+
+.th-menu-wrapper ul > li > a:hover,
+.th-menu-wrapper ul > li.current-menu-item > a {
+    color: #FFD700 !important;
+}

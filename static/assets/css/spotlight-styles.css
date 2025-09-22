@@ -1,0 +1,525 @@
+/* Spotlight Page Styles */
+/* ====================== */
+
+/* Global Spacing Overrides for Professional Layout */
+:root {
+    --section-space: 60px !important; /* Reduced from 120px */
+    --section-space-mobile: 40px !important; /* Reduced from 80px */
+}
+
+/* Hero Section Enhancements */
+.spotlight-hero {
+    padding: 20px 0 !important; /* Significantly reduced padding */
+    min-height: 150px !important; /* Reduced height */
+    margin-bottom: 30px !important; /* Add spacing to next section */
+}
+
+.spotlight-hero .hero-style1 {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spotlight-hero .hero-subtitle {
+    font-weight: 700 !important;
+    color: #FFAC00 !important; /* Bright orange from website theme */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem !important; /* Slightly smaller */
+    display: block;
+    margin-bottom: 0.8rem; /* Reduced margin */
+}
+
+.spotlight-hero .hero-title {
+    font-weight: 900 !important;
+    color: #1A685B !important; /* Main theme color - teal */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem; /* Reduced margin */
+    line-height: 1.2;
+    font-size: 2.5rem !important; /* Slightly smaller */
+}
+
+.spotlight-hero .hero-title .title1,
+.spotlight-hero .hero-title .title2 {
+    font-weight: 900 !important;
+    color: #1A685B !important; /* Main theme color - teal */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.spotlight-hero .hero-text {
+    font-weight: 600 !important;
+    color: #2c3e50 !important; /* Dark text for better readability */
+    text-shadow: none;
+    font-size: 1rem !important; /* Slightly smaller */
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem; /* Reduced margin */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Remove gradient background */
+.hero-bg-gradient {
+    display: none;
+}
+
+.hero-wrapper .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Spotlight Statistics Cards */
+.spotlight-stat-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.spotlight-stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card-icon {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--stat-color, #1A685B);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.stat-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.stat-description {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.stat-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.spotlight-stat-card:hover .stat-card-bg {
+    opacity: 1;
+}
+
+/* Spotlight Item Cards */
+.spotlight-item-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.spotlight-item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.spotlight-item-card.featured-item {
+    border: 2px solid #ffc107;
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+}
+
+.spotlight-item-card.featured-item:hover {
+    box-shadow: 0 20px 40px rgba(255, 193, 7, 0.3);
+}
+
+/* Featured Badge */
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ffc107, #ff8f00);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.featured-badge i {
+    font-size: 0.9rem;
+}
+
+/* Item Image */
+.item-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.spotlight-item-card:hover .item-image img {
+    transform: scale(1.05);
+}
+
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #6c757d;
+}
+
+/* Performance Badge */
+.performance-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Item Content */
+.item-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-header {
+    margin-bottom: 1rem;
+}
+
+.item-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.item-subtitle {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.item-location {
+    font-size: 0.9rem;
+    color: #28a745;
+    font-weight: 500;
+}
+
+.item-description {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+/* Achievements List */
+.item-achievements {
+    margin-bottom: 1.5rem;
+}
+
+.item-achievements h6 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.achievement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.achievement-list li {
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.4;
+}
+
+.achievement-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Item Footer */
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    margin-top: auto;
+}
+
+.achievement-score {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.score-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.score-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Contact Links */
+.item-contact {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.contact-link {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.contact-link:hover {
+    background: #1A685B;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 104, 91, 0.3);
+}
+
+/* Empty State */
+.empty-state {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.empty-state h3,
+.empty-state h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animate-fade-up {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .spotlight-stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+    
+    .stat-title {
+        font-size: 1.1rem;
+    }
+    
+    .item-content {
+        padding: 1.25rem;
+    }
+    
+    .item-title {
+        font-size: 1.1rem;
+    }
+    
+    .item-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .achievement-score {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .spotlight-stat-card {
+        padding: 1.25rem;
+    }
+    
+    .stat-value {
+        font-size: 1.8rem;
+    }
+    
+    .item-image {
+        height: 180px;
+    }
+    
+    .featured-badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .performance-badge {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Section Background Alternation */
+.bg-smoke {
+    background-color: #f8f9fa;
+}
+
+/* Custom Section Spacing */
+.space {
+    padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+    .space {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .space {
+        padding: 40px 0;
+    }
+}
+
+/* Global Professional Spacing Classes */
+.space-compact {
+    padding: 40px 0 !important;
+}
+
+.space-compact-top {
+    padding-top: 40px !important;
+}
+
+.space-compact-bottom {
+    padding-bottom: 40px !important;
+}
+
+/* Reduce margins between sections globally */
+section + section {
+    margin-top: -20px;
+}
+
+/* Tighter spacing for title areas */
+.title-area {
+    margin-bottom: 30px !important;
+}
+
+.title-area .sub-title {
+    margin-bottom: 10px !important;
+}
+
+.title-area .sec-title {
+    margin-bottom: 15px !important;
+}
+
+.title-area .sec-text {
+    margin-bottom: 0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .spotlight-hero {
+        padding: 15px 0 !important;
+        min-height: 120px !important;
+    }
+    
+    .spotlight-hero .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .space-compact {
+        padding: 30px 0 !important;
+    }
+}

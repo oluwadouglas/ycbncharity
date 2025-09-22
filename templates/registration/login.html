@@ -1,0 +1,267 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}Join Us | YCBN{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Auth page theming with YCBN green theme */
+  .auth-hero {
+    background: linear-gradient(135deg, #1A685B 0%, #228B22 50%, #32CD32 100%);
+    padding: 60px 0;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .auth-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .auth-hero .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .auth-hero .logo img { 
+    height: 80px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  }
+  
+  .auth-card { 
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .auth-card .card { 
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-card .card-body { 
+    padding: 40px;
+  }
+  
+  .auth-title { 
+    font-weight: 800;
+    color: #1A685B;
+    margin-bottom: 20px;
+  }
+  
+  .auth-tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 30px;
+  }
+  
+  .auth-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-tab.active {
+    background: #1A685B;
+    color: white;
+    box-shadow: 0 4px 12px rgba(26, 104, 91, 0.3);
+  }
+  
+  .auth-form {
+    display: none;
+  }
+  
+  .auth-form.active {
+    display: block;
+  }
+  
+  /* Style bare Django inputs to look like Bootstrap controls */
+  .auth-card input[type="text"],
+  .auth-card input[type="password"],
+  .auth-card input[type="email"],
+  .auth-card input[type="number"] {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #e9ecef;
+    appearance: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-card input:focus { 
+    border-color: #1A685B;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(26, 104, 91, 0.25);
+  }
+  
+  .auth-actions .btn-primary { 
+    background: linear-gradient(135deg, #1A685B 0%, #228B22 100%);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-actions .btn-primary:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 104, 91, 0.3);
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+  }
+  
+  .welcome-text {
+    background: linear-gradient(135deg, #1A685B 0%, #32CD32 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+  
+  .auth-link {
+    color: #1A685B;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .auth-link:hover {
+    color: #228B22;
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-hero">
+  <div class="container">
+    <div class="logo mb-3">
+      <a href="{% url 'charity:home' %}"><img src="{% static 'assets/img/ycbn-logo.jpg' %}" alt="YCBN Logo"></a>
+    </div>
+    <h1 class="h3 auth-title mb-2 welcome-text">Welcome to YCBN</h1>
+    <p class="mb-0 lead">Join our community or sign in to continue</p>
+  </div>
+</section>
+
+<section class="auth-card">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <!-- Auth Tabs -->
+            <div class="auth-tabs">
+              <button class="auth-tab active" onclick="switchTab('login')">Sign In</button>
+              <button class="auth-tab" onclick="switchTab('register')">Join Now</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="auth-form active" id="login-form">
+              <h2 class="h4 mb-4 text-center auth-title">Sign In</h2>
+              {% if form.errors %}
+                <div class="alert alert-danger">Please check your username and password.</div>
+              {% endif %}
+              <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label class="form-label" for="id_username">Username</label>
+                  {{ form.username }}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="id_password">Password</label>
+                  {{ form.password }}
+                </div>
+                {% if next %}
+                  <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
+                <div class="auth-actions mb-3">
+                  <button class="btn btn-primary w-100" type="submit">
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                  </button>
+                </div>
+                <div class="text-center">
+                  <a href="{% url 'password_reset' %}" class="auth-link">Forgot password?</a>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="auth-form" id="register-form">
+              <h2 class="h4 mb-4 text-center auth-title">Join Our Community</h2>
+              <form method="post" action="{% url 'charity:register' %}" id="register-form-element">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label class="form-label" for="reg_username">Username</label>
+                  <input type="text" class="form-control" id="reg_username" name="username" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg_email">Email</label>
+                  <input type="email" class="form-control" id="reg_email" name="email" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg_password1">Password</label>
+                  <input type="password" class="form-control" id="reg_password1" name="password1" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg_password2">Confirm Password</label>
+                  <input type="password" class="form-control" id="reg_password2" name="password2" required>
+                </div>
+                <div class="auth-actions">
+                  <button class="btn btn-primary w-100" type="submit">
+                    <i class="fas fa-user-plus me-2"></i>Join Now
+                  </button>
+                </div>
+              </form>
+            </div>
+            
+            <div class="text-center mt-4">
+              <a href="{% url 'charity:home' %}" class="auth-link">
+                <i class="fas fa-arrow-left me-2"></i>Back to Home
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function switchTab(tab) {
+  // Update tab buttons
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Update forms
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.getElementById(tab + '-form').classList.add('active');
+}
+</script>
+{% endblock %}

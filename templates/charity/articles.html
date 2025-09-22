@@ -1,0 +1,310 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Articles - YCBN" }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Keep article images uniform and responsive */
+  .th-blog .blog-img,
+  .th-blog .blog-radius-img {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+  .th-blog .blog-img img,
+  .th-blog .blog-radius-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .articles-header {
+    background: linear-gradient(135deg, #1A685B 0%, #2A8B75 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .write-article-cta {
+    background: #f8f9fa;
+    border: 2px dashed #1A685B;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .write-article-cta:hover {
+    border-color: #2A8B75;
+    background: #f0f8ff;
+  }
+
+  .article-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+  }
+
+  .articles-header .article-stat i {
+    color: var(--theme-color2);
+  }
+
+  .article-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .no-articles {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+  }
+
+  .no-articles i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Articles Header -->
+<section class="articles-header" style="margin-top: 20px;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+  <!-- Removed breadcrumb and intro as requested -->
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        {% if is_authenticated %}
+          <div class="article-stats">
+            <div class="article-stat">
+              <i class="fas fa-newspaper"></i>
+              <span>{{ articles.count }} Articles</span>
+            </div>
+            <div class="article-stat">
+              <i class="fas fa-users"></i>
+              <span>Community</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="th-blog-wrapper space-top space-extra-bottom">
+  <div class="container">
+        <!-- Call to Action for Writing Articles -->
+    <div style="margin-top: 40px;">
+    {% if is_authenticated %}
+      {% if is_member %}
+        <div class="write-article-cta">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h4 class="mb-2"><i class="fas fa-pen-fancy text-theme me-2"></i>Share Your Story</h4>
+              <p class="mb-0">Have something inspiring to share? Write an article about your experience with YCBN programs, youth leadership, or community development.</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+              <a href="{% url 'charity:add_article' %}" class="th-btn">
+                <i class="fas fa-plus me-2"></i>Write Article
+              </a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="write-article-cta">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h4 class="mb-2"><i class="fas fa-info-circle text-warning me-2"></i>Become a Member</h4>
+              <p class="mb-0">To write and share articles, you need to be a member of YCBN. Join our community of youth leaders and storytellers!</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+              <a href="{% url 'charity:become_member' %}" class="th-btn">
+                <i class="fas fa-user-plus me-2"></i>Become a Member
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="write-article-cta">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h4 class="mb-2"><i class="fas fa-sign-in-alt text-primary me-2"></i>Join YCBN Community</h4>
+            <p class="mb-0">Want to share your youth leadership story? Join our community to write articles and connect with fellow youth leaders across Uganda.</p>
+          </div>
+          <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <a href="{% url 'charity:register' %}" class="th-btn me-2">
+              <i class="fas fa-user-plus me-2"></i>Join Now
+            </a>
+            <a href="/admin/login/" class="th-btn style4">
+              <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="row gx-40">
+      <div class="col-xxl-8 col-lg-7">
+        {% if articles %}
+          {% for post in articles %}
+          <div class="th-blog blog-single has-post-thumbnail">
+            {% if post.image %}
+            <div class="blog-img">
+                <a href="{% url 'charity:article_details' post.id %}"><img src="{{ post.image.url }}" alt="{{ post.title }}"></a>
+            </div>
+            {% endif %}
+            <div class="blog-content">
+              <div class="blog-meta">
+                <a href="{% url 'charity:articles' %}"><i class="fas fa-calendar-days"></i>{{ post.date|date:"F d, Y" }}</a>
+                <a class="author" href="{% url 'charity:articles' %}"><i class="fas fa-user"></i>{{ post.author_name }}</a>
+                {% if is_member %}
+                <a class="ms-2" href="{% url 'charity:edit_article' post.id %}"><i class="fas fa-pen"></i> Edit</a>
+                {% endif %}
+              </div>
+              <h2 class="blog-title"><a href="{% url 'charity:article_details' post.id %}">{{ post.title }}</a></h2>
+              <p class="blog-text">{{ post.content|truncatechars:220|striptags }}</p>
+              <a href="{% url 'charity:article_details' post.id %}" class="th-btn btn-sm">Read Article <i class="fas fa-arrow-up-right ms-2"></i></a>
+            </div>
+          </div>
+          {% endfor %}
+          
+          <!-- Pagination -->
+          <div class="th-pagination">
+            <ul>
+              <li><span><i class="fas fa-arrow-left"></i></span></li>
+              <li><span>1</span></li>
+              <li><span><i class="fas fa-arrow-right"></i></span></li>
+            </ul>
+          </div>
+        {% else %}
+          <div class="no-articles">
+            <i class="fas fa-newspaper"></i>
+            <h3>No Articles Yet</h3>
+            <p>Be the first to share your story! 
+            {% if is_authenticated and is_member %}
+              <a href="{% url 'charity:add_article' %}">Write the first article</a>
+            {% elif is_authenticated %}
+              Contact us to become a member and start writing.
+            {% else %}
+              <a href="{% url 'charity:register' %}">Join our community</a> to start writing articles.
+            {% endif %}
+            </p>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="col-xxl-4 col-lg-5">
+        <aside class="sidebar-area">
+          <div class="widget widget_search">
+            <form class="search-form">
+              <input type="text" placeholder="Search articles...">
+              <button type="submit"><i class="far fa-search"></i></button>
+            </form>
+          </div>
+          
+          <div class="widget widget_categories">
+            <h3 class="widget_title">Article Topics</h3>
+            <ul>
+              <li>
+                <a href="{% url 'charity:articles' %}">Youth Leadership</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+              <li>
+                <a href="{% url 'charity:articles' %}">Skills Development</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+              <li>
+                <a href="{% url 'charity:articles' %}">Community Projects</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+              <li>
+                <a href="{% url 'charity:articles' %}">Digital Literacy</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+              <li>
+                <a href="{% url 'charity:articles' %}">Health & Wellness</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+              <li>
+                <a href="{% url 'charity:articles' %}">Success Stories</a>
+                <span><i class="fas fa-arrow-right"></i></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="widget">
+            <h3 class="widget_title">Recent Articles</h3>
+            <div class="recent-post-wrap">
+              {% for post in articles|slice:":3" %}
+              <div class="recent-post">
+                <div class="media-img">
+                  <a href="{% url 'charity:article_details' post.id %}">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                    <img src="{% static 'assets/img/blog/recent-post-1-1.jpg' %}" alt="{{ post.title }}">
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="media-body">
+                  <div class="recent-post-meta">
+                    <a href="{% url 'charity:articles' %}"><i class="fas fa-calendar-days"></i>{{ post.date|date:"M d, Y" }}</a>
+                  </div>
+                  <h4 class="post-title"><a class="text-inherit" href="{% url 'charity:article_details' post.id %}">{{ post.title|truncatechars:50 }}</a></h4>
+                </div>
+              </div>
+              {% empty %}
+              <p class="text-muted">No recent articles yet.</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="widget widget_tag_cloud">
+            <h3 class="widget_title">Popular Tags</h3>
+            <div class="tagcloud">
+              <a href="{% url 'charity:articles' %}">Youth</a>
+              <a href="{% url 'charity:articles' %}">Leadership</a>
+              <a href="{% url 'charity:articles' %}">Skills</a>
+              <a href="{% url 'charity:articles' %}">Community</a>
+              <a href="{% url 'charity:articles' %}">Projects</a>
+              <a href="{% url 'charity:articles' %}">Stories</a>
+              <a href="{% url 'charity:articles' %}">Impact</a>
+              <a href="{% url 'charity:articles' %}">Uganda</a>
+            </div>
+          </div>
+
+          <!-- Writing Guidelines for Members -->
+          {% if is_member %}
+          <div class="widget" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+            <h3 class="widget_title">Writing Guidelines</h3>
+            <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
+              <li>Share authentic experiences</li>
+              <li>Focus on youth empowerment topics</li>
+              <li>Keep content respectful and constructive</li>
+              <li>Include relevant images when possible</li>
+              <li>Write in English or local languages</li>
+            </ul>
+          </div>
+          {% endif %}
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+{% endblock %}

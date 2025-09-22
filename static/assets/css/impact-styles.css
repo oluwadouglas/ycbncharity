@@ -1,0 +1,1392 @@
+/* Impact Page Styles - Enhanced with animations and modern design */
+
+/* Reduced Section Spacing for Better Cohesion */
+.space {
+    padding: 60px 0 !important;
+}
+
+.space-top {
+    padding-top: 60px !important;
+}
+
+.space-bottom {
+    padding-bottom: 60px !important;
+}
+
+/* Impact Statistics Section */
+#impact-stats {
+    padding: 40px 0 !important;
+}
+
+#impact-stats .title-area {
+    margin-bottom: 30px;
+}
+
+/* Impact Sections Spacing */
+.impact-content {
+    padding: 15px 0;
+}
+
+.impact-img {
+    margin-top: 20px;
+}
+
+/* CTA Section Enhancements */
+.cta-area-1 {
+    padding: 50px 0 !important;
+    background: linear-gradient(135deg, rgba(26, 104, 91, 0.95) 0%, rgba(15, 74, 66, 0.95) 100%);
+    position: relative;
+}
+
+.cta-area-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.cta-area-1 .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cta-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 172, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(255, 172, 0, 0.3);
+}
+
+.cta-title {
+    color: white !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+}
+
+.cta-text {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .th-btn {
+    padding: 15px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.cta-buttons .th-btn.style4 {
+    background: linear-gradient(135deg, #FFAC00 0%, #ff8c00 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 25px rgba(255, 172, 0, 0.3);
+}
+
+.cta-buttons .th-btn.style4:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 172, 0, 0.4);
+    background: linear-gradient(135deg, #ff8c00 0%, #FFAC00 100%);
+}
+
+.cta-buttons .th-btn.style3 {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.cta-buttons .th-btn.style3:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Counter Cards */
+#impact-counters {
+    margin-top: 40px;
+}
+
+.counter-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 25px;
+    padding: 35px 25px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 50px rgba(26, 104, 91, 0.12),
+        0 5px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid rgba(26, 104, 91, 0.08);
+    height: 100%;
+    backdrop-filter: blur(10px);
+    margin-bottom: 20px;
+}
+
+.counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--counter-color, linear-gradient(90deg, #1A685B 0%, #FFAC00 100%));
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+    z-index: 2;
+    border-radius: 25px 25px 0 0;
+}
+
+.counter-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--counter-color, rgba(26, 104, 91, 0.03)) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.counter-card:hover::before {
+    transform: scaleX(1);
+}
+
+.counter-card:hover::after {
+    opacity: 1;
+}
+
+.counter-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 
+        0 35px 80px rgba(26, 104, 91, 0.25),
+        0 15px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    border-color: rgba(26, 104, 91, 0.25);
+}
+
+.counter-card-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--counter-color, linear-gradient(135deg, #1A685B 0%, #FFAC00 100%));
+    box-shadow: 
+        0 10px 30px rgba(26, 104, 91, 0.35),
+        0 0 0 8px rgba(255, 255, 255, 0.1),
+        inset 0 2px 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.counter-card-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.counter-card:hover .counter-card-icon::before {
+    opacity: 1;
+}
+
+.counter-card-icon i {
+    font-size: 2.8rem;
+    color: white;
+    transition: all 0.4s ease;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.counter-card:hover .counter-card-icon {
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 
+        0 15px 45px rgba(26, 104, 91, 0.45),
+        0 0 0 12px rgba(255, 255, 255, 0.15),
+        inset 0 2px 15px rgba(255, 255, 255, 0.3);
+}
+
+.counter-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #1A685B;
+    margin-bottom: 15px;
+    line-height: 1;
+    background: linear-gradient(135deg, #1A685B 0%, #0f4a42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.4s ease;
+    text-shadow: 0 2px 20px rgba(26, 104, 91, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.counter-card:hover .counter-number {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, var(--counter-color, #1A685B) 0%, #0f4a42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.counter-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+    transition: color 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.counter-card:hover .counter-title {
+    color: #1A685B;
+}
+
+.counter-type {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    background: linear-gradient(90deg, rgba(26, 104, 91, 0.1) 0%, rgba(255, 172, 0, 0.1) 100%);
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.counter-card:hover .counter-type {
+    background: var(--counter-color, linear-gradient(90deg, rgba(26, 104, 91, 0.15) 0%, rgba(255, 172, 0, 0.15) 100%));
+    color: #333;
+    transform: translateY(-2px);
+}
+
+.counter-card-bg {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 120px;
+    height: 120px;
+    background: var(--counter-color, linear-gradient(135deg, rgba(26, 104, 91, 0.08) 0%, rgba(255, 172, 0, 0.08) 100%));
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 0;
+}
+
+.counter-card:hover .counter-card-bg {
+    opacity: 1;
+    transform: scale(4) rotate(45deg);
+}
+
+/* Counter Animation */
+@keyframes countUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.counter-number.counting {
+    animation: countUp 0.6s ease-out;
+}
+
+/* Impact Content Sections */
+.impact-content {
+    padding: 20px 0;
+}
+
+.impact-subtitle {
+    color: #FFAC00;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.impact-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.impact-description p {
+    margin-bottom: 20px;
+}
+
+.impact-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.impact-img {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+.impact-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+.impact-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    transition: transform 0.4s ease;
+}
+
+.impact-img:hover img {
+    transform: scale(1.05);
+}
+
+.placeholder-img {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.impact-shape {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+/* Empty States */
+.empty-state {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.empty-state i {
+    opacity: 0.6;
+}
+
+.empty-state h3,
+.empty-state h4 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Scroll Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+}
+
+.animate-fade-up.animate {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-left.animate {
+    animation: fadeInLeft 0.8s ease forwards;
+}
+
+.animate-fade-right.animate {
+    animation: fadeInRight 0.8s ease forwards;
+}
+
+/* Pulse Effect for Counters */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 8px 25px rgba(26, 104, 91, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 25px rgba(26, 104, 91, 0.3), 0 0 0 10px rgba(26, 104, 91, 0.1);
+    }
+    100% {
+        box-shadow: 0 8px 25px rgba(26, 104, 91, 0.3);
+    }
+}
+
+.counter-card.counting .counter-card-icon {
+    animation: pulse 2s infinite;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+    66% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+}
+
+.counter-card-icon {
+    animation: float 6s ease-in-out infinite;
+}
+
+.counter-card:nth-child(2n) .counter-card-icon {
+    animation-delay: -2s;
+}
+
+.counter-card:nth-child(3n) .counter-card-icon {
+    animation-delay: -4s;
+}
+
+/* Enhanced Homepage Impact Animations */
+.floating-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+/* Typewriter Effect */
+.typewriter {
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Ripple Effect */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(31, 138, 112, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Hover Effects */
+.impact-highlights-section .impact-metric,
+.impact-highlights-section .impact-stat,
+.impact-highlights-section .highlight-item {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.impact-highlights-section .impact-metric:hover,
+.impact-highlights-section .impact-stat:hover,
+.impact-highlights-section .highlight-item:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+/* Magnetic Button Effects */
+.impact-highlights-section .th-btn,
+.impact-highlights-section .impact-cta {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    position: relative;
+}
+
+.impact-highlights-section .th-btn:hover,
+.impact-highlights-section .impact-cta:hover {
+    box-shadow: 0 8px 25px rgba(31, 138, 112, 0.3);
+}
+
+/* Counter Completion Effects */
+.counter-completed {
+    position: relative;
+}
+
+.counter-completed::after {
+    content: '✓';
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #28a745;
+    font-weight: bold;
+    opacity: 0;
+    animation: checkmark-appear 0.5s ease-out 0.3s forwards;
+}
+
+@keyframes checkmark-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Progressive Image Loading */
+.impact-highlights-section img {
+    transition: all 0.6s ease-in-out;
+}
+
+.impact-highlights-section img[style*="opacity: 0"] {
+    filter: blur(5px);
+    transform: scale(0.95);
+}
+
+.impact-highlights-section img[style*="opacity: 1"] {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* Enhanced Card Animations */
+.impact-highlight-card,
+.impact-story-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.impact-highlight-card:hover,
+.impact-story-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Stagger Animation Delays */
+.impact-highlights-section .highlight-item:nth-child(1) { animation-delay: 0.1s; }
+.impact-highlights-section .highlight-item:nth-child(2) { animation-delay: 0.2s; }
+.impact-highlights-section .highlight-item:nth-child(3) { animation-delay: 0.3s; }
+.impact-highlights-section .highlight-item:nth-child(4) { animation-delay: 0.4s; }
+.impact-highlights-section .highlight-item:nth-child(5) { animation-delay: 0.5s; }
+.impact-highlights-section .highlight-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Performance Optimizations */
+.impact-highlights-section * {
+    will-change: transform, opacity;
+}
+
+.impact-highlights-section {
+    contain: layout style paint;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .floating-card,
+    .typewriter,
+    .ripple-effect {
+        animation: none;
+    }
+    
+    .impact-highlights-section * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Loading States */
+.impact-highlights-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.impact-highlights-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--theme-color);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: loading-spin 1s linear infinite;
+}
+
+@keyframes loading-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .impact-highlights-section .highlight-item {
+        border: 2px solid currentColor;
+    }
+    
+    .ripple-effect {
+        background: currentColor;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .impact-highlights-section {
+        animation: none;
+        transform: none;
+    }
+    
+    .floating-card {
+        animation: none;
+    }
+    
+    .typewriter {
+        white-space: normal;
+        overflow: visible;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .counter-card {
+        padding: 30px 20px;
+        margin-bottom: 30px;
+    }
+    
+    .counter-card-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    
+    .counter-card-icon i {
+        font-size: 2rem;
+    }
+    
+    .counter-number {
+        font-size: 2.5rem;
+    }
+    
+    .counter-title {
+        font-size: 1rem;
+    }
+    
+    .impact-actions {
+        flex-direction: column;
+    }
+    
+    .impact-actions .th-btn {
+        text-align: center;
+        margin: 0;
+    }
+    
+    .impact-img {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .counter-number {
+        font-size: 2rem;
+    }
+    
+    .counter-card-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .counter-card-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .impact-content {
+        text-align: center;
+    }
+}
+
+/* Loading States */
+.counter-card.loading {
+    opacity: 0.7;
+}
+
+.counter-card.loading .counter-number {
+    color: #ccc;
+}
+
+.counter-card.loading .counter-card-icon {
+    background: #e9ecef;
+    animation: none;
+}
+
+/* Success State */
+.counter-card.completed .counter-card-icon {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    animation: pulse 1s ease-in-out 3;
+}
+
+/* Custom Color Support */
+.counter-card[data-color] .counter-card-icon {
+    background: var(--counter-color);
+}
+
+.counter-card[data-color]::before {
+    background: var(--counter-color);
+}
+
+.counter-card[data-color] .counter-card-bg {
+    background: var(--counter-color);
+    opacity: 0.1;
+}
+
+/* Impact Highlights Styling */
+.impact-highlights {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(26, 104, 91, 0.03) 0%, rgba(255, 172, 0, 0.03) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(26, 104, 91, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.impact-highlights::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1A685B 0%, #FFAC00 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid transparent;
+}
+
+.highlight-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #1A685B 0%, #FFAC00 100%);
+    transform: scaleY(0);
+    transition: transform 0.4s ease;
+}
+
+.highlight-item:hover::before {
+    transform: scaleY(1);
+}
+
+.highlight-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(26, 104, 91, 0.15);
+    border-left-color: #1A685B;
+}
+
+.highlight-number {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #1A685B;
+    background: linear-gradient(135deg, #1A685B 0%, #0f4a42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    min-width: 80px;
+    text-align: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.highlight-number::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #1A685B 0%, #FFAC00 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.highlight-item:hover .highlight-number::after {
+    opacity: 1;
+}
+
+.highlight-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* Pulse animation for highlight numbers */
+@keyframes highlightPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.highlight-item.animate .highlight-number {
+    animation: highlightPulse 2s ease-in-out infinite;
+}
+
+/* Staggered animation delays */
+.highlight-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.highlight-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.highlight-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .impact-highlights {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+    
+    .highlight-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 20px 15px;
+    }
+    
+    .highlight-number {
+        font-size: 1.8rem;
+        min-width: auto;
+    }
+    
+    .highlight-description {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .highlight-item:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* ===== IMPACT HIGHLIGHTS SECTION STYLES ===== */
+/* Styles that blend with existing impact page design */
+
+.impact-highlights-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.impact-highlights-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(26, 104, 91, 0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    z-index: 1;
+}
+
+.impact-highlights-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Impact Story Cards - Similar to existing impact sections */
+.impact-story-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 
+        0 15px 50px rgba(26, 104, 91, 0.12),
+        0 5px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(26, 104, 91, 0.08);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.impact-story-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 25px 70px rgba(26, 104, 91, 0.2),
+        0 10px 30px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    border-color: rgba(26, 104, 91, 0.2);
+}
+
+.impact-story-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1A685B 0%, #FFAC00 100%);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+    z-index: 1;
+}
+
+.impact-story-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Story Header - Consistent with existing title styles */
+.story-badge {
+    background: linear-gradient(135deg, #1A685B 0%, #0f4a42 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(26, 104, 91, 0.3);
+}
+
+.story-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.story-subtitle {
+    color: #FFAC00;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.story-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.story-description p {
+    margin-bottom: 15px;
+}
+
+/* Impact Metrics - Enhanced version of existing highlight styles */
+.impact-metrics {
+    background: linear-gradient(135deg, rgba(26, 104, 91, 0.03) 0%, rgba(255, 172, 0, 0.03) 100%);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(26, 104, 91, 0.1);
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.impact-metrics::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1A685B 0%, #FFAC00 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.metrics-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1A685B;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.metric-item {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+.metric-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #1A685B 0%, #FFAC00 100%);
+    transform: scaleY(0);
+    transition: transform 0.4s ease;
+}
+
+.metric-item:hover::before {
+    transform: scaleY(1);
+}
+
+.metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(26, 104, 91, 0.15);
+}
+
+.metric-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1A685B;
+    background: linear-gradient(135deg, #1A685B 0%, #0f4a42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    line-height: 1;
+    position: relative;
+}
+
+.metric-number::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #1A685B 0%, #FFAC00 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.metric-item:hover .metric-number::after {
+    opacity: 1;
+}
+
+.metric-label {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Story Actions - Consistent with existing button styles */
+.story-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.story-actions .th-btn {
+    padding: 15px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* Visual Section - Consistent with existing image styles */
+.impact-story-visual {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-left: 20px;
+}
+
+.story-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    transition: transform 0.4s ease;
+}
+
+.impact-story-visual:hover .story-image {
+    transform: scale(1.05);
+}
+
+.story-placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.story-placeholder i {
+    color: #1A685B;
+    opacity: 0.6;
+    margin-bottom: 15px;
+}
+
+/* Floating Stats - Unique enhancement */
+.floating-stats {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.floating-stat-card {
+    position: absolute;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+    text-align: center;
+}
+
+.floating-stat-card.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.floating-stat-card.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #1A685B;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-text {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Decoration - Consistent with existing shapes */
+.story-decoration {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.decoration-shape {
+    width: 100px;
+    height: auto;
+    opacity: 0.6;
+}
+
+/* Story Divider */
+.story-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #1A685B 50%, transparent 100%);
+    margin: 50px 0;
+    opacity: 0.3;
+}
+
+/* Responsive Design for Impact Highlights */
+@media (max-width: 1200px) {
+    .impact-story-visual {
+        margin-left: 0;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .impact-story-card {
+        padding: 25px 20px;
+    }
+    
+    .story-title {
+        font-size: 1.6rem;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric-number {
+        font-size: 2rem;
+    }
+    
+    .story-actions {
+        flex-direction: column;
+    }
+    
+    .story-actions .th-btn {
+        text-align: center;
+        margin: 0;
+    }
+    
+    .floating-stat-card {
+        position: relative;
+        margin: 10px auto;
+        display: block;
+    }
+    
+    .floating-stat-card.top-right,
+    .floating-stat-card.bottom-left {
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .story-badge {
+        font-size: 0.8rem;
+        padding: 6px 15px;
+    }
+    
+    .story-title {
+        font-size: 1.4rem;
+    }
+    
+    .metric-number {
+        font-size: 1.8rem;
+    }
+    
+    .impact-story-card {
+        padding: 20px 15px;
+    }
+}

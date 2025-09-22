@@ -1,0 +1,50 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}Donate to YCBN Uganda{% endblock %}
+
+{% block content %}
+<section class="donation-details space-top space-extra2-bottom">
+    <div class="container">
+        <div class="row gx-40">
+            <div class="col-xxl-8 col-lg-7">
+                <div class="donation-form-v1">
+                    <p class="donation-form-notice"><i class="fa-solid fa-triangle-exclamation"></i><span class="text-title">Notice:</span> Every contribution, no matter how small, directly impacts the lives of Ugandan youth. Thank you for supporting YCBN Uganda!</p>
+                    <form action="#" method="POST" class="contact-form ajax-contact">
+                        <div class="form-group donate-input">
+                            <input type="text" value="2000" required class="donate_amount">
+                            <span class="icon">UGX</span>
+                        </div>
+                        <ul class="donate-amount-button-list list-unstyled">
+                            <li class="donate-amount-button" data-amount="2000">UGX 2,000</li>
+                            <li class="donate-amount-button" data-amount="10000">UGX 10,000</li>
+                            <li class="donate-amount-button" data-amount="50000">UGX 50,000</li>
+                            <li class="donate-amount-button" data-amount="100000">UGX 100,000</li>
+                            <li class="donate-amount-button" data-amount="Custom Amount">Custom Amount</li>
+                        </ul>
+                        <h5 class="title">Select Payment Method</h5>
+                        <ul class="donate-payment-method list-unstyled">
+                            <li><input type="radio" id="mobile_money" name="donate_method" class="donate_method" checked><label for="mobile_money">Mobile Money</label></li>
+                            <li><input type="radio" id="flutterwave" name="donate_method" class="donate_method"><label for="flutterwave">Flutterwave</label></li>
+                            <li><input type="radio" id="paypal" name="donate_method" class="donate_method"><label for="paypal">PayPal</label></li>
+                            <li><input type="radio" id="bank_transfer" name="donate_method" class="donate_method"><label for="bank_transfer">Bank Transfer</label></li>
+                        </ul>
+                        <button type="submit" class="th-btn">Donate Now</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xxl-4 col-lg-5">
+                <div class="donation-info-box">
+                    <h4>Why Donate?</h4>
+                    <p>Your support helps us provide skills, knowledge, and hope to Uganda’s youth. Together, we build a brighter future for all.</p>
+                    <ul class="list-unstyled mt-3">
+                        <li><strong>Impact:</strong> Schools Reached, Youth Trained, Community Events, Projects Initiated</li>
+                        <li><strong>Secure:</strong> All payments are safe and encrypted</li>
+                        <li><strong>Transparent:</strong> Track your impact with YCBN Uganda</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

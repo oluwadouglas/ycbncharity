@@ -1,0 +1,62 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Add Article - YCBN" }}{% endblock %}
+
+{% block content %}
+<section class="space overflow-hidden contact-area-1 position-relative z-index-common">
+  <div class="container">
+
+    {% if messages %}
+    <div class="row"><div class="col-12">
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div></div>
+    {% endif %}
+
+    <div class="contact-wrap1">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-9">
+          <div class="title-area text-center mb-4">
+            <h2 class="sec-title">{{ is_edit|yesno:"Edit Article,Add Article" }}</h2>
+          </div>
+          <form method="post" enctype="multipart/form-data" class="contact-form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="form-group col-12 mb-3">
+                <label class="form-label">Title</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                  <div class="text-danger small">{{ form.title.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="form-group col-12 mb-3">
+                <label class="form-label">Featured Image</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                  <div class="text-danger small">{{ form.image.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="form-group col-12 mb-3">
+                <label class="form-label">Content</label>
+                {{ form.content }}
+                {% if form.content.errors %}
+                  <div class="text-danger small">{{ form.content.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="form-btn col-12">
+                <button class="th-btn" type="submit">{{ is_edit|yesno:"Save Changes,Publish Article" }}</button>
+                <a class="th-btn style4 ms-2" href="{% url 'charity:articles' %}">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

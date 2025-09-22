@@ -1,0 +1,118 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/bg/breadcumb-bg.jpg' %}" data-overlay="global" data-opacity="8">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">{{ page_title|default:"Page" }}</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{% url 'charity:home' %}">Home</a></li>
+                <li>{{ page_title|default:"Page" }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="space">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <div class="title-area text-center">
+                        <span class="sub-title after-none before-none"><i class="fas fa-heart text-theme"></i> Pricing Plan</span>
+                        <h2 class="sec-title">The terms and Conditions Select Your Plan</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-30 justify-content-center">
+
+                <div class="col-xl-12 col-lg-4 col-md-6">
+                    <div class="price-card2">
+                        <div class="price-card-title-wrap">
+                            <h3 class="price-card_title">
+                                Free This Plan </h3>
+                            <p class="price-card_text">Refund policies vary based on the date of cancellation.</p>
+                        </div>
+                        <div class="price-card-price-wrap">
+                            <h4 class="price-card_price">
+                                <span class="currency">$</span>
+                                00
+                            </h4>
+                        </div>
+                        <div class="price-card_content">
+                            <div class="checklist">
+                                <ul>
+                                    <li><i class="fas fa-circle-check"></i> We are privileged to work.</li>
+                                    <li><i class="fas fa-circle-check"></i> 24/7 system monitoring</li>
+                                    <li class="unavailable"><i class="fas fa-circle-check"></i> Encourage team member</li>
+                                    <li class="unavailable"><i class="fas fa-circle-check"></i> Remote best support</li>
+                                </ul>
+                            </div>
+                            <a href='{% url 'charity:pricing' %}' class="th-btn">Choose Your Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-4 col-md-6">
+                    <div class="price-card2">
+                        <div class="price-card-title-wrap">
+                            <h3 class="price-card_title">
+                                Standard This Plan </h3>
+                            <p class="price-card_text">Refund policies vary based on the date of cancellation.</p>
+                        </div>
+                        <div class="price-card-price-wrap">
+                            <h4 class="price-card_price">
+                                <span class="currency">$</span>
+                                60
+                            </h4>
+                        </div>
+                        <div class="price-card_content">
+                            <div class="checklist">
+                                <ul>
+                                    <li><i class="fas fa-circle-check"></i> We are privileged to work.</li>
+                                    <li><i class="fas fa-circle-check"></i> 24/7 system monitoring</li>
+                                    <li><i class="fas fa-circle-check"></i> Encourage team member</li>
+                                    <li class="unavailable"><i class="fas fa-circle-check"></i> Remote best support</li>
+                                </ul>
+                            </div>
+                            <a href='{% url 'charity:pricing' %}' class="th-btn">Choose Your Plan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-4 col-md-6">
+                    <div class="price-card2">
+                        <div class="price-card-title-wrap">
+                            <h3 class="price-card_title">
+                                Premium This Plan </h3>
+                            <p class="price-card_text">Refund policies vary based on the date of cancellation.</p>
+                        </div>
+                        <div class="price-card-price-wrap">
+                            <h4 class="price-card_price">
+                                <span class="currency">$</span>
+                                120
+                            </h4>
+                        </div>
+                        <div class="price-card_content">
+                            <div class="checklist">
+                                <ul>
+                                    <li><i class="fas fa-circle-check"></i> We are privileged to work.</li>
+                                    <li><i class="fas fa-circle-check"></i> 24/7 system monitoring</li>
+                                    <li><i class="fas fa-circle-check"></i> Encourage team member</li>
+                                    <li><i class="fas fa-circle-check"></i> Remote best support</li>
+                                </ul>
+                            </div>
+                            <a href='{% url 'charity:pricing' %}' class="th-btn">Choose Your Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}

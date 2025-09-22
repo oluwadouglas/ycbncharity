@@ -1,0 +1,133 @@
+{% load static %}
+
+<!--==============================
+Downloadable Resources Section  
+==============================-->
+<section class="resources-section space" id="downloadable-resources">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="title-area text-center">
+                    <span class="sub-title">Resources</span>
+                    <h2 class="sec-title">Downloadable Resources</h2>
+                    <p class="sec-text">Access our comprehensive collection of educational materials, guides, and resources designed to empower youth with essential knowledge and skills.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row gy-30 gx-30 justify-content-center">
+            {% for resource in downloadable_resources %}
+            <div class="col-lg-4 col-md-6">
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="resource-title">{{ resource.title }}</h4>
+                        <p class="resource-description">{{ resource.description }}</p>
+                        <div class="resource-meta">
+                            {% if resource.file_size %}
+                            <span class="resource-size"><i class="fas fa-file"></i> {{ resource.file_size }}</span>
+                            {% endif %}
+                            {% if resource.file_type %}
+                            <span class="resource-type"><i class="fas fa-tag"></i> {{ resource.file_type|upper }}</span>
+                            {% endif %}
+                        </div>
+                        {% if resource.file %}
+                            {% if resource.file.url %}
+                            <a href="{{ resource.file.url }}" class="resource-btn" download target="_blank">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </a>
+                            {% else %}
+                            <a href="#" class="resource-btn" onclick="alert('Resource file is not available!')">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </a>
+                            {% endif %}
+                        {% else %}
+                        <a href="#" class="resource-btn" onclick="alert('Resource will be available soon!')">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="resource-bg-shape"></div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default resources if no backend data -->
+            <div class="col-lg-4 col-md-6">
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="resource-title">Life Skills Guide for Youth</h4>
+                        <p class="resource-description">A comprehensive guide for navigating adolescence.</p>
+                        <div class="resource-meta">
+                            <span class="resource-size"><i class="fas fa-file"></i> 2.5 MB</span>
+                            <span class="resource-type"><i class="fas fa-tag"></i> PDF</span>
+                        </div>
+                        <a href="#" class="resource-btn" onclick="alert('Resource will be available soon!')">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                    </div>
+                    <div class="resource-bg-shape"></div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="resource-title">SRHR Infographic Poster</h4>
+                        <p class="resource-description">Visual guide on sexual and reproductive health rights.</p>
+                        <div class="resource-meta">
+                            <span class="resource-size"><i class="fas fa-file"></i> 1.8 MB</span>
+                            <span class="resource-type"><i class="fas fa-tag"></i> PDF</span>
+                        </div>
+                        <a href="#" class="resource-btn" onclick="alert('Resource will be available soon!')">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                    </div>
+                    <div class="resource-bg-shape"></div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="resource-title">Youth Entrepreneurship Workbook</h4>
+                        <p class="resource-description">Practical exercises for aspiring young entrepreneurs.</p>
+                        <div class="resource-meta">
+                            <span class="resource-size"><i class="fas fa-file"></i> 3.2 MB</span>
+                            <span class="resource-type"><i class="fas fa-tag"></i> PDF</span>
+                        </div>
+                        <a href="#" class="resource-btn" onclick="alert('Resource will be available soon!')">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                    </div>
+                    <div class="resource-bg-shape"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if downloadable_resources.count > 6 %}
+        <div class="text-center mt-50">
+            <a href="{% url 'charity:resources' %}" class="th-btn">View All Resources <i class="fas fa-arrow-up-right ms-2"></i></a>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="resources-shape-1">
+        <img src="{% static 'assets/img/shape/about_shape4_1.png' %}" alt="shape">
+    </div>
+    <div class="resources-shape-2">
+        <img src="{% static 'assets/img/shape/about_shape4_2.png' %}" alt="shape">
+    </div>
+</section>

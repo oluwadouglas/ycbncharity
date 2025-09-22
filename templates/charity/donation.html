@@ -1,0 +1,70 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% load currency_filters %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .donation-card .box-thumb { aspect-ratio: 16/9; overflow: hidden; border-radius: 10px; background: #f5f5f5; }
+  .donation-card .box-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="space" id="donation-sec">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="title-area text-center">
+          <span class="sub-title before-none after-none"><i class="fas fa-heart text-theme"></i> Lets Start Donating</span>
+          <h2 class="sec-title">See Your Impact: Transparent Donation Causes</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gy-30">
+      {% for item in donations %}
+      <div class="col-xl-6">
+        <div class="donation-card style3 h-100">
+          <div class="box-thumb position-relative">
+            {% if item.icon %}
+              <a href="{% url 'charity:donation_details' item.id %}"><img src="{{ item.icon.url }}" alt="{{ item.title }}"></a>
+            {% endif %}
+            {% if item.progress_percent %}
+              <div class="donation-card-tag{% if forloop.counter|divisibleby:2 %} bg-theme2{% endif %}">{{ item.progress_percent }}%</div>
+            {% endif %}
+            <div class="donation-card-shape" data-mask-src="{% static 'assets/img/donation/donation-card-shape2-1.png' %}"></div>
+          </div>
+          <div class="box-content">
+            <h3 class="box-title"><a href="{% url 'charity:donation_details' item.id %}">{{ item.title }}</a></h3>
+            {% if item.description %}
+              <p>{{ item.description|truncatewords:28 }}</p>
+            {% endif %}
+
+            <div class="donation-card_progress-wrap">
+              <div class="progress">
+                <div class="progress-bar" style="width: {{ item.progress_percent }}%;"></div>
+              </div>
+              <div class="donation-card_progress-content">
+                <span class="donation-card_raise">Raised <span class="donation-card_raise-number">{{ item.raised_amount|ugx_short }}</span></span>
+                <span class="donation-card_goal">Goal <span class="donation-card_goal-number">{{ item.goal_amount|ugx_short }}</span></span>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <a href="{% url 'charity:donation_details' item.id %}" class="th-btn style6">Read More <i class="fas fa-arrow-up-right ms-2"></i></a>
+              <a href="{% url 'charity:donate_now' %}" class="th-btn style6">Donate Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <p class="text-center">No donation causes available yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,163 @@
+/* Enhanced Header Styles - Fixed Version */
+
+/* Main Navigation Wrapper */
+.nav-wrapper {
+    background: #fff;
+    padding: 0;
+    position: relative;
+    margin-top: -1px;
+}
+
+/* Navigation Content Container */
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 10px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Styling */
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.header-logo img {
+    height: 45px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.header-logo .logo-text {
+    color: var(--theme-color);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Main Menu Navigation */
+.main-menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.main-menu ul {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-menu ul li {
+    position: relative;
+}
+
+.main-menu ul li a {
+    color: var(--title-color);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 12px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.main-menu ul li a:hover {
+    color: var(--theme-color);
+}
+
+/* User Button */
+.header-button {
+    margin-left: auto;
+}
+
+.header-button .th-btn {
+    background: var(--theme-color);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.header-button .th-btn:hover {
+    opacity: 0.9;
+}
+
+/* Mobile Menu Toggle */
+.th-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--theme-color);
+    font-size: 24px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Dropdown Menu */
+.menu-item-has-children .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    min-width: 220px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.menu-item-has-children:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-item-has-children .sub-menu li a {
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+/* Mobile Styles */
+@media (max-width: 991px) {
+    .nav-content {
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+    .header-logo img {
+        height: 35px;
+    }
+
+    .main-menu {
+        display: none;
+    }
+
+    .th-menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+    
+    .header-button {
+        display: none;
+    }
+}

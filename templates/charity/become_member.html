@@ -1,0 +1,197 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Become a Member - YCBN" }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .member-hero {
+    background: linear-gradient(135deg, #1A685B 0%, #2A8B75 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+  
+  .benefit-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+  }
+  
+  .benefit-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: #1A685B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 2rem;
+  }
+  
+  .join-form {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .join-btn {
+    background: #1A685B;
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 104, 91, 0.3);
+  }
+  
+  .join-btn:hover {
+    background: #2A8B75;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 104, 91, 0.4);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="member-hero">
+  <div class="container">
+    <h1 class="mb-3">Join the YCBN Community</h1>
+    <p class="lead mb-0">Share your story, inspire others, and make a difference in youth empowerment across Uganda</p>
+  </div>
+</section>
+
+<section class="space">
+  <div class="container">
+    
+    {% if messages %}
+    <div class="row">
+      <div class="col-12">
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    
+    <!-- Benefits Section -->
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto text-center mb-4">
+        <h2 class="sec-title">Why Become a Member?</h2>
+        <p class="text-muted">Join our vibrant community of young leaders and change-makers</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-pen-fancy"></i>
+          </div>
+          <h4>Write Articles</h4>
+          <p class="text-muted mb-0">Share your experiences, insights, and stories about youth leadership, community development, and personal growth.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>Connect & Network</h4>
+          <p class="text-muted mb-0">Connect with like-minded youth leaders and change-makers across Uganda. Build lasting relationships and collaborations.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h4>Inspire Others</h4>
+          <p class="text-muted mb-0">Your story can inspire and motivate other young people to take action in their communities and pursue their dreams.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Join Form -->
+    <div class="row mt-5">
+      <div class="col-lg-6 mx-auto">
+        <div class="join-form">
+          <div class="mb-4">
+            <i class="fas fa-user-plus" style="font-size: 3rem; color: #1A685B; margin-bottom: 1rem;"></i>
+            <h3>Ready to Join?</h3>
+            <p class="text-muted">Click the button below to become a YCBN member and start writing articles!</p>
+          </div>
+          
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="join-btn">
+              <i class="fas fa-heart me-2"></i>
+              Become a Member
+            </button>
+          </form>
+          
+          <div class="mt-4">
+            <small class="text-muted">
+              <i class="fas fa-info-circle me-1"></i>
+              Membership is free and gives you immediate access to write and publish articles.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- What You Can Write About -->
+    <div class="row mt-5">
+      <div class="col-lg-10 mx-auto">
+        <div class="text-center mb-4">
+          <h3>What Can You Write About?</h3>
+          <p class="text-muted">Share your experiences and insights on topics that matter to Uganda's youth</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Youth Leadership Experiences</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Community Development Projects</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Skills Development Stories</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Educational Achievements</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Digital Literacy Journeys</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Health & Wellness Tips</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Success Stories & Inspiration</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Challenges & Solutions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/bg/breadcumb-bg.jpg' %}" data-overlay="global" data-opacity="8">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">{{ page_title|default:"Page" }}</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{% url 'charity:event-details' %}">Event Details</a></li>
+                <li>{{ page_title|default:"Page" }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

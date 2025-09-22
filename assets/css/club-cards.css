@@ -1,0 +1,435 @@
+/* =====================================================
+   YCBF Club Cards Override Styles
+   This file overrides the default service-card.style3 styling
+   to ensure proper display of club images and icons
+   ===================================================== */
+
+/* Force proper display for club cards */
+.service-card.style3.club-card {
+    position: relative !important;
+    background: var(--white-color) !important;
+    border-radius: 30px !important;
+    overflow: visible !important; /* Allow icon to overlap */
+    box-shadow: 0px 4px 4px -1px rgba(12, 12, 13, 0.1), 0px 4px 4px -1px rgba(12, 12, 13, 0.05) !important;
+    transition: all 0.4s ease !important;
+    height: auto !important;
+    min-height: 450px;
+}
+
+.service-card.style3.club-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0px 15px 35px rgba(12, 12, 13, 0.15) !important;
+}
+
+/* ===== CLUB CARD IMAGE SECTION ===== */
+.service-card.style3.club-card .box-thumb {
+    position: relative !important;
+    background: transparent !important;
+    border-radius: 30px 30px 0 0 !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+    height: 220px !important;
+    filter: none !important;
+}
+
+.service-card.style3.club-card .box-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 30px 30px 0 0 !important;
+    transition: all 0.4s ease !important;
+    filter: none !important;
+}
+
+.service-card.style3.club-card:hover .box-thumb img {
+    transform: scale(1.03) !important;
+    filter: none !important;
+}
+
+/* ===== CLUB CARD ICON SECTION (Override existing) ===== */
+.service-card.style3.club-card .club-icon-container {
+    position: absolute !important;
+    top: 185px !important; /* Position over image/content border */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10 !important;
+    width: 80px !important;
+    height: 80px !important;
+    background: var(--white-color) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.4s ease !important;
+}
+
+.service-card.style3.club-card:hover .club-icon-container {
+    transform: translateX(-50%) translateY(-5px) !important;
+    box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.18) !important;
+}
+
+.service-card.style3.club-card .club-icon-container .box-icon {
+    width: 50px !important;
+    height: 50px !important;
+    background: linear-gradient(135deg, var(--theme-color), var(--theme-color2)) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    border-radius: 50% 50% 0 0/100% 100% 0 0 !important; /* Remove original shape */
+    line-height: normal !important;
+}
+
+/* Override the original box-icon after pseudo-element */
+.service-card.style3.club-card .club-icon-container .box-icon:after {
+    display: none !important;
+}
+
+.service-card.style3.club-card .club-icon-container .box-icon img {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain !important;
+    filter: brightness(0) invert(1) !important; /* Make icons white */
+    transform: none !important;
+    transition: all 0.4s ease !important;
+    position: static !important;
+    z-index: auto !important;
+}
+
+.service-card.style3.club-card .club-icon-container .box-icon i {
+    color: var(--white-color) !important;
+    font-size: 20px !important;
+    transition: all 0.4s ease !important;
+}
+
+.service-card.style3.club-card:hover .club-icon-container .box-icon img {
+    transform: rotateY(360deg) !important;
+}
+
+.service-card.style3.club-card:hover .club-icon-container .box-icon i {
+    transform: rotate(15deg) !important;
+}
+
+/* ===== CLUB CARD CONTENT SECTION ===== */
+.service-card.style3.club-card .box-content {
+    position: relative !important;
+    background: var(--white-color) !important;
+    padding: 60px 30px 30px 30px !important; /* Extra top padding for icon */
+    border-radius: 0 0 30px 30px !important;
+    text-align: center !important;
+    box-shadow: none !important;
+}
+
+.service-card.style3.club-card .box-title {
+    margin-bottom: 15px !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+}
+
+.service-card.style3.club-card .box-title a {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: var(--title-color) !important;
+    transition: color 0.4s ease !important;
+}
+
+.service-card.style3.club-card .box-title a:hover {
+    color: var(--theme-color) !important;
+}
+
+.service-card.style3.club-card .box-text {
+    margin-bottom: 20px !important;
+    color: var(--body-color) !important;
+    line-height: 1.6 !important;
+    font-size: 15px !important;
+}
+
+/* ===== CLUB LOCATION STYLING ===== */
+.service-card.style3.club-card .club-location {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-bottom: 15px !important;
+    font-size: 14px !important;
+    color: var(--theme-color) !important;
+    font-weight: 500 !important;
+}
+
+.service-card.style3.club-card .club-location i {
+    font-size: 14px !important;
+    color: var(--theme-color) !important;
+}
+
+/* ===== CLUB ACTION BUTTON ===== */
+.service-card.style3.club-card .club-action .th-btn {
+    padding: 12px 30px !important;
+    background: var(--theme-color) !important;
+    color: var(--white-color) !important;
+    border-radius: 25px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.4s ease !important;
+    border: 2px solid var(--theme-color) !important;
+}
+
+.service-card.style3.club-card .club-action .th-btn:hover {
+    background: transparent !important;
+    color: var(--theme-color) !important;
+    transform: translateY(-2px) !important;
+}
+
+.service-card.style3.club-card:hover .club-action .th-btn {
+    background: var(--theme-color2) !important;
+    border-color: var(--theme-color2) !important;
+}
+
+/* ===== CLUB INFO SECTION ===== */
+.service-card.style3.club-card .club-info {
+    margin-top: 15px !important;
+    padding-top: 15px !important;
+    border-top: 1px solid var(--smoke-color2) !important;
+}
+
+.service-card.style3.club-card .club-info small {
+    color: var(--light-color) !important;
+    font-size: 13px !important;
+    display: block !important;
+    margin: 5px 0 !important;
+}
+
+/* ===== EMPTY STATE STYLING ===== */
+.empty-state {
+    padding: 80px 30px !important;
+    background: var(--smoke-color) !important;
+    border-radius: 30px !important;
+    border: 2px dashed var(--th-border-color) !important;
+    text-align: center !important;
+}
+
+.empty-state i {
+    opacity: 0.4 !important;
+    color: var(--light-color) !important;
+    margin-bottom: 20px !important;
+}
+
+.empty-state h4 {
+    color: var(--title-color) !important;
+    margin-bottom: 10px !important;
+}
+
+.empty-state p {
+    color: var(--body-color) !important;
+    margin-bottom: 25px !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1199px) {
+    .service-card.style3.club-card {
+        min-height: 420px !important;
+    }
+    
+    .service-card.style3.club-card .box-thumb {
+        height: 200px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container {
+        top: 165px !important;
+        width: 75px !important;
+        height: 75px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .service-card.style3.club-card .box-title a {
+        font-size: 20px !important;
+    }
+    
+    .service-card.style3.club-card .box-content {
+        padding: 55px 25px 25px 25px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-card.style3.club-card {
+        min-height: 400px !important;
+    }
+    
+    .service-card.style3.club-card .box-thumb {
+        height: 180px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container {
+        top: 145px !important;
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon {
+        width: 42px !important;
+        height: 42px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon i {
+        font-size: 18px !important;
+    }
+    
+    .service-card.style3.club-card .box-content {
+        padding: 50px 20px 20px 20px !important;
+    }
+    
+    .service-card.style3.club-card .box-title a {
+        font-size: 18px !important;
+    }
+    
+    .service-card.style3.club-card .box-text {
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-card.style3.club-card {
+        min-height: 380px !important;
+    }
+    
+    .service-card.style3.club-card .box-thumb {
+        height: 160px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container {
+        top: 125px !important;
+        width: 65px !important;
+        height: 65px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon {
+        width: 38px !important;
+        height: 38px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container .box-icon i {
+        font-size: 16px !important;
+    }
+    
+    .service-card.style3.club-card .box-content {
+        padding: 45px 15px 15px 15px !important;
+    }
+    
+    .service-card.style3.club-card .box-title a {
+        font-size: 16px !important;
+    }
+    
+    .service-card.style3.club-card .box-text {
+        font-size: 13px !important;
+    }
+    
+    .service-card.style3.club-card .club-action .th-btn {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ===== SECTION SPECIFIC STYLING ===== */
+#clubs-sec .service-card.style3.club-card {
+    margin-bottom: 30px !important;
+}
+
+#clubs-sec .title-area {
+    margin-bottom: 50px !important;
+}
+
+#clubs-page .service-card.style3.club-card {
+    margin-bottom: 30px !important;
+}
+
+#clubs-page .title-area {
+    margin-bottom: 60px !important;
+}
+
+/* ===== FALLBACK ICON SYSTEM ===== */
+/* If no icon image loads, show FontAwesome icon */
+.service-card.style3.club-card .club-icon-container .box-icon:empty:before {
+    content: "\f0c0" !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    color: var(--white-color) !important;
+    font-size: 20px !important;
+}
+
+/* Hide broken image icon */
+.service-card.style3.club-card .club-icon-container .box-icon img[src=""],
+.service-card.style3.club-card .club-icon-container .box-icon img:not([src]) {
+    display: none !important;
+}
+
+/* ===== ANIMATION ENHANCEMENTS ===== */
+.service-card.style3.club-card {
+    animation: fadeInUp 0.6s ease-out !important;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation for multiple cards */
+.service-card.style3.club-card:nth-child(2) {
+    animation-delay: 0.1s !important;
+}
+
+.service-card.style3.club-card:nth-child(3) {
+    animation-delay: 0.2s !important;
+}
+
+.service-card.style3.club-card:nth-child(4) {
+    animation-delay: 0.3s !important;
+}
+
+.service-card.style3.club-card:nth-child(5) {
+    animation-delay: 0.4s !important;
+}
+
+.service-card.style3.club-card:nth-child(6) {
+    animation-delay: 0.5s !important;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .service-card.style3.club-card {
+        break-inside: avoid !important;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .service-card.style3.club-card .club-icon-container {
+        position: static !important;
+        display: inline-block !important;
+        margin: 10px auto !important;
+    }
+}

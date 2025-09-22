@@ -1,0 +1,72 @@
+/* Custom styles moved from index.html */
+.team-social-icons .team-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A685B !important;
+    font-size: 1.3rem;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 2px !important;
+    transition: transform 0.2s, color 0.2s;
+}
+.team-social-icons .team-social-link:hover {
+    transform: scale(1.18);
+    color: #145143 !important;
+    background: transparent !important;
+}
+.team-social-icons .team-social-link i {
+    color: #1A685B !important;
+    background: transparent !important;
+    transition: color 0.2s;
+}
+.team-social-icons .team-social-link:hover i {
+    color: #145143 !important;
+    background: transparent !important;
+}
+.team-img.team-img-custom {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f7f7f7;
+}
+.team-img-main {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px 12px 0 0;
+    background: #eaeaea;
+    display: block;
+}
+.team-card-content.team-card-content-custom {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 18px 12px 12px 12px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-top: -8px;
+}
+.box-title .team-name-link {
+    color: #222;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.team-desig.team-desig-custom {
+    margin-top: 0;
+    font-size: 15px;
+    color: #888;
+}
+@media (max-width: 991.98px) {
+    .th-team.team-card3 .team-img-main {
+        height: 220px !important;
+    }
+}
+

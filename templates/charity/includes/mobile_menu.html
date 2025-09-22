@@ -1,0 +1,36 @@
+{% load static %}
+{% with url_name=request.resolver_match.url_name %}
+<ul>
+    <li class="{% if url_name == 'home' %}current-menu-item{% endif %}">
+        <a href="{% url 'charity:home' %}">Home</a>
+    </li>
+    <li class="{% if url_name == 'impact' %}current-menu-item{% endif %}"><a href="{% url 'charity:impact' %}">Our Impact</a></li>
+    <li class="menu-item-has-children {% if url_name == 'about' or url_name == 'programs' or url_name == 'projects' or url_name == 'clubs' or url_name == 'partner_schools' or url_name == 'donations' or url_name == 'donate_now' %}current-menu-item{% endif %}">
+        <a href="{% url 'charity:about' %}">About Us</a>
+        <button type="button" class="drawer-caret" aria-label="Expand submenu" aria-expanded="false"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+        <ul class="sub-menu">
+            <li class="{% if url_name == 'programs' %}current-menu-item{% endif %}"><a href="{% url 'charity:programs' %}">Programs</a></li>
+            <li class="{% if url_name == 'projects' %}current-menu-item{% endif %}"><a href="{% url 'charity:projects' %}">Projects</a></li>
+            <li class="{% if url_name == 'clubs' %}current-menu-item{% endif %}"><a href="{% url 'charity:clubs' %}">Clubs</a></li>
+            <li class="{% if url_name == 'partner_schools' %}current-menu-item{% endif %}"><a href="{% url 'charity:partner_schools' %}">Partner Schools</a></li>
+            <li class="{% if url_name == 'donations' %}current-menu-item{% endif %}"><a href="{% url 'charity:donations' %}">Donations</a></li>
+            <li class="{% if url_name == 'donate_now' %}current-menu-item{% endif %}"><a href="{% url 'charity:donate_now' %}">Donate Now</a></li>
+        </ul>
+    </li>
+    <li class="{% if url_name == 'articles' or url_name == 'article_details' or url_name == 'add_article' or url_name == 'edit_article' %}current-menu-item{% endif %}"><a href="{% url 'charity:articles' %}">Articles</a></li>
+    <li class="{% if url_name == 'spotlight' %}current-menu-item{% endif %}"><a href="{% url 'charity:spotlight' %}">Spotlight</a></li>
+    <li class="{% if url_name == 'blog' %}current-menu-item{% endif %}"><a href="{% url 'charity:blog' %}">Blog</a></li>
+    {% if user.is_authenticated %}
+    <li><a href="{% url 'charity:profile' %}"><i class="fas fa-user me-2"></i>{{ user.get_short_name|default:user.username }}</a></li>
+    <li>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link p-0">Logout</button>
+        </form>
+    </li>
+    {% else %}
+    <li><a href="{% url 'login' %}">Log in</a></li>
+    <li><a href="{% url 'charity:register' %}">Join Us</a></li>
+    {% endif %}
+</ul>
+{% endwith %}

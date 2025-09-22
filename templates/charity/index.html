@@ -1,0 +1,944 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'assets/css/impact-styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/spotlight-styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/sdg-styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/resources-styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/clubs-custom.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/custom-index.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'assets/js/impact-animations.js' %}"></script>
+<script src="{% static 'assets/js/spotlight-animations.js' %}"></script>
+<script src="{% static 'assets/js/sdg-animations.js' %}"></script>
+{% endblock %}
+
+{% block title %}YCBN{% endblock %}
+
+{% block content %}
+<!--==============================
+Hero Area
+==============================-->
+<div class="th-hero-wrapper hero-4" id="hero">
+    <div class="swiper th-slider hero-slider4" id="heroSlider4" data-slider-options='{"effect":"fade","autoHeight": "true"}'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="hero-inner" data-bg-src="{% static 'assets/img/hero1.jpg' %}">
+                    <div class="hero-bg-shape4-1">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-1.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-2 shake">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-2.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-3 jump d-xl-inline-block d-none">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-3.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-4 jump-reverse">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-4.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-5">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-5.png' %}" alt="img">
+                    </div>
+                    <div class="container-fluid px-0">
+                        <div class="row g-0">
+                            <div class="col-12">
+                                <div class="hero-style4">
+                                    <span class="sub-title after-none" data-ani="slideinup" data-ani-delay="0.2s">Empowering Uganda's Youth</span>
+                                    <h1 class="hero-title text-white">
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Building Capacity, One </span>
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Young Leader at a Time </span>
+                                    </h1>
+                                    <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.6s">Join the Youth Capacity Building Network (YCBN) to develop skills, access opportunities, and connect with like-minded young changemakers across Uganda.</p>
+                                    <div class="btn-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                        <a href="{% url 'charity:about' %}" class="th-btn">Discover Now<i class="fa-solid fa-arrow-up-right ms-2"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn style3 popup-video"><i class="fas fa-play"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="hero-inner" data-bg-src="{% static 'assets/img/hero2.jpg' %}">
+                    <div class="hero-bg-shape4-1">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-1.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-2 shake">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-2.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-3 jump d-xl-inline-block d-none">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-3.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-4 jump-reverse">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-4.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-5">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-5.png' %}" alt="img">
+                    </div>
+                    <div class="container-fluid px-0">
+                        <div class="row g-0">
+                            <div class="col-12">
+                                <div class="hero-style4">
+                                    <span class="sub-title after-none" data-ani="slideinup" data-ani-delay="0.2s">Skills for Tomorrow</span>
+                                    <h1 class="hero-title text-white">
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Unlocking Potential </span>
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Through Education </span>
+                                    </h1>
+                                    <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.6s">Through comprehensive training programs, mentorship opportunities, and community projects, we equip young Ugandans with the tools they need to succeed.</p>
+                                    <div class="btn-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                        <a href="{% url 'charity:about' %}" class="th-btn">Learn More<i class="fa-solid fa-arrow-up-right ms-2"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn style3 popup-video"><i class="fas fa-play"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="hero-inner" data-bg-src="{% static 'assets/img/hero3.jpg' %}">
+                    <div class="hero-bg-shape4-1">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-1.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-2 shake">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-2.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-3 jump d-xl-inline-block d-none">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-3.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-4 jump-reverse">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-4.png' %}" alt="img">
+                    </div>
+                    <div class="hero-bg-shape4-5">
+                        <img src="{% static 'assets/img/hero/hero-bg-shape4-5.png' %}" alt="img">
+                    </div>
+                    <div class="container-fluid px-0">
+                        <div class="row g-0">
+                            <div class="col-12">
+                                <div class="hero-style4">
+                                    <span class="sub-title after-none" data-ani="slideinup" data-ani-delay="0.2s">Community Impact</span>
+                                    <h1 class="hero-title text-white">
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Every Young Person </span>
+                                        <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
+                                            Deserves a Chance </span>
+                                    </h1>
+                                    <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.6s">Join our community of young leaders making a difference in Uganda through innovative projects, sustainable development, and collaborative action.</p>
+                                    <div class="btn-wrap" data-ani="slideinup" data-ani-delay="0.7s">
+                                        <a href="{% url 'charity:about' %}" class="th-btn">Get Involved<i class="fa-solid fa-arrow-up-right ms-2"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn style3 popup-video"><i class="fas fa-play"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-thumb-tab" data-slider-tab=".hero-slider4">
+        <div class="tab-btn active">
+            <img src="{% static 'assets/img/hero1.jpg' %}" alt="thumb">
+        </div>
+        <div class="tab-btn">
+            <img src="{% static 'assets/img/hero2.jpg' %}" alt="thumb">
+        </div>
+        <div class="tab-btn">
+            <img src="{% static 'assets/img/hero3.jpg' %}" alt="thumb">
+        </div>
+    </div>
+</div>
+<!--======== / Hero Section ========-->
+
+<div class="overflow-hidden pt-40 pb-80" id="about-sec">
+    <div class="shape-mockup about-bg-shape4-1 d-xxl-block d-none jump-reverse" data-bottom="0" data-left="0%">
+        <img src="{% static 'assets/img/shape/about_shape4_1.png' %}" alt="shape">
+    </div>
+    <div class="shape-mockup about-bg-shape4-2 d-xxl-block d-none jump" data-bottom="5%" data-right="3%">
+        <img src="{% static 'assets/img/shape/about_shape4_2.png' %}" alt="shape">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12">
+                <div class="about-wrap4 text-center">
+                    <div class="title-area mb-50">
+                        <span class="sub-title before-none">About YCBN</span>
+                        <h2 class="sec-title">Empowering Youth, Strengthening Communities, Driving Change</h2>
+                        <p class="sec-text">The Youth Capacity Building Network (YCBN) equips young Ugandans with the skills, knowledge, and opportunities to lead in their communities. Through innovative programs and strategic partnerships, we create clear pathways to education, employment, and civic leadership.</p>
+                    </div>
+                    
+                    <!-- Program Categories Section -->
+                    <div class="title-area mb-40">
+                        <span class="sub-title before-none">Program Areas</span>
+                        <h3 class="sec-title h4">Our Three Core Areas of Impact</h3>
+                    </div>
+                    
+<div class="row justify-content-center align-items-stretch gy-2 gx-3">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="feature-card style4 sdg-compact">
+                                <div class="feature-card_icon">
+                                    <img src="{% static 'assets/img/icon/about-icon4-1.svg' %}" alt="Skills Development">
+                                </div>
+                                <div class="feature-card_content">
+                                    <h4 class="feature-card_title">Skills Development</h4>
+                                    <p class="feature-card_text">Comprehensive training in digital literacy, entrepreneurship, leadership, and technical skills that prepare youth for today’s workforce.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+<div class="feature-card style4 sdg-compact h-100">
+                                <div class="feature-card_icon" data-theme-color="var(--theme-color2)">
+                                    <img src="{% static 'assets/img/icon/about-icon4-2.svg' %}" alt="Community Projects">
+                                </div>
+                                <div class="feature-card_content">
+                                    <h4 class="feature-card_title">Community Projects</h4>
+                                    <p class="feature-card_text">Supporting youth-led initiatives that address local challenges through funding, mentorship, and resource mobilization.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+<div class="feature-card style4 sdg-compact h-100">
+                                <div class="feature-card_icon" data-theme-color="#FF5528">
+                                    <i class="fas fa-hands-helping" aria-hidden="true"></i>
+                                </div>
+                                <div class="feature-card_content">
+                                    <h4 class="feature-card_title">Mentorship and Networking</h4>
+                                    <p class="feature-card_text">Connecting young leaders with experienced mentors and building networks for collaboration and career advancement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist mt-30">
+                        <ul class="list-unstyled">
+                            <li class="d-flex align-items-center justify-content-center mb-3">
+                                <img src="{% static 'assets/img/icon/checklist-icon.svg' %}" alt="icon" class="me-3">
+                                <span>Delivering practical training in leadership and entrepreneurship</span>
+                            </li>
+                            <li class="d-flex align-items-center justify-content-center mb-3">
+                                <img src="{% static 'assets/img/icon/checklist-icon.svg' %}" alt="icon" class="me-3">
+                                <span>Providing mentorship and meaningful networking opportunities</span>
+                            </li>
+                            <li class="d-flex align-items-center justify-content-center mb-3">
+                                <img src="{% static 'assets/img/icon/checklist-icon.svg' %}" alt="icon" class="me-3">
+                                <span>Facilitating access to funding and resources for youth-led initiatives</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-wrap style2 mt-50">
+                        <a href="{% url 'charity:about' %}" class="th-btn">Learn More<div class="icon"><i class="fa-solid fa-arrow-up-right ms-2"></i></div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Partner Schools teaser -->
+<section class="space" id="partner-schools-home">
+  <div class="container">
+    <div class="title-area text-center">
+      <span class="sub-title">Our Network</span>
+      <h2 class="sec-title">Partner Schools Across Uganda</h2>
+      <p class="sec-text">We partner with schools to build youth capacity through clubs, mentorship, and skills programs.</p>
+    </div>
+    <div class="row gy-30 gx-30 justify-content-center">
+      {% for school in schools|slice:":6" %}
+      <div class="col-md-4 col-sm-6">
+        <div class="service-card style3 club-card">
+          <div class="box-thumb">
+            {% if school.image %}
+              <img src="{{ school.image.url }}" alt="{{ school.name }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+            {% else %}
+              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ school.name }}">
+            {% endif %}
+          </div>
+          <div class="box-content">
+            <h3 class="box-title">{{ school.name }}</h3>
+            {% if school.location %}
+            <div class="club-location mb-2">
+              <i class="fas fa-map-marker-alt text-theme"></i>
+              <span class="location-text">{{ school.location }}</span>
+            </div>
+            {% endif %}
+            <p class="box-text">{{ school.description|default:"Partner school working with YCBN to empower youth."|truncatewords:20 }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12"><p class="text-center text-muted">Partner schools will appear here soon.</p></div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-40">
+      <a href="{% url 'charity:partner_schools' %}" class="th-btn">View All Partner Schools <i class="fas fa-arrow-up-right ms-2"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Impact Highlights Section -->
+{% include 'charity/components/impact_highlights.html' with impact_highlights=impact %}
+
+<!--==============================
+About Area
+==============================-->
+<section class="space-top space-extra-bottom" id="spotlight-stats">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-12">
+                <div class="title-area text-center">
+                    <span class="sub-title">
+                        <i class="fas fa-trophy me-2"></i>
+                        Excellence Metrics
+                    </span>
+                    <h2 class="sec-title">Performance at a Glance</h2>
+                    <p class="sec-text">These indicators highlight outcomes achieved across our programs.</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if spotlight_stats %}
+        <div class="row gy-2 gx-3 justify-content-center" id="spotlight-counters">
+            {% for stat in spotlight_stats %}
+            <div class="col-md-4 col-sm-6">
+                <div class="sdg-card sdg-compact shadow-sm h-100 text-center animate-on-scroll animate-fade-up">
+                    <div class="sdg-icon mb-2">
+                        <i class="{{ stat.icon_class|default:'fas fa-trophy' }}" style="font-size: 2rem; color: {{ stat.color|default:'#1A685B' }};"></i>
+                    </div>
+                    <h4 class="sdg-title mb-1" style="color: {{ stat.color|default:'#1A685B' }}; font-weight: 700;">{{ stat.title }}</h4>
+                    <p class="sdg-desc mb-1" style="font-weight:600;">{{ stat.value }}</p>
+                    <p class="sdg-desc mb-0">{{ stat.description }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <div class="empty-state">
+                        <i class="fas fa-trophy fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No Spotlight Stats Available</h4>
+                        <p class="text-muted">We're working on highlighting our achievements. Check back soon for updates!</p>
+                        <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!--==============================
+Projects Area (edge-to-edge)
+==============================-->
+<section class="space" id="projects-sec">
+  <div class="container-fluid px-0">
+    <div class="title-area text-center">
+      <span class="sub-title">Projects</span>
+      <h2 class="sec-title">Recent Community & Innovation Projects</h2>
+    </div>
+    <div class="row gy-30 gx-30 justify-content-center mx-0">
+      {% for project in projects|slice:":6" %}
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card style3 club-card">
+          <div class="box-thumb">
+            {% if project.image %}
+              <img src="{{ project.image.url }}" alt="{{ project.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+            {% else %}
+              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ project.title }}">
+            {% endif %}
+          </div>
+          <div class="box-content">
+            <h3 class="box-title"><a href="{% url 'charity:project_detail' project.id %}">{{ project.title }}</a></h3>
+            <p class="box-text">{{ project.description|default:"Youth-led project under YCBN mentorship and support."|truncatewords:20 }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12"><p class="text-center text-muted">Projects will be published here soon.</p></div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-40">
+      <a href="{% url 'charity:projects' %}" class="th-btn">View All Projects <i class="fas fa-arrow-up-right ms-2"></i></a>
+    </div>
+  </div>
+</section>
+
+<!--==============================
+Clubs Area  
+==============================-->
+<section class="service-area-3 space" id="clubs-sec">
+    <div class="shape-mockup service-shape-3-1 jump d-lg-block d-none" data-left="3%" data-top="15%">
+        <div class="color-masking">
+            <div class="masking-src bg-mask" data-mask-src="{% static 'assets/img/hero/hero-bg-shape2-1.png' %}"></div>
+            <img src="{% static 'assets/img/hero/hero-bg-shape2-1.png' %}" alt="shape">
+        </div>
+    </div>
+
+    <div class="shape-mockup service-shape-3-2 jump-reverse d-lg-block d-none" data-right="3%" data-bottom="5%">
+        <img src="{% static 'assets/img/shape/service_bg_shape4_1.png' %}" alt="shape">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="title-area text-center">
+                    <span class="sub-title">Youth Clubs</span>
+                    <h2 class="sec-title">Empowering Communities through School-Based Clubs</h2>
+                    <p class="sec-text">Our school-based clubs drive youth development, offering platforms for leadership, skills development, and community engagement across Uganda.</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if clubs %}
+        <div class="row gy-30 gx-30 justify-content-center">
+            {% for club in clubs %}
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card style3 club-card">
+                    <!-- Club Image/Thumbnail -->
+                    <div class="box-thumb">
+                        {% if club.image %}
+                            {% if club.image.url %}
+                                <img src="{{ club.image.url }}" alt="{{ club.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+                            {% else %}
+                                <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
+                            {% endif %}
+                        {% else %}
+                            <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Icon Container positioned between image and content -->
+                    <div class="club-icon-container">
+                        <div class="box-icon">
+                            {% if club.icon %}
+                                {% if club.icon.url %}
+                                    <img src="{{ club.icon.url }}" alt="{{ club.title }} Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                                    <i class="fas fa-users" style="display: none;"></i>
+                                {% else %}
+                                    <i class="fas fa-users"></i>
+                                {% endif %}
+                            {% else %}
+                                <i class="fas fa-users"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Club Content -->
+                    <div class="box-content">
+                        <h3 class="box-title">
+                            <a href="{% url 'charity:clubs' %}">{{ club.title }}</a>
+                        </h3>
+                        
+                        <!-- Club Location -->
+                        {% if club.location %}
+                        <div class="club-location mb-2">
+                            <i class="fas fa-map-marker-alt text-theme"></i>
+                            <span class="location-text">{{ club.location }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Club Description/Comment -->
+                        <p class="box-text">
+                            {{ club.comment|default:"Join this dynamic club to develop leadership skills, engage with your community, and make a lasting impact."|truncatewords:20 }}
+                        </p>
+                        
+                        <!-- Learn More Button -->
+                        <div class="club-action mt-3">
+                            <a href="{% url 'charity:clubs' %}" class="th-btn style6">Learn More <i class="fas fa-arrow-up-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Clubs Button -->
+        <div class="text-center mt-50">
+            <a href="{% url 'charity:clubs' %}" class="th-btn">View All Clubs <i class="fas fa-arrow-up-right ms-2"></i></a>
+        </div>
+        {% else %}
+        <!-- No Clubs Message -->
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <div class="empty-state">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No Clubs Available Yet</h4>
+                        <p class="text-muted">We’re establishing additional youth clubs. Please check back soon.</p>
+                        <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<section class="space" id="team-sec">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title after-none before-none"><i class="far fa-heart text-theme"></i> Our Volunteers</span>
+            <h2 class="sec-title">Meet Our Dedicated Team</h2>
+        </div>
+        <div class="row gy-40">
+            {% for member in youth_leaders %}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="th-team team-card3">
+                    <div class="team-img team-img-custom">
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-img-main" />
+                        {% else %}
+                            <img src="{% static 'assets/img/team/default.png' %}" alt="{{ member.name }}" class="team-img-main" />
+                        {% endif %}
+                    </div>
+                    <div class="team-card-content team-card-content-custom">
+                        <h3 class="box-title"><a href="#" class="team-name-link">{{ member.name }}</a></h3>
+                        <span class="team-desig team-desig-custom">{{ member.title|default:'Volunteer' }}</span>
+                        {% if member.social_links %}
+                        <div class="th-social team-social-icons">
+                            {% for key, url in member.social_links.items %}
+                                <a target="_blank" href="{{ url }}" class="team-social-link">
+                                    <i class="fab fa-{{ key }}"></i>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <style>
+        /* Volunteer card social icons - green, no background, no shadow */
+        .team-social-icons .team-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1A685B !important;
+            font-size: 1.3rem;
+            background: transparent !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            width: auto !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 2px !important;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .team-social-icons .team-social-link:hover {
+            transform: scale(1.18);
+            color: #145143 !important;
+            background: transparent !important;
+        }
+        .team-social-icons .team-social-link i {
+            color: #1A685B !important;
+            background: transparent !important;
+            transition: color 0.2s;
+        }
+        .team-social-icons .team-social-link:hover i {
+            color: #145143 !important;
+            background: transparent !important;
+        }
+        /* Responsive fix for volunteer cards */
+        @media (max-width: 991.98px) {
+            .th-team.team-card3 .team-img img {
+                height: 220px !important;
+            }
+        }
+        @media (max-width: 767.98px) {
+            .th-team.team-card3 .team-card-content {
+                padding: 12px 8px 10px 8px !important;
+            }
+            .th-team.team-card3 .box-title {
+                font-size: 1.1rem !important;
+                margin-bottom: 2px !important;
+            }
+            .th-team.team-card3 .team-desig {
+                font-size: 0.95rem !important;
+                margin-top: 0 !important;
+            }
+            .th-team.team-card3 .team-img img {
+                height: 160px !important;
+            }
+        }
+        </style>
+    </div>
+</section>
+<!--==============================
+Programs Area  
+==============================-->
+<section class="space overflow-hidden" data-bg-src="{% static 'assets/img/bg/gray-bg3.png' %}" id="programs-sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="title-area text-center">
+                    <span class="sub-title">Our Programs</span>
+                    <h2 class="sec-title">Empowering Youth through Comprehensive Development Programs</h2>
+                    <p class="sec-text">Explore our flagship programs designed to build capacity and deliver lasting impact in communities across Uganda.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container th-container2">
+        <div class="slider-area">
+            <div class="swiper th-slider has-shadow" id="programsSlider" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"4"}}, "autoHeight": "true"}'>
+                <div class="swiper-wrapper">
+                    {% for category in categories %}
+                        {% for program in category.programs.all|slice:":6" %}
+                        <div class="swiper-slide">
+                            <div class="donation-card style4 program-card" data-theme-color="{% cycle '' 'var(--theme-color2)' '#FF5528' '#122F2A' %}">
+                                <div class="donation-card-shape" data-mask-src="{% static 'assets/img/donation/donation-card-bg-shape1-1.png' %}"></div>
+                                <div class="box-thumb">
+                                    {% if program.image %}
+                                        <img src="{{ program.image.url }}" alt="{{ program.title }}">
+                                    {% else %}
+                                        <img src="{% static 'assets/img/donation/donation4-1.png' %}" alt="{{ program.title }}">
+                                    {% endif %}
+                                </div>
+                                <h3 class="box-title"><a href="{% url 'charity:program_detail' program.id %}">{{ program.title }}</a></h3>
+                                <div class="box-content">
+                                    <h4 class="subtitle">{{ category.name }}</h4>
+                                    
+                                    <!-- Program Description -->
+                                    <div class="program-description">
+                                        <p class="program-text">{{ program.description|default:"Join this comprehensive program designed to empower youth and build essential life skills."|truncatewords:15 }}</p>
+                                    </div>
+                                    
+                                    <a href="{% url 'charity:program_detail' program.id %}" class="th-btn style6">Learn More <i class="fas fa-arrow-up-right ms-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- View All Programs Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'charity:programs' %}" class="th-btn">View All Programs <i class="fas fa-arrow-up-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!--==============================
+Spotlight Area (edge-to-edge)
+==============================-->
+<section class="space overflow-hidden" id="spotlight-sec">
+  <div class="container-fluid px-0">
+    <div class="title-area text-center">
+      <span class="sub-title">Spotlight</span>
+      <h2 class="sec-title">Top‑Performing Clubs, Projects, and Mentors</h2>
+    </div>
+    {% for cat in spotlight_categories %}
+    <div class="mb-3 px-3">
+      <h3 class="h4" style="color:#1A685B;">{{ cat.title }}</h3>
+    </div>
+    <div class="row gy-30 gx-30 justify-content-center mx-0">
+      {% for item in cat.active_items|slice:":3" %}
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card style3 club-card">
+          <div class="box-thumb">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" alt="{{ item.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+            {% else %}
+              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ item.title }}">
+            {% endif %}
+          </div>
+          <div class="box-content">
+            <h3 class="box-title">{{ item.title }}</h3>
+            <p class="box-text">{{ item.description|truncatewords:22 }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12"><p class="text-center text-muted">No spotlight items for this category yet.</p></div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- UN SDG Commitment Section (inline goals with scrolling animation) -->
+<section class="sdg-section space" id="sdg-commitment">
+    <div class="container-fluid px-0">
+        <div class="row justify-content-center mx-0">
+            <div class="col-lg-10">
+                <div class="title-area text-center">
+                    <span class="sub-title">Global Impact</span>
+                    <h2 class="sec-title">Our Commitment to the UN SDGs</h2>
+                    <p class="sec-text">YCBN Uganda actively aligns its programs with the United Nations Sustainable Development Goals (SDGs), empowering youth to take part in shaping a better world.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-0">
+<div class="sdg-marquee" aria-label="UN SDG Goals" data-force-animate="1">
+            <div class="sdg-marquee-track">
+                <div class="sdg-goals-inline">
+                    <div class="sdg-goal" data-sdg="1"><span class="sdg-goal-icon">🏠</span><span class="sdg-goal-title">No Poverty</span></div>
+                    <div class="sdg-goal" data-sdg="2"><span class="sdg-goal-icon">🌾</span><span class="sdg-goal-title">Zero Hunger</span></div>
+                    <div class="sdg-goal" data-sdg="3"><span class="sdg-goal-icon">❤️</span><span class="sdg-goal-title">Good Health</span></div>
+                    <div class="sdg-goal" data-sdg="4"><span class="sdg-goal-icon">📚</span><span class="sdg-goal-title">Quality Education</span></div>
+                    <div class="sdg-goal" data-sdg="5"><span class="sdg-goal-icon">⚖️</span><span class="sdg-goal-title">Gender Equality</span></div>
+                    <div class="sdg-goal" data-sdg="6"><span class="sdg-goal-icon">💧</span><span class="sdg-goal-title">Clean Water</span></div>
+                    <div class="sdg-goal" data-sdg="7"><span class="sdg-goal-icon">⚡</span><span class="sdg-goal-title">Clean Energy</span></div>
+                    <div class="sdg-goal" data-sdg="8"><span class="sdg-goal-icon">💼</span><span class="sdg-goal-title">Decent Work</span></div>
+                    <div class="sdg-goal" data-sdg="9"><span class="sdg-goal-icon">🏭</span><span class="sdg-goal-title">Industry & Innovation</span></div>
+                    <div class="sdg-goal" data-sdg="10"><span class="sdg-goal-icon">🤝</span><span class="sdg-goal-title">Reduced Inequalities</span></div>
+                    <div class="sdg-goal" data-sdg="11"><span class="sdg-goal-icon">🏙️</span><span class="sdg-goal-title">Sustainable Cities</span></div>
+                    <div class="sdg-goal" data-sdg="12"><span class="sdg-goal-icon">♻️</span><span class="sdg-goal-title">Responsible Consumption</span></div>
+                    <div class="sdg-goal" data-sdg="13"><span class="sdg-goal-icon">🌍</span><span class="sdg-goal-title">Climate Action</span></div>
+                    <div class="sdg-goal" data-sdg="14"><span class="sdg-goal-icon">🐠</span><span class="sdg-goal-title">Life Below Water</span></div>
+                    <div class="sdg-goal" data-sdg="15"><span class="sdg-goal-icon">🌳</span><span class="sdg-goal-title">Life on Land</span></div>
+                    <div class="sdg-goal" data-sdg="16"><span class="sdg-goal-icon">⚖️</span><span class="sdg-goal-title">Peace & Justice</span></div>
+                    <div class="sdg-goal" data-sdg="17"><span class="sdg-goal-icon">🤝</span><span class="sdg-goal-title">Partnerships</span></div>
+                </div>
+                <!-- duplicate for seamless loop -->
+                <div class="sdg-goals-inline" aria-hidden="true">
+                    <div class="sdg-goal" data-sdg="1"><span class="sdg-goal-icon">🏠</span><span class="sdg-goal-title">No Poverty</span></div>
+                    <div class="sdg-goal" data-sdg="2"><span class="sdg-goal-icon">🌾</span><span class="sdg-goal-title">Zero Hunger</span></div>
+                    <div class="sdg-goal" data-sdg="3"><span class="sdg-goal-icon">❤️</span><span class="sdg-goal-title">Good Health</span></div>
+                    <div class="sdg-goal" data-sdg="4"><span class="sdg-goal-icon">📚</span><span class="sdg-goal-title">Quality Education</span></div>
+                    <div class="sdg-goal" data-sdg="5"><span class="sdg-goal-icon">⚖️</span><span class="sdg-goal-title">Gender Equality</span></div>
+                    <div class="sdg-goal" data-sdg="6"><span class="sdg-goal-icon">💧</span><span class="sdg-goal-title">Clean Water</span></div>
+                    <div class="sdg-goal" data-sdg="7"><span class="sdg-goal-icon">⚡</span><span class="sdg-goal-title">Clean Energy</span></div>
+                    <div class="sdg-goal" data-sdg="8"><span class="sdg-goal-icon">💼</span><span class="sdg-goal-title">Decent Work</span></div>
+                    <div class="sdg-goal" data-sdg="9"><span class="sdg-goal-icon">🏭</span><span class="sdg-goal-title">Industry & Innovation</span></div>
+                    <div class="sdg-goal" data-sdg="10"><span class="sdg-goal-icon">🤝</span><span class="sdg-goal-title">Reduced Inequalities</span></div>
+                    <div class="sdg-goal" data-sdg="11"><span class="sdg-goal-icon">🏙️</span><span class="sdg-goal-title">Sustainable Cities</span></div>
+                    <div class="sdg-goal" data-sdg="12"><span class="sdg-goal-icon">♻️</span><span class="sdg-goal-title">Responsible Consumption</span></div>
+                    <div class="sdg-goal" data-sdg="13"><span class="sdg-goal-icon">🌍</span><span class="sdg-goal-title">Climate Action</span></div>
+                    <div class="sdg-goal" data-sdg="14"><span class="sdg-goal-icon">🐠</span><span class="sdg-goal-title">Life Below Water</span></div>
+                    <div class="sdg-goal" data-sdg="15"><span class="sdg-goal-icon">🌳</span><span class="sdg-goal-title">Life on Land</span></div>
+                    <div class="sdg-goal" data-sdg="16"><span class="sdg-goal-icon">⚖️</span><span class="sdg-goal-title">Peace & Justice</span></div>
+                    <div class="sdg-goal" data-sdg="17"><span class="sdg-goal-icon">🤝</span><span class="sdg-goal-title">Partnerships</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="testi-area-4 space bg-theme-dark overflow-hidden">
+        <div class="shape-mockup testi-bg-shape4-1 jump-reverse d-xl-block d-none" data-top="5%" data-left="3%">
+            <img src="{% static 'assets/img/hero/hero-bg-shape4-4.png' %}" alt="img">
+        </div>
+        <div class="shape-mockup shake testi-bg-shape4-2 d-xl-block d-none" data-top="7%" data-right="5%">
+            <img src="{% static 'assets/img/shape/team_bg_shape3_4.png' %}" alt="img">
+        </div>
+        <div class="shape-mockup shake testi-bg-shape4-3 d-xl-block d-none" data-bottom="7%" data-left="4%">
+            <img src="{% static 'assets/img/shape/team_bg_shape3_5.png' %}" alt="img">
+        </div>
+        <div class="container">
+            <div class="row gy-40 gx-80">
+                <div class="col-lg-4 align-self-end">
+<div class="swiper th-slider testi-thumb-slider4" data-slider-options='{"effect":"fade","loop":false}'>
+                        <div class="swiper-wrapper">
+                            {% if voices_of_change %}
+                                {% for voice in voices_of_change %}
+                                <div class="swiper-slide">
+                                    <div class="testi-box-img">
+                                        {% if voice.image and voice.image.url %}
+                                            <img class="testi-img" src="{{ voice.image.url }}" alt="{{ voice.name }}" onerror="this.src='{% static 'assets/img/testimonial/testi_default.png' %}'">
+                                        {% else %}
+                                            <img class="testi-img" src="{% static 'assets/img/testimonial/testi_default.png' %}" alt="{{ voice.name|default:'Story' }}">
+                                        {% endif %}
+                                        <div class="testi-card_review">
+                                            <i class="fas fa-star"></i>
+                                            5.0
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="testi-wrap4">
+                        <div class="title-area">
+                            <span class="sub-title after-none">Voices of Change</span>
+                            <h2 class="sec-title text-white">Stories of Impact and Transformation</h2>
+                        </div>
+                        <div class="testi-slider4">
+                            <div class="swiper th-slider testimonial-slider4" id="testiSlide4" data-slider-options='{"loop":false,"paginationType":"progressbar","effect":"fade", "autoHeight": "true", "thumbs":{"swiper":".testi-thumb-slider4"}}'>
+                                <div class="swiper-wrapper">
+                                    {% if voices_of_change %}
+                                        {% for voice in voices_of_change %}
+                                        <div class="swiper-slide">
+                                            <div class="testi-card4">
+                                                <p class="box-text">"{{ voice.quote|default:"This program has transformed my life and given me the skills I need to build a better future for myself and my community." }}"</p>
+                                                <h3 class="box-title">{{ voice.name|default:"Anonymous" }}</h3>
+                                                <p class="box-desig">{{ voice.title|default:"Program Participant" }}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="swiper-slide">
+                                            <div class="testi-card4">
+                                                <p class="box-text">No stories have been published yet. Please check back soon.</p>
+                                                <h3 class="box-title">Voices of Change</h3>
+                                                <p class="box-desig">YCBN Uganda</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="slider-pagination"></div>
+                                <div class="slider-pagination2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="space" id="blog-sec">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">News & Articles</span>
+                <h2 class="sec-title">Our Latest News & Articles</h2>
+            </div>
+            
+            {% if posts %}
+            <div class="slider-area">
+                <div class="swiper th-slider has-shadow" id="blogSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}, "autoHeight": "true"}'>
+                    <div class="swiper-wrapper">
+                        {% for post in posts %}
+                        <div class="swiper-slide">
+                            <div class="blog-card">
+                                <div class="blog-img">
+                                    <a href="{% url 'charity:blog_details' post.id %}">
+                                        <div class="blog-img-shape1" data-mask-src="{% static 'assets/img/blog/blog-card-bg-shape1-2.png' %}"></div>
+                                        {% if post.image %}
+                                            <img src="{{ post.image.url }}" alt="{{ post.title }}" onerror="this.src='{% static 'assets/img/blog/blog_1_1.jpg' %}'">
+                                        {% else %}
+                                            <img src="{% static 'assets/img/blog/blog_1_1.jpg' %}" alt="{{ post.title }}">
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-card-shape" data-mask-src="{% static 'assets/img/blog/blog-card-bg-shape1-1.png' %}"></div>
+                                    <div class="blog-meta">
+                                        <a href="{% url 'charity:blog' %}"><i class="fas fa-calendar"></i>{{ post.date|date:"F j, Y" }}</a>
+                                        <a href="{% url 'charity:blog' %}"><i class="fas fa-user"></i>{{ post.author|default:"YCBN Team" }}</a>
+                                    </div>
+                                    <h3 class="box-title"><a href="{% url 'charity:blog_details' post.id %}">{{ post.title|truncatewords:8 }}</a></h3>
+                                    <a href="{% url 'charity:blog_details' post.id %}" class="th-btn">Read More <i class="fas fa-arrow-up-right ms-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button data-slider-prev="#blogSlider1" class="slider-arrow slider-prev"><i class="far fa-arrow-left"></i></button>
+                <button data-slider-next="#blogSlider1" class="slider-arrow slider-next"><i class="far fa-arrow-right"></i></button>
+            </div>
+            
+            <!-- View All Articles Button -->
+            <div class="text-center mt-50">
+                <a href="{% url 'charity:blog' %}" class="th-btn">View All Articles <i class="fas fa-arrow-up-right ms-2"></i></a>
+            </div>
+            
+            {% else %}
+            <!-- No Articles Message -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <div class="empty-state">
+                            <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                            <h4 class="text-muted">No Articles Available Yet</h4>
+                            <p class="text-muted">We’re preparing new content. Please check back soon for updates.</p>
+                            <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+<!-- Downloadable Resources Section -->
+{% if donations %}
+<section class="space overflow-hidden" data-bg-src="{% static 'assets/img/bg/gray-bg3.png' %}" id="donation-sec">
+    <div class="container-fluid px-0">
+        <div class="row justify-content-center mx-0">
+            <div class="col-lg-7">
+                <div class="title-area text-center">
+                    <span class="sub-title">Support Youth Empowerment</span>
+                    <h2 class="sec-title">Give Now to Empower Uganda’s Next Generation</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-0">
+        <div class="slider-area" style="margin:0; padding:0;">
+            <div class="swiper th-slider has-shadow" id="donationSlider4" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"4"}}, "autoHeight": "true"}'>
+                <div class="swiper-wrapper">
+                    {% for donation in donations %}
+                    <div class="swiper-slide">
+                        <div class="donation-card style4">
+                            <div class="box-thumb">
+                                {% if donation.icon %}
+                                    <img src="{{ donation.icon.url }}" alt="{{ donation.title }}" onerror="this.src='{% static 'assets/img/donation/donation4-1.png' %}'">
+                                {% else %}
+                                    <img src="{% static 'assets/img/donation/donation4-1.png' %}" alt="{{ donation.title }}">
+                                {% endif %}
+                            </div>
+                            <h3 class="box-title"><a href="{% url 'charity:donation_details' donation.id %}">{{ donation.title }}</a></h3>
+                            <div class="box-content">
+                                <h4 class="subtitle">Donation</h4>
+                                <div class="donation-card_progress-wrap">
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: {{ donation.progress_percent }}%;">
+                                            <div class="progress-value">{{ donation.progress_percent }}%</div>
+                                        </div>
+                                    </div>
+                                    <div class="donation-card_progress-content">
+                                        <span class="donation-card_raise">Raised - UGX {{ donation.raised_amount }}</span>
+                                        <span class="donation-card_goal">Goal - UGX {{ donation.goal_amount }}</span>
+                                    </div>
+                                </div>
+                                <a href="{% url 'charity:donation_details' donation.id %}" class="th-btn style6">Donate Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% include 'charity/components/downloadable_resources.html' %}
+
+<!--==============================
+Gallery Area (edge-to-edge)
+==============================-->
+<section class="space overflow-hidden" id="gallery-sec">
+  <div class="container-fluid px-0">
+    <div class="title-area text-center">
+      <span class="sub-title">Gallery</span>
+      <h2 class="sec-title">Moments From Our Work</h2>
+    </div>
+    <div class="row g-2 mx-0">
+      {% for photo in photos %}
+      <div class="col-6 col-md-3">
+        <div class="card border-0">
+          <img src="{{ photo.image.url }}" alt="{{ photo.title }}" style="width:100%;height:220px;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-40">
+      <a href="{% url 'charity:gallery' %}" class="th-btn">View Full Gallery <i class="fas fa-arrow-up-right ms-2"></i></a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,365 @@
+/* Custom Navigation Menu Fixes */
+
+/* Menu Container Styling */
+.menu-area-wrap {
+    padding: 4px 20px !important; /* Reduced vertical padding */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 25px !important;
+    max-width: fit-content !important;
+    margin: 0 auto !important;
+    background: #fff !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    border-radius: 25px !important;
+}
+
+/* Mobile Navigation */
+@media (max-width: 991.98px) {
+    /* Hide the default Bootstrap collapse */
+    .navbar-collapse.collapse:not(.show) {
+        display: block !important;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
+        padding: 70px 25px 30px;
+        background: #fff;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .navbar-collapse.show {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start !important;
+        width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 12px 0 !important;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #333 !important;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        color: var(--theme-color) !important;
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    /* Dropdown menu for mobile */
+    .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 0 15px !important;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .dropdown-item {
+        padding: 10px 5px !important;
+        color: #555 !important;
+        font-size: 0.95em;
+        border-left: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        color: var(--theme-color) !important;
+        background: transparent !important;
+        padding-left: 15px !important;
+        border-left-color: var(--theme-color);
+    }
+    
+    /* Backdrop styles */
+    .navbar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-backdrop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Dropdown toggle arrow */
+    .dropdown-toggle::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        border: none;
+        vertical-align: middle;
+        transition: transform 0.3s ease;
+        margin-left: 8px;
+        font-size: 0.8em;
+    }
+
+    .dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(-180deg);
+    }
+
+    /* Close button */
+    .navbar-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        background: rgba(0, 0, 0, 0.05);
+        border: none;
+        border-radius: 50%;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 10000;
+    }
+    
+    .navbar-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transform: rotate(90deg);
+    }
+        cursor: pointer;
+        color: #333;
+        z-index: 10000;
+    }
+
+    /* Backdrop */
+    .navbar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-backdrop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Logo Section */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo img {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation Menu */
+.main-menu {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+.main-menu ul {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 20px !important;
+}
+
+.main-menu ul li {
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.main-menu ul li a {
+    padding: 8px 15px !important;
+    display: block;
+    color: var(--title-color);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+/* User Actions */
+.header-button {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+.header-button .th-btn {
+    padding: 8px 20px !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+}
+
+/* Dropdown Menu */
+.menu-item-has-children .sub-menu {
+    min-width: 220px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff !important; /* solid white background */
+    padding: 12px 0 !important; /* vertical padding */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    /* Ensure the dropdown fully expands to fit its content */
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important; /* allow all items to be seen */
+    z-index: 10000; /* above header elements */
+}
+
+.menu-item-has-children:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Nested submenus: ensure they also auto-size and don't clip */
+.menu-item-has-children .sub-menu .sub-menu {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.menu-item-has-children .sub-menu li {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.menu-item-has-children .sub-menu li a {
+    padding: 10px 18px !important;
+    display: block;
+    font-size: 14px;
+    color: var(--green-primary, #1A685B);
+}
+.menu-item-has-children .sub-menu li a:hover {
+    background: rgba(26, 104, 91, 0.08);
+    color: var(--nav-accent, #ffc107);
+}
+
+/* Spacing Fix */
+.custom-spacing {
+    padding-top: 15px !important; /* Reduced space between nav and main content */
+}
+
+/* Ensure dropdown not clipped by parents and stacks above */
+.menu-area, .menu-area .menu-area-wrap, .main-menu, .main-menu ul { overflow: visible !important; }
+.menu-area { position: relative; z-index: 9990; }
+
+/* Mobile: ensure dropdowns expand within mobile menu without clipping */
+@media (max-width: 991px) {
+  .th-mobile-menu .menu-item-has-children > .sub-menu {
+    position: static !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: transparent !important; /* inherits panel bg */
+    padding: 6px 0 !important;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 991px) {
+    .menu-area-wrap {
+        padding: 10px 15px !important;
+    }
+    
+    .main-menu {
+        display: none !important;
+    }
+    
+    .header-button {
+        margin-left: auto !important;
+    }
+}

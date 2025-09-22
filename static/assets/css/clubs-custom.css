@@ -1,0 +1,350 @@
+/* =================================
+   Custom Clubs Section Styling
+   ================================= */
+
+/* Club Card Enhancements */
+.club-card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: visible;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: #fff;
+}
+
+.club-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Club Location Styling */
+.club-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.club-location i {
+    font-size: 16px;
+    color: var(--theme-color);
+}
+
+.location-text {
+    font-weight: 500;
+    color: #444;
+}
+
+/* Club Action Button */
+.club-action {
+    margin-top: 15px;
+}
+
+.club-action .th-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.club-action .th-btn:hover {
+    transform: translateX(3px);
+    box-shadow: 0 5px 15px rgba(26, 104, 91, 0.3);
+}
+
+/* Club Card Content */
+.club-card .box-content {
+    padding: 45px 30px 30px 30px;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    margin-top: -5px;
+}
+
+.club-card .box-title {
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.club-card .box-title a {
+    color: #2c2c2c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.club-card .box-title a:hover {
+    color: var(--theme-color);
+    transform: translateX(2px);
+}
+
+/* Club Description/Text */
+.club-card .box-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+/* Club Image Enhancements */
+.club-card .box-thumb {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.club-card .box-thumb img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease, filter 0.3s ease;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Ensure images load properly */
+.club-card .box-thumb img[src=""],
+.club-card .box-thumb img:not([src]),
+.club-card .box-thumb img[src="null"],
+.club-card .box-thumb img[src="undefined"] {
+    opacity: 0;
+}
+
+.club-card:hover .box-thumb img {
+    transform: scale(1.05);
+}
+
+/* Fallback for broken images */
+.club-card .box-thumb::before {
+    content: "📁";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #ddd;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.club-card .box-thumb img[onerror] {
+    position: relative;
+    z-index: 2;
+}
+
+/* Club Icon Container - positioned between image and content */
+.club-icon-container {
+    position: relative;
+    height: 0;
+    z-index: 10;
+}
+
+/* Club Icon Styling - positioned between image and title */
+.club-card .box-icon {
+    position: absolute;
+    top: -30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--theme-color) 0%, var(--theme-color2) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    border: 4px solid #fff;
+    overflow: hidden;
+}
+
+.club-card:hover .box-icon {
+    transform: rotate(360deg) scale(1.1);
+    background: linear-gradient(135deg, var(--theme-color2) 0%, var(--theme-color) 100%);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Uploaded icon images */
+.club-card .box-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    /* Remove filter to show original icon colors */
+    filter: none;
+    /* For uploaded icons, we want to show them as they are */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px;
+    border-radius: 6px;
+}
+
+/* Hide broken icon images */
+.club-card .box-icon img[src=""],
+.club-card .box-icon img:not([src]),
+.club-card .box-icon img[src="null"],
+.club-card .box-icon img[src="undefined"] {
+    display: none;
+}
+
+/* Default icon when no icon is uploaded */
+.club-card .box-icon i {
+    color: #fff;
+    font-size: 20px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Ensure FontAwesome icons display properly */
+.club-card .box-icon i.fas,
+.club-card .box-icon i.far,
+.club-card .box-icon i.fab {
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", "Font Awesome 6 Free", sans-serif;
+    font-weight: 900;
+}
+
+/* Icon fallback container */
+.club-card .box-icon {
+    /* Ensures there's always visible content */
+    min-width: 50px;
+    min-height: 50px;
+}
+
+/* If both image and icon fail, show a default symbol */
+.club-card .box-icon:empty::before {
+    content: "🏫";
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Empty State Styling */
+.empty-state {
+    padding: 60px 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 2px dashed #ddd;
+}
+
+.empty-state i {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .club-card .box-content {
+        padding: 20px;
+    }
+    
+    .club-card .box-thumb img {
+        height: 160px;
+    }
+    
+    .club-location {
+        font-size: 13px;
+    }
+    
+    .club-action .th-btn {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .club-card .box-thumb img {
+        height: 140px;
+    }
+    
+    .empty-state {
+        padding: 40px 15px;
+    }
+}
+
+/* Section Title Enhancements */
+#clubs-sec .title-area {
+    margin-bottom: 60px;
+}
+
+#clubs-sec .sec-title {
+    margin-bottom: 20px;
+}
+
+#clubs-sec .sec-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* View All Button Styling */
+#clubs-sec .text-center.mt-50 {
+    margin-top: 50px !important;
+}
+
+#clubs-sec .text-center .th-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(26, 104, 91, 0.3);
+}
+
+#clubs-sec .text-center .th-btn:hover {
+    box-shadow: 0 8px 25px rgba(26, 104, 91, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.club-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.club-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.club-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.club-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.club-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.club-card:nth-child(6) {
+    animation-delay: 0.5s;
+}

@@ -1,0 +1,199 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} | YCBN{% endblock %}
+
+{% block content %}
+<!-- Page Title -->
+<div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/bg/volunteer-bg.jpg' %}" data-overlay="global" data-opacity="8">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">{{ page_header }}</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{% url 'charity:home' %}">Home</a></li>
+                <li>{{ page_header }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Volunteer Section -->
+<section class="space-extra-bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mb-5">
+                <span class="sub-title text-theme"><i class="fas fa-hands-helping me-2"></i> Volunteer With Us</span>
+                <h2 class="sec-title mt-2">Make a Difference in Your Community</h2>
+                <p class="mb-0">Join our team of passionate volunteers and help us create positive change. Your time and skills can make a real impact.</p>
+            </div>
+        </div>
+        
+        <div class="row gy-4">
+            <!-- Volunteer Opportunities -->
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="feature-card_icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-card_title">Mentorship Programs</h3>
+                    <p class="feature-card_text">Guide and inspire the next generation by becoming a mentor. Share your knowledge and experience with young people in need of positive role models.</p>
+                    <a href="{% url 'charity:programs' %}" class="link-btn">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="feature-card_icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-card_title">Community Service</h3>
+                    <p class="feature-card_text">Participate in community development projects, from building schools to organizing educational workshops and community clean-ups.</p>
+                    <a href="{% url 'charity:projects' %}" class="link-btn">View Projects <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="feature-card_icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="feature-card_title">Skills-Based Volunteering</h3>
+                    <p class="feature-card_text">Use your professional skills to support our mission. We need help with web development, design, marketing, and more.</p>
+                    <a href="{% url 'charity:contact' %}" class="link-btn">Contact Us <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="feature-card_icon">
+                        <i class="fas fa-hands-usd"></i>
+                    </div>
+                    <h3 class="feature-card_title">Fundraising</h3>
+                    <p class="feature-card_text">Help us raise funds to support our programs and initiatives. Every dollar makes a difference in the lives of those we serve.</p>
+                    <a href="{% url 'charity:donate_now' %}" class="link-btn">Donate Now <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-area mt-5 pt-5 text-center">
+            <div class="cta-wrapper">
+                <h3 class="cta-title">Ready to Make a Difference?</h3>
+                <p class="cta-text">Join our team of dedicated volunteers and help us create lasting change in our community.</p>
+                <a href="{% url 'charity:contact' %}" class="th-btn">Become a Volunteer <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="space-top space-extra-bottom bg-light">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title"><i class="fas fa-quote-left text-theme"></i> Volunteer Stories</span>
+            <h2 class="sec-title">What Our Volunteers Say</h2>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="testi-slider1">
+                    <!-- Testimonial 1 -->
+                    <div class="testi-card">
+                        <div class="testi-card_content">
+                            <p class="testi-card_text">"Volunteering with YCBN has been one of the most rewarding experiences of my life. Seeing the impact we make on young people's lives keeps me coming back."</p>
+                            <div class="testi-card_profile">
+                                <div class="testi-card_avater">
+                                    <img src="{% static 'assets/img/team/testi1.jpg' %}" alt="Testimonial">
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="testi-card_name">Sarah Johnson</h3>
+                                    <span class="testi-card_desig">Mentor, 3 Years</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testi-card">
+                        <div class="testi-card_content">
+                            <p class="testi-card_text">"I've been able to use my tech skills to help improve YCBN's website. It's amazing to contribute to a cause I believe in while doing what I love."</p>
+                            <div class="testi-card_profile">
+                                <div class="testi-card_avater">
+                                    <img src="{% static 'assets/img/team/testi2.jpg' %}" alt="Testimonial">
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="testi-card_name">David Kim</h3>
+                                    <span class="testi-card_desig">Volunteer Developer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="space-top space-extra-bottom">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title"><i class="far fa-question-circle text-theme"></i> Common Questions</span>
+            <h2 class="sec-title">Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion accordion-style1" id="faqAccordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                How do I become a volunteer?
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>To become a volunteer, simply fill out our volunteer application form on the contact page. Our team will review your application and get in touch with you about available opportunities that match your skills and interests.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What skills do I need to volunteer?
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>We welcome volunteers with all kinds of skills and backgrounds. Whether you're good with people, have technical skills, or just want to help, there's a place for you. Specific roles may require certain skills, but many of our opportunities are open to anyone with a willingness to learn and help.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                How much time do I need to commit?
+                            </button>
+                        </div>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>We have opportunities that can fit any schedule. Some volunteers contribute a few hours a week, while others help with one-time events. During the application process, you can discuss your availability with our volunteer coordinator to find the right fit for you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <p class="mb-3">Have more questions? We're here to help!</p>
+                    <a href="{% url 'charity:contact' %}" class="th-btn">Contact Us <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

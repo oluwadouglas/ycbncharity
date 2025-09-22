@@ -1,0 +1,94 @@
+/* Enhanced Navigation Menu Styles with Maximum Specificity */
+body .header-default .menu-area .menu-area-wrap {
+    background: #fff !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    border-radius: 25px !important;
+    margin: 0 auto !important;
+    padding: 4px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    max-width: fit-content !important;
+    position: relative !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .header-logo-section {
+    display: flex !important;
+    align-items: center !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .header-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .header-logo img {
+    height: 40px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .main-menu {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .main-menu > ul {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 15px !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .main-menu > ul > li {
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .main-menu > ul > li > a {
+    padding: 8px 12px !important;
+    display: block !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .header-button {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+body .header-default .menu-area .menu-area-wrap .header-button .th-btn {
+    padding: 8px 20px !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Ensure proper vertical spacing */
+.sticky-wrapper {
+    padding: 10px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 991px) {
+    body .header-default .menu-area .menu-area-wrap {
+        padding: 10px 15px !important;
+    }
+    
+    body .header-default .menu-area .menu-area-wrap .header-button {
+        margin-left: auto !important;
+    }
+}

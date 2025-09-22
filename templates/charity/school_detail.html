@@ -1,0 +1,231 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% block title %}{{ school.name }} | Partner School - YCBN{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partner-schools.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <!-- Enhanced School Header -->
+        <div class="school-detail-header">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    {% if school.image %}
+                        <div class="school-detail-image">
+                            <img src="{{ school.image.url }}" class="img-fluid" alt="{{ school.name }}">
+                        </div>
+                    {% else %}
+                        <div class="school-detail-image bg-light p-5 text-center">
+                            <i class="fas fa-school fa-4x text-muted mb-3"></i>
+                            <p class="text-muted">No photo available</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="d-flex align-items-start mb-4">
+                        {% if school.badge %}
+                            <div class="school-detail-badge me-4">
+                                <img src="{{ school.badge.url }}" alt="{{ school.name }} badge">
+                            </div>
+                        {% endif %}
+                        <div class="flex-grow-1">
+                            <h1 class="school-name-title">{{ school.name }}</h1>
+                            <p class="school-location-text">
+                                <i class="fas fa-map-marker-alt me-2"></i>{{ school.location }}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="lead mb-4">{{ school.description }}</p>
+                    
+                    <!-- Enhanced School Info Grid -->
+                    <div class="row">
+                        {% if school.partnership_date %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Partnership Since</h6>
+                                    <div class="info-value">{{ school.partnership_date|date:"F Y" }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if school.student_population %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Students</h6>
+                                    <div class="info-value">{{ school.student_population|floatformat:0 }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if school.contact_person %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Contact Person</h6>
+                                    <div class="info-value">{{ school.contact_person }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if school.contact_phone %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Phone</h6>
+                                    <div class="info-value">{{ school.contact_phone }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if school.contact_email %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Email</h6>
+                                    <div class="info-value">
+                                        <a href="mailto:{{ school.contact_email }}" class="text-decoration-none">{{ school.contact_email }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if school.website %}
+                        <div class="col-md-6">
+                            <div class="school-info-item d-flex align-items-center">
+                                <div class="info-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Website</h6>
+                                    <div class="info-value">
+                                        {% if 'http' in school.website %}
+                                            <a href="{{ school.website }}" target="_blank" class="text-decoration-none">Visit School Website</a>
+                                        {% else %}
+                                            <a href="http://{{ school.website }}" target="_blank" class="text-decoration-none">Visit School Website</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Associated Clubs Section -->
+        {% if clubs %}
+        <div class="school-clubs-section">
+            <div class="container">
+                <div class="school-clubs-title">
+                    <h3>YCBN Youth Clubs</h3>
+                    <div class="clubs-subtitle">Active at {{ school.name }}</div>
+                </div>
+                <div class="row">
+                    {% for club in clubs %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="school-club-card">
+                            <!-- Club Icon Section -->
+                            <div class="club-icon-section">
+                                <div class="club-icon-wrapper">
+                                    {% if club.icon %}
+                                        <img src="{{ club.icon.url }}" alt="{{ club.title }}">
+                                    {% else %}
+                                        <i class="fas fa-users"></i>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Club Content -->
+                            <div class="club-content">
+                                <h5 class="club-title">{{ club.title }}</h5>
+                                
+                                {% if club.description %}
+                                    <p class="club-description">{{ club.description|truncatewords:20 }}</p>
+                                {% endif %}
+                                
+                                <!-- Club Meta Information -->
+                                <div class="club-meta">
+                                    {% if club.coordinator %}
+                                        <div class="club-meta-item">
+                                            <i class="fas fa-user"></i>
+                                            <span>Coordinator: {{ club.coordinator }}</span>
+                                        </div>
+                                    {% endif %}
+                                    
+                                    {% if club.member_count %}
+                                        <div class="club-meta-item">
+                                            <i class="fas fa-users"></i>
+                                            <span>{{ club.member_count }} members</span>
+                                        </div>
+                                    {% endif %}
+                                    
+                                    {% if club.meeting_schedule %}
+                                        <div class="club-meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>{{ club.meeting_schedule }}</span>
+                                        </div>
+                                    {% endif %}
+                                    
+                                    {% if not club.is_active %}
+                                        <div class="club-meta-item">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <span class="text-warning">Inactive Club</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="no-clubs-state">
+            <i class="fas fa-users"></i>
+            <h4>No YCBN clubs at this school yet</h4>
+            <p>We're always looking to start new clubs and programs! Contact us if you're interested in establishing a YCBN club at {{ school.name }}.</p>
+        </div>
+        {% endif %}
+        
+        <!-- Enhanced Call to Action -->
+        <div class="partner-cta-section">
+            <div class="container">
+                <h4>Interested in partnering with YCBN?</h4>
+                <p>Join our network of schools making a positive impact on youth development across Uganda. Together, we can empower the next generation.</p>
+                <a href="{% url 'charity:contact' %}" class="cta-button">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us Today
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

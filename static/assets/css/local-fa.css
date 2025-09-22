@@ -1,0 +1,36 @@
+/* Local fallback for Font Awesome 6 Free & Brands */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900; /* Solid */
+  font-display: swap;
+  src: url("../fonts/fontawesome/fa-solid-900.woff2") format("woff2"),
+       url("../fonts/fontawesome/fa-solid-900.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400; /* Regular */
+  font-display: swap;
+  src: url("../fonts/fontawesome/fa-regular-400.woff2") format("woff2"),
+       url("../fonts/fontawesome/fa-regular-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/fontawesome/fa-brands-400.woff2") format("woff2"),
+       url("../fonts/fontawesome/fa-brands-400.ttf") format("truetype");
+}
+
+/* Map classic FA 5/6 shorthand classes to families */
+.fa, .fas, .far, .fab { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.fas { font-family: "Font Awesome 6 Free"; font-weight: 900; }
+.far { font-family: "Font Awesome 6 Free"; font-weight: 400; }
+.fab { font-family: "Font Awesome 6 Brands"; font-weight: 400; }
+
+/* Ensure pseudo-elements using var(--icon-font) still work with Free */
+:root { --icon-font: "Font Awesome 6 Free"; }

@@ -1,0 +1,132 @@
+/* Custom Navigation Menu Fixes */
+
+/* Menu Container Styling */
+.menu-area-wrap {
+    padding: 4px 20px !important; /* Reduced vertical padding */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 25px !important;
+    max-width: fit-content !important;
+    margin: 0 auto !important;
+    background: #fff !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    border-radius: 25px !important;
+}
+
+/* Logo Section */
+.header-logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo img {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Navigation Menu */
+.main-menu {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+.main-menu ul {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 20px !important;
+}
+
+.main-menu ul li {
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.main-menu ul li a {
+    padding: 8px 15px !important;
+    display: block;
+    color: var(--title-color);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+/* User Actions */
+.header-button {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+.header-button .th-btn {
+    padding: 8px 20px !important;
+    line-height: 1.4 !important;
+    height: auto !important;
+}
+
+/* Dropdown Menu */
+.menu-item-has-children .sub-menu {
+    min-width: 220px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    padding: 15px 0 !important;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.menu-item-has-children:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-item-has-children .sub-menu li {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.menu-item-has-children .sub-menu li a {
+    padding: 8px 25px !important;
+    display: block;
+    font-size: 14px;
+}
+
+/* Spacing Fix */
+.custom-spacing {
+    padding-top: 15px !important; /* Reduced space between nav and main content */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 991px) {
+    .menu-area-wrap {
+        padding: 10px 15px !important;
+    }
+    
+    .main-menu {
+        display: none !important;
+    }
+    
+    .header-button {
+        margin-left: auto !important;
+    }
+}

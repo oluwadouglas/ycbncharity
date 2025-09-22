@@ -1,0 +1,76 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}Voices of Change | YCBN Uganda{% endblock %}
+
+{% block content %}
+<div class="breadcumb-wrapper" data-bg-src="{% static 'assets/img/bg/breadcumb-bg.jpg' %}" data-overlay="global" data-opacity="8">
+    <div class="container">
+        <div class="breadcumb-content">
+            <h1 class="breadcumb-title">Voices of Change</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{% url 'charity:home' %}">Home</a></li>
+                <li>Voices of Change</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="overflow-hidden space">
+    <style>
+        /* Scoped styles for this page */
+        .voc-card { position: relative; border-radius: 18px; border: 1px solid rgba(26,104,91,0.12); background: #fff; box-shadow: 0 8px 22px rgba(0,0,0,0.08); transition: transform .25s ease, box-shadow .25s ease; overflow: hidden; }
+        .voc-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120px 120px at 110% -10%, rgba(26,104,91,0.08), transparent 60%), radial-gradient(100px 100px at -10% 120%, rgba(26,104,91,0.06), transparent 60%); pointer-events: none; }
+        .voc-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.12); }
+        .voc-accent { height: 5px; width: 100%; background: linear-gradient(90deg, #1A685B 0%, rgba(26,104,91,0.35) 100%); border-top-left-radius: 18px; border-top-right-radius: 18px; }
+        .voc-avatar { width: 96px; height: 96px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(26,104,91,0.25); box-shadow: 0 8px 18px rgba(26,104,91,0.18); }
+        .voc-quote { font-size: 1.14rem; line-height: 1.72; font-style: italic; color: #2a2a2a; }
+        .voc-quote i { color: #1A685B; opacity: .95; }
+        .voc-meta h6 { font-weight: 800; margin-bottom: 2px; }
+        .voc-meta small { color: #6c757d; }
+        .voc-divider { height: 1px; background: rgba(26,104,91,0.12); margin: 12px 0 0; }
+        .voc-quote-badge { position: absolute; right: 12px; top: 10px; width: 36px; height: 36px; border-radius: 50%; background: rgba(26,104,91,0.1); display: grid; place-items: center; color: #1A685B; animation: floatY 3.2s ease-in-out infinite; }
+        @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    </style>
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title after-none before-none"><i class="fas fa-heart text-theme"></i>Voices of Change</span>
+            <h2 class="sec-title">What Our Youth Leaders Say</h2>
+        </div>
+        <div class="row g-4 g-xl-5">
+            {% for testimonial in testimonials %}
+            <div class="col-sm-6 col-lg-4">
+                <div class="voc-card h-100">
+                    <div class="voc-accent"></div>
+                    <div class="voc-quote-badge"><i class="fas fa-quote-right"></i></div>
+                    <div class="p-4 pb-1 d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3 me-md-4">
+                            {% if testimonial.image %}
+                                <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" class="voc-avatar">
+                            {% else %}
+                                <div class="d-inline-flex align-items-center justify-content-center voc-avatar bg-light">
+                                    <i class="fas fa-user text-muted"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow-1 voc-meta">
+                            <h6 class="mb-0">{{ testimonial.name }}</h6>
+                            <small>{{ testimonial.title }}</small>
+                        </div>
+                    </div>
+                    <div class="card-body pt-3 px-4 pb-4">
+                        <p class="voc-quote mb-0">
+                            <i class="fas fa-quote-left me-2"></i>
+                            {{ testimonial.quote|default:"" }}
+                            <i class="fas fa-quote-right ms-2"></i>
+                        </p>
+                        <div class="voc-divider"></div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No youth testimonials available at the moment.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'assets/css/spotlight-styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Excellence Metrics Section -->
+<section class="space-top space-extra-bottom" id="spotlight-stats">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-12">
+                <div class="title-area text-center">
+                    <span class="sub-title">
+                        <i class="fas fa-trophy me-2"></i>
+                        Excellence Metrics
+                    </span>
+                    <h2 class="sec-title">Performance at a Glance</h2>
+                    <p class="sec-text">These metrics highlight the exceptional results achieved across all categories.</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if spotlight_stats %}
+        <div class="row gy-4 justify-content-center" id="spotlight-counters">
+            {% for stat in spotlight_stats %}
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="spotlight-stat-card animate-on-scroll animate-fade-up" style="--stat-color: {{ stat.color }};">
+                    <div class="stat-card-icon">
+                        <i class="{{ stat.icon_class }}" style="color: {{ stat.color }}; font-size: 2.5rem;"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-value">{{ stat.value }}</h3>
+                        <h4 class="stat-title">{{ stat.title }}</h4>
+                        <p class="stat-description">{{ stat.description }}</p>
+                    </div>
+                    <div class="stat-card-bg" style="background: linear-gradient(135deg, {{ stat.color }}15, {{ stat.color }}05);"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Spotlight Categories -->
+{% if spotlight_categories %}
+{% for category in spotlight_categories %}
+<section class="space{% if forloop.counter0|divisibleby:2 %} bg-smoke{% endif %}" id="spotlight-{{ category.name }}">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="title-area text-center">
+                    <span class="sub-title" style="color: {{ category.background_color }};">
+                        <i class="{{ category.icon_class }} me-2"></i>
+                        {{ category.get_name_display }}
+                    </span>
+                    <h2 class="sec-title">{{ category.title }}</h2>
+                    {% if category.subtitle %}
+                    <p class="sec-text">{{ category.subtitle }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if category.active_items %}
+        <div class="row gy-4">
+            {% for item in category.active_items %}
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="spotlight-item-card animate-on-scroll animate-fade-up{% if item.is_featured %} featured-item{% endif %}" style="animation-delay: {{ forloop.counter0|floatformat:1|add:'0.1' }}s;">
+                    {% if item.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Featured</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="item-image">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% else %}
+                        <div class="placeholder-img" style="background: {{ category.background_color }}15;">
+                            <i class="{{ category.icon_class }} fa-3x" style="color: {{ category.background_color }};"></i>
+                        </div>
+                        {% endif %}
+                        <div class="performance-badge" style="background: {{ item.performance_badge_color }};">
+                            {{ item.get_performance_level_display }}
+                        </div>
+                    </div>
+                    
+                    <div class="item-content">
+                        <div class="item-header">
+                            <h4 class="item-title">{{ item.title }}</h4>
+                            {% if item.subtitle %}
+                            <p class="item-subtitle">{{ item.subtitle }}</p>
+                            {% endif %}
+                            {% if item.location %}
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                {{ item.location }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="item-description">
+                            {{ item.description|truncatewords:25 }}
+                        </div>
+                        
+                        {% if item.achievements_list %}
+                        <div class="item-achievements">
+                            <h6>Key Achievements:</h6>
+                            <ul class="achievement-list">
+                                {% for achievement in item.achievements_list|slice:":3" %}
+                                <li><i class="fas fa-check-circle me-2" style="color: {{ category.background_color }};"></i>{{ achievement }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="item-footer">
+                            <div class="achievement-score">
+                                <span class="score-label">Performance Score:</span>
+                                <span class="score-value" style="color: {{ category.background_color }};">{{ item.achievement_score }}/100</span>
+                            </div>
+                            
+                            {% if item.contact_info %}
+                            <div class="item-contact">
+                                {% for key, value in item.contact_info.items %}
+                                {% if key == 'email' %}
+                                <a href="mailto:{{ value }}" class="contact-link" title="Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                {% elif key == 'phone' %}
+                                <a href="tel:{{ value }}" class="contact-link" title="Phone">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                {% elif key == 'website' %}
+                                <a href="{{ value }}" target="_blank" class="contact-link" title="Website">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Button -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <a href="{% url 'charity:contact' %}" class="th-btn" style="background: {{ category.background_color }};">
+                    Learn More About {{ category.get_name_display }}
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="empty-state">
+                    <i class="{{ category.icon_class }} fa-4x text-muted mb-3"></i>
+                    <h4>{{ category.get_name_display }} Coming Soon</h4>
+                    <p class="text-muted">We're currently evaluating and selecting the best performers in this category. Check back soon!</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endfor %}
+{% else %}
+<section class="space">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="empty-state text-center">
+                    <i class="fas fa-star fa-4x text-muted mb-4"></i>
+                    <h3>Spotlight Categories Coming Soon</h3>
+                    <p class="text-muted mb-4">We're setting up our excellence recognition system. Soon you'll be able to see our top performing clubs, mentors, projects, and programs.</p>
+                    <div class="btn-group">
+                        <a href="{% url 'charity:about' %}" class="th-btn">Learn About Us<i class="fas fa-info-circle ms-2"></i></a>
+                        <a href="{% url 'charity:contact' %}" class="th-btn style3 ms-3">Get Involved<i class="fas fa-users ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'assets/js/spotlight-animations.js' %}"></script>
+{% endblock %}

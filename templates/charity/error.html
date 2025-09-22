@@ -1,0 +1,26 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<section class="space">
+        <div class="container">
+            <div class="error-img">
+                <img src="{% static 'assets/img/theme-img/error.svg' %}" alt="404 image">
+            </div>
+            <div class="error-content">
+                <h2 class="error-title fw-extrabold mt-50">Opp’s That Page Can’t be Found</h2>
+                <p class="error-text">It looks like nothing was found at this location. Maybe try one of
+                    the links below or a search?</p>
+                <a href='{% url 'charity:index' %}' class="th-btn"><i class="fas fa-home me-2"></i> Back To Home</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}

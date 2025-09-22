@@ -1,0 +1,30 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% block title %}Add Project | YCBN{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4 text-center">Add New Project</h2>
+        <form method="post" enctype="multipart/form-data" class="mx-auto" style="max-width: 600px;">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title</label>
+                {{ form.title|as_widget:attrs }}
+                {{ form.title.errors }}
+            </div>
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Description</label>
+                {{ form.description|as_widget:attrs }}
+                {{ form.description.errors }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image</label>
+                {{ form.image|as_widget:attrs }}
+                {{ form.image.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">Add Project</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

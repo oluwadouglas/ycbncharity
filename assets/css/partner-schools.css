@@ -1,0 +1,734 @@
+/* =====================================================
+   YCBF Partner Schools Enhanced Styling
+   Modern, cohesive styling that matches the existing YCBF theme
+   ===================================================== */
+
+/* ===== PARTNER SCHOOLS PAGE HEADER ===== */
+.partner-schools-header {
+    background: linear-gradient(135deg, var(--theme-color) 0%, var(--theme-dark) 100%);
+    padding: 60px 0;
+    color: var(--white-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-schools-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><pattern id="grain" width="100" height="20" patternUnits="userSpaceOnUse"><circle cx="20" cy="5" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="15" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="20" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.partner-schools-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.partner-schools-header h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.partner-schools-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== ENHANCED PARTNER SCHOOL CARDS ===== */
+.partner-school-card {
+    background: var(--white-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    position: relative;
+    border: 1px solid rgba(26, 104, 91, 0.1);
+}
+
+.partner-school-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--theme-color), var(--theme-color2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.partner-school-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(26, 104, 91, 0.15);
+    border-color: var(--theme-color);
+}
+
+.partner-school-card:hover::before {
+    opacity: 1;
+}
+
+/* ===== PARTNER SCHOOL CARD IMAGE ===== */
+.partner-school-card .card-image-container {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    background: var(--smoke-color);
+}
+
+.partner-school-card .card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.partner-school-card:hover .card-image-container img {
+    transform: scale(1.05);
+}
+
+.partner-school-card .school-badge-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--white-color);
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-school-card .school-badge-overlay img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.partner-school-card .card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(135deg, var(--smoke-color) 0%, var(--smoke-color2) 100%);
+}
+
+.partner-school-card .card-image-placeholder i {
+    font-size: 4rem;
+    color: var(--light-color);
+    opacity: 0.6;
+}
+
+/* ===== PARTNER SCHOOL CARD CONTENT ===== */
+.partner-school-card .card-body {
+    padding: 30px;
+    position: relative;
+}
+
+.partner-school-card .school-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 15px;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.partner-school-card:hover .school-name {
+    color: var(--theme-color);
+}
+
+.partner-school-card .school-description {
+    color: var(--body-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.partner-school-card .school-location {
+    display: flex;
+    align-items: center;
+    color: var(--theme-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.partner-school-card .school-location i {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+/* ===== PARTNER SCHOOL CARD FOOTER ===== */
+.partner-school-card .card-footer {
+    background: var(--smoke-color);
+    padding: 20px 30px;
+    border-top: 1px solid rgba(26, 104, 91, 0.1);
+}
+
+.partner-school-card .view-details-btn {
+    background: var(--theme-color);
+    color: var(--white-color);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-school-card .view-details-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.partner-school-card .view-details-btn:hover {
+    background: var(--theme-color2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 172, 0, 0.3);
+    color: var(--white-color);
+}
+
+.partner-school-card .view-details-btn:hover::before {
+    left: 100%;
+}
+
+/* ===== EMPTY STATE STYLING ===== */
+.partner-schools-empty-state {
+    background: var(--smoke-color);
+    border: 2px dashed var(--th-border-color);
+    border-radius: 20px;
+    padding: 80px 40px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.partner-schools-empty-state i {
+    font-size: 5rem;
+    color: var(--light-color);
+    opacity: 0.5;
+    margin-bottom: 30px;
+}
+
+.partner-schools-empty-state h4 {
+    color: var(--title-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.partner-schools-empty-state p {
+    color: var(--body-color);
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ===== SCHOOL DETAIL PAGE ENHANCEMENTS ===== */
+.school-detail-header {
+    background: linear-gradient(135deg, var(--white-color) 0%, var(--smoke-color) 100%);
+    padding: 40px 0;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+}
+
+.school-detail-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.school-detail-badge {
+    width: 80px;
+    height: 80px;
+    background: var(--white-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.school-detail-badge img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.school-name-title {
+    color: var(--title-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.school-location-text {
+    color: var(--theme-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* ===== SCHOOL INFO GRID ENHANCEMENTS ===== */
+.school-info-item {
+    background: var(--white-color);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--theme-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.school-info-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(26, 104, 91, 0.1);
+}
+
+.school-info-item .info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--theme-color), var(--theme-color2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.school-info-item .info-icon i {
+    color: var(--white-color);
+    font-size: 1.1rem;
+}
+
+.school-info-item .info-content h6 {
+    color: var(--body-color);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.school-info-item .info-content .info-value {
+    color: var(--title-color);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* ===== CLUBS SECTION STYLING ===== */
+.school-clubs-section {
+    background: var(--smoke-color);
+    padding: 60px 0;
+    border-radius: 30px;
+    margin: 50px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.school-clubs-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(26, 104, 91, 0.05) 0%, transparent 70%);
+    z-index: 1;
+}
+
+.school-clubs-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.school-clubs-title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.school-clubs-title::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--theme-color), var(--theme-color2));
+    border-radius: 2px;
+}
+
+.school-clubs-title h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 15px;
+}
+
+.school-clubs-title .clubs-subtitle {
+    color: var(--theme-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* ===== ENHANCED CLUB CARDS IN SCHOOL DETAIL ===== */
+.school-club-card {
+    background: var(--white-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    height: 100%;
+    border: 1px solid rgba(26, 104, 91, 0.1);
+}
+
+.school-club-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(26, 104, 91, 0.15);
+}
+
+.school-club-card .club-icon-section {
+    padding: 30px 30px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--smoke-color) 0%, var(--white-color) 100%);
+}
+
+.school-club-card .club-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--theme-color), var(--theme-color2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 25px rgba(26, 104, 91, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.school-club-card:hover .club-icon-wrapper {
+    transform: rotateY(180deg);
+}
+
+.school-club-card .club-icon-wrapper img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.school-club-card .club-content {
+    padding: 20px 30px 30px;
+}
+
+.school-club-card .club-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.school-club-card .club-description {
+    color: var(--body-color);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.school-club-card .club-meta {
+    border-top: 1px solid var(--smoke-color2);
+    padding-top: 20px;
+}
+
+.school-club-card .club-meta-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: var(--body-color);
+}
+
+.school-club-card .club-meta-item i {
+    color: var(--theme-color);
+    margin-right: 10px;
+    width: 16px;
+    text-align: center;
+}
+
+/* ===== NO CLUBS EMPTY STATE ===== */
+.no-clubs-state {
+    text-align: center;
+    padding: 80px 40px;
+    background: var(--white-color);
+    border-radius: 20px;
+    border: 2px dashed var(--th-border-color);
+    margin: 40px 0;
+}
+
+.no-clubs-state i {
+    font-size: 4rem;
+    color: var(--light-color);
+    opacity: 0.5;
+    margin-bottom: 25px;
+}
+
+.no-clubs-state h4 {
+    color: var(--title-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.no-clubs-state p {
+    color: var(--body-color);
+    font-size: 1rem;
+}
+
+/* ===== CALL TO ACTION SECTION ===== */
+.partner-cta-section {
+    background: linear-gradient(135deg, var(--theme-color) 0%, var(--theme-dark) 100%);
+    padding: 60px 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: var(--white-color);
+    margin-top: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+}
+
+.partner-cta-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.partner-cta-section h4 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--white-color);
+}
+
+.partner-cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.partner-cta-section .cta-button {
+    background: var(--white-color);
+    color: var(--theme-color);
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.partner-cta-section .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    color: var(--theme-color);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1199px) {
+    .partner-schools-header h2 {
+        font-size: 3rem;
+    }
+    
+    .school-clubs-title h3 {
+        font-size: 2rem;
+    }
+    
+    .school-name-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .partner-schools-header {
+        padding: 40px 0;
+    }
+    
+    .partner-schools-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .partner-schools-header p {
+        font-size: 1.1rem;
+    }
+    
+    .school-clubs-section {
+        padding: 40px 0;
+        margin: 30px 0;
+    }
+    
+    .school-clubs-title h3 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .partner-schools-header h2 {
+        font-size: 2rem;
+    }
+    
+    .partner-schools-header p {
+        font-size: 1rem;
+    }
+    
+    .partner-school-card .card-body {
+        padding: 25px;
+    }
+    
+    .partner-school-card .card-footer {
+        padding: 15px 25px;
+    }
+    
+    .school-name-title {
+        font-size: 1.8rem;
+    }
+    
+    .school-location-text {
+        font-size: 1rem;
+    }
+    
+    .school-clubs-title h3 {
+        font-size: 1.6rem;
+    }
+    
+    .school-club-card .club-content {
+        padding: 15px 20px 25px;
+    }
+    
+    .school-club-card .club-icon-section {
+        padding: 25px 25px 15px;
+    }
+    
+    .partner-cta-section {
+        padding: 40px 30px;
+        margin-top: 30px;
+    }
+    
+    .partner-cta-section h4 {
+        font-size: 1.5rem;
+    }
+    
+    .partner-cta-section p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .partner-schools-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .partner-schools-empty-state {
+        padding: 50px 30px;
+    }
+    
+    .partner-schools-empty-state i {
+        font-size: 3.5rem;
+    }
+    
+    .school-clubs-title h3 {
+        font-size: 1.4rem;
+    }
+    
+    .partner-cta-section {
+        padding: 30px 20px;
+    }
+    
+    .partner-cta-section h4 {
+        font-size: 1.3rem;
+    }
+    
+    .partner-cta-section .cta-button {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== ANIMATION ENHANCEMENTS ===== */
+.partner-school-card,
+.school-club-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.partner-school-card:nth-child(2) { animation-delay: 0.1s; }
+.partner-school-card:nth-child(3) { animation-delay: 0.2s; }
+.partner-school-card:nth-child(4) { animation-delay: 0.3s; }
+.partner-school-card:nth-child(5) { animation-delay: 0.4s; }
+.partner-school-card:nth-child(6) { animation-delay: 0.5s; }
+
+.school-club-card:nth-child(2) { animation-delay: 0.15s; }
+.school-club-card:nth-child(3) { animation-delay: 0.3s; }
+.school-club-card:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== LOADING STATES ===== */
+.loading-placeholder {
+    background: linear-gradient(90deg, var(--smoke-color) 25%, var(--smoke-color2) 50%, var(--smoke-color) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

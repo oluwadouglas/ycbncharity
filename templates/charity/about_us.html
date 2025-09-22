@@ -1,0 +1,61 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+{% block title %}About Us | YCBN{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container-fluid px-0">
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Our Vision</h5>
+                        <p class="card-text">To nurture an informed, skilled, and healthy youth population in Uganda, capable of driving sustainable development and positive societal change.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Our Mission</h5>
+                        <p class="card-text">To equip young people in schools and communities with essential tools for a purposeful life through holistic knowledge, capacity building, health awareness, and guidance programs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Our Core Values</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>Empathy</li>
+                            <li>Integrity</li>
+                            <li>Community</li>
+                            <li>Excellence</li>
+                            <li>Youth-Led Change</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mb-4 text-center">Voices of Change</h3>
+        <div class="row">
+            {% for voice in voices %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm text-center p-3">
+                    <div class="mb-3 mx-auto" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: #f5f5f5;">
+                        {% if voice.image %}
+                          <img src="{{ voice.image.url }}" alt="{{ voice.name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        {% endif %}
+                    </div>
+                    <h5 class="card-title mb-1">{{ voice.name }}</h5>
+                    <p class="text-muted mb-0">{{ voice.title }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center">No voices of change available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
