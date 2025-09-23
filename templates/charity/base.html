@@ -142,7 +142,7 @@
   </style>
 {% load static %}
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr">
+<html class="no-js" lang="en-UG" dir="ltr">
 
 <head>
     <meta charset="utf-8">
@@ -152,6 +152,77 @@
     <meta name="description" content="YCBN - Youth Capacity Building Network empowering young people through skill development and mentorship">
     <meta name="keywords" content="YCBN, Youth Capacity Building, Skills Development, Mentorship, Education, Empowerment">
     <meta name="robots" content="INDEX,FOLLOW">
+    <!-- Region and language targeting for Uganda -->
+    <meta name="content-language" content="en-UG">
+    <meta name="geo.region" content="UG">
+    <meta name="geo.placename" content="Uganda">
+
+    <!-- Canonical and Hreflang -->
+    {% block canonical %}
+    <link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
+    {% endblock %}
+    <link rel="alternate" hreflang="en-UG" href="{{ canonical_url|default:request.build_absolute_uri }}">
+
+    <!-- Open Graph (Facebook, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_UG">
+    <meta property="og:site_name" content="YCBN Uganda">
+    <meta property="og:title" content="{% block og_title %}{{ page_title|default:'YCBN Uganda' }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:'YCBN - Youth Capacity Building Network empowering young people through skill development and mentorship' }}{% endblock %}">
+    <meta property="og:url" content="{{ canonical_url|default:request.build_absolute_uri }}">
+    <meta property="og:image" content="{% if og_image %}{{ og_image }}{% else %}{{ default_og_image }}{% endif %}">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@YCBNetwork">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ page_title|default:'YCBN Uganda' }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ meta_description|default:'YCBN - Youth Capacity Building Network empowering young people through skill development and mentorship' }}{% endblock %}">
+    <meta name="twitter:image" content="{% if og_image %}{{ og_image }}{% else %}{{ default_og_image }}{% endif %}">
+
+    <!-- JSON-LD: Organization (NGO) -->
+    {% block jsonld %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Youth Capacity Building Network (YCBN)",
+      "url": "{{ canonical_url|default:request.scheme|add:'://'|add:request.get_host }}",
+      "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'assets/img/ycbn-logo.png' %}",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Uganda",
+        "identifier": "UG"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61579627535321",
+        "https://x.com/YCBNetwork",
+        "https://youtube.com/@youthcapacitybuildingnetwork?si=m2gIte8HQjiVzrmr",
+        "https://www.linkedin.com/company/tiny-bit-wiser/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+256772573781",
+        "email": "info@ycbn.org",
+        "contactType": "customer support",
+        "areaServed": "UG",
+        "availableLanguage": ["en-UG", "en"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "YCBN Uganda",
+      "url": "{{ canonical_url|default:request.scheme|add:'://'|add:request.get_host }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://ycbn.org/articles?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    {% endblock %}
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -220,12 +291,16 @@
     <link rel="stylesheet" href="{% static 'assets/css/custom-spacing.css' %}">
     <!-- Fixed Navigation Styles -->
     <link rel="stylesheet" href="{% static 'assets/css/nav-fixed.css' %}">
-
-    <style>
-      /* Global styles for mobile navigation */
-      body.mobile-menu-open {
-        overflow: hidden;
-      }
+    <!-- Layout and card overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/layout-overrides.css' %}?v=20250923-1">
+    <!-- Uniform Cards/Grids -->
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}?v=20250923-1">
+ 
+     <style>
+       /* Global styles for mobile navigation */
+       body.mobile-menu-open {
+         overflow: hidden;
+       }
       
       /* Prevent scrolling when mobile menu is open */
       @media (max-width: 991.98px) {
@@ -1816,6 +1891,23 @@
 </head>
 
 <body class="{% if request.resolver_match.url_name == 'home' %}home-page{% endif %}" style="margin: 0; padding: 0; overflow-x: hidden;">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #1A685B;
+        color: #fff;
+        padding: 8px 12px;
+        z-index: 10001;
+        transition: top 0.2s ease;
+      }
+      .skip-link:focus {
+        top: 0;
+        outline: 3px solid #FFD700;
+      }
+    </style>
     <!-- Preloader placed at the very top to avoid flash of content -->
     <div id="preloader" class="preloader">
         <div class="preloader-inner">
@@ -2597,7 +2689,7 @@
     
     
     <!-- Main Content -->
-    <main class="main-content">
+<main id="main-content" class="main-content" role="main">
     {% block content %}
     <!-- Hero Section -->
     <div class="hero-slider" style="margin: 0; padding: 0; width: 100%;">

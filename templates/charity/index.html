@@ -245,37 +245,17 @@ Hero Area
 
 <!-- Partner Schools teaser -->
 <section class="space" id="partner-schools-home">
-  <div class="container">
+  <div class="container-fluid px-0">
     <div class="title-area text-center">
       <span class="sub-title">Our Network</span>
       <h2 class="sec-title">Partner Schools Across Uganda</h2>
       <p class="sec-text">We partner with schools to build youth capacity through clubs, mentorship, and skills programs.</p>
     </div>
-    <div class="row gy-30 gx-30 justify-content-center">
+    <div class="cards-grid px-3">
       {% for school in schools|slice:":6" %}
-      <div class="col-md-4 col-sm-6">
-        <div class="service-card style3 club-card">
-          <div class="box-thumb">
-            {% if school.image %}
-              <img src="{{ school.image.url }}" alt="{{ school.name }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
-            {% else %}
-              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ school.name }}">
-            {% endif %}
-          </div>
-          <div class="box-content">
-            <h3 class="box-title">{{ school.name }}</h3>
-            {% if school.location %}
-            <div class="club-location mb-2">
-              <i class="fas fa-map-marker-alt text-theme"></i>
-              <span class="location-text">{{ school.location }}</span>
-            </div>
-            {% endif %}
-            <p class="box-text">{{ school.description|default:"Partner school working with YCBN to empower youth."|truncatewords:20 }}</p>
-          </div>
-        </div>
-      </div>
+        {% include 'charity/includes/card.html' with item=school %}
       {% empty %}
-      <div class="col-12"><p class="text-center text-muted">Partner schools will appear here soon.</p></div>
+        <p class="text-center text-muted">Partner schools will appear here soon.</p>
       {% endfor %}
     </div>
     <div class="text-center mt-40">
@@ -286,6 +266,23 @@ Hero Area
 
 <!-- Impact Highlights Section -->
 {% include 'charity/components/impact_highlights.html' with impact_highlights=impact %}
+
+<!-- Impact Cards (uniform with other sections) -->
+<section class="space" id="impact-cards">
+  <div class="container-fluid px-0">
+    <div class="title-area text-center">
+      <span class="sub-title">Impact</span>
+      <h2 class="sec-title">Highlights From Our Work</h2>
+    </div>
+    <div class="cards-grid px-3">
+      {% for imp in impact %}
+        {% include 'charity/includes/card.html' with item=imp %}
+      {% empty %}
+        <p class="text-center text-muted">Impact highlights coming soon.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 <!--==============================
 About Area
@@ -343,25 +340,11 @@ Projects Area (edge-to-edge)
       <span class="sub-title">Projects</span>
       <h2 class="sec-title">Recent Community & Innovation Projects</h2>
     </div>
-    <div class="row gy-30 gx-30 justify-content-center mx-0">
+    <div class="cards-grid px-3">
       {% for project in projects|slice:":6" %}
-      <div class="col-lg-4 col-md-6">
-        <div class="service-card style3 club-card">
-          <div class="box-thumb">
-            {% if project.image %}
-              <img src="{{ project.image.url }}" alt="{{ project.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
-            {% else %}
-              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ project.title }}">
-            {% endif %}
-          </div>
-          <div class="box-content">
-            <h3 class="box-title"><a href="{% url 'charity:project_detail' project.id %}">{{ project.title }}</a></h3>
-            <p class="box-text">{{ project.description|default:"Youth-led project under YCBN mentorship and support."|truncatewords:20 }}</p>
-          </div>
-        </div>
-      </div>
+        {% include 'charity/includes/card.html' with item=project %}
       {% empty %}
-      <div class="col-12"><p class="text-center text-muted">Projects will be published here soon.</p></div>
+        <p class="text-center text-muted">Projects will be published here soon.</p>
       {% endfor %}
     </div>
     <div class="text-center mt-40">
@@ -395,66 +378,10 @@ Clubs Area
             </div>
         </div>
         
-        {% if clubs %}
-        <div class="row gy-30 gx-30 justify-content-center">
+{% if clubs %}
+        <div class="cards-grid px-3">
             {% for club in clubs %}
-            <div class="col-lg-4 col-md-6">
-                <div class="service-card style3 club-card">
-                    <!-- Club Image/Thumbnail -->
-                    <div class="box-thumb">
-                        {% if club.image %}
-                            {% if club.image.url %}
-                                <img src="{{ club.image.url }}" alt="{{ club.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
-                            {% else %}
-                                <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
-                            {% endif %}
-                        {% else %}
-                            <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ club.title }}">
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Icon Container positioned between image and content -->
-                    <div class="club-icon-container">
-                        <div class="box-icon">
-                            {% if club.icon %}
-                                {% if club.icon.url %}
-                                    <img src="{{ club.icon.url }}" alt="{{ club.title }} Icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                                    <i class="fas fa-users" style="display: none;"></i>
-                                {% else %}
-                                    <i class="fas fa-users"></i>
-                                {% endif %}
-                            {% else %}
-                                <i class="fas fa-users"></i>
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <!-- Club Content -->
-                    <div class="box-content">
-                        <h3 class="box-title">
-                            <a href="{% url 'charity:clubs' %}">{{ club.title }}</a>
-                        </h3>
-                        
-                        <!-- Club Location -->
-                        {% if club.location %}
-                        <div class="club-location mb-2">
-                            <i class="fas fa-map-marker-alt text-theme"></i>
-                            <span class="location-text">{{ club.location }}</span>
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Club Description/Comment -->
-                        <p class="box-text">
-                            {{ club.comment|default:"Join this dynamic club to develop leadership skills, engage with your community, and make a lasting impact."|truncatewords:20 }}
-                        </p>
-                        
-                        <!-- Learn More Button -->
-                        <div class="club-action mt-3">
-                            <a href="{% url 'charity:clubs' %}" class="th-btn style6">Learn More <i class="fas fa-arrow-up-right ms-2"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              {% include 'charity/includes/card.html' with item=club %}
             {% endfor %}
         </div>
         
@@ -586,38 +513,14 @@ Programs Area
     </div>
     
     <div class="container th-container2">
-        <div class="slider-area">
-            <div class="swiper th-slider has-shadow" id="programsSlider" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"},"1400":{"slidesPerView":"4"}}, "autoHeight": "true"}'>
-                <div class="swiper-wrapper">
-                    {% for category in categories %}
-                        {% for program in category.programs.all|slice:":6" %}
-                        <div class="swiper-slide">
-                            <div class="donation-card style4 program-card" data-theme-color="{% cycle '' 'var(--theme-color2)' '#FF5528' '#122F2A' %}">
-                                <div class="donation-card-shape" data-mask-src="{% static 'assets/img/donation/donation-card-bg-shape1-1.png' %}"></div>
-                                <div class="box-thumb">
-                                    {% if program.image %}
-                                        <img src="{{ program.image.url }}" alt="{{ program.title }}">
-                                    {% else %}
-                                        <img src="{% static 'assets/img/donation/donation4-1.png' %}" alt="{{ program.title }}">
-                                    {% endif %}
-                                </div>
-                                <h3 class="box-title"><a href="{% url 'charity:program_detail' program.id %}">{{ program.title }}</a></h3>
-                                <div class="box-content">
-                                    <h4 class="subtitle">{{ category.name }}</h4>
-                                    
-                                    <!-- Program Description -->
-                                    <div class="program-description">
-                                        <p class="program-text">{{ program.description|default:"Join this comprehensive program designed to empower youth and build essential life skills."|truncatewords:15 }}</p>
-                                    </div>
-                                    
-                                    <a href="{% url 'charity:program_detail' program.id %}" class="th-btn style6">Learn More <i class="fas fa-arrow-up-right ms-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    {% endfor %}
-                </div>
-            </div>
+        <div class="cards-grid px-3">
+            {% for category in categories %}
+                {% for program in category.programs.all %}
+                    {% include 'charity/includes/card.html' with item=program %}
+                {% empty %}
+                    <p class="text-center text-muted">No programs available yet. Stay tuned.</p>
+                {% endfor %}
+            {% endfor %}
         </div>
         
         <!-- View All Programs Button -->
@@ -636,29 +539,15 @@ Spotlight Area (edge-to-edge)
       <span class="sub-title">Spotlight</span>
       <h2 class="sec-title">Top‑Performing Clubs, Projects, and Mentors</h2>
     </div>
-    {% for cat in spotlight_categories %}
+{% for cat in spotlight_categories %}
     <div class="mb-3 px-3">
       <h3 class="h4" style="color:#1A685B;">{{ cat.title }}</h3>
     </div>
-    <div class="row gy-30 gx-30 justify-content-center mx-0">
+    <div class="cards-grid px-3">
       {% for item in cat.active_items|slice:":3" %}
-      <div class="col-lg-4 col-md-6">
-        <div class="service-card style3 club-card">
-          <div class="box-thumb">
-            {% if item.image %}
-              <img src="{{ item.image.url }}" alt="{{ item.title }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
-            {% else %}
-              <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ item.title }}">
-            {% endif %}
-          </div>
-          <div class="box-content">
-            <h3 class="box-title">{{ item.title }}</h3>
-            <p class="box-text">{{ item.description|truncatewords:22 }}</p>
-          </div>
-        </div>
-      </div>
+        {% include 'charity/includes/card.html' with item=item %}
       {% empty %}
-      <div class="col-12"><p class="text-center text-muted">No spotlight items for this category yet.</p></div>
+        <p class="text-center text-muted">No spotlight items for this category yet.</p>
       {% endfor %}
     </div>
     {% endfor %}
