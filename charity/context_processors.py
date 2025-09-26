@@ -54,9 +54,9 @@ def seo_defaults(request):
             'meta_description': 'Discover YCBN programs in skills development, mentorship, and youth leadership across Uganda.',
             'og_image': og('assets/img/hero2.jpg'),
         },
-        'charity:blog': {
-            'page_title': 'YCBN Blog — Insights and Stories from Uganda',
-            'meta_description': 'Read updates, insights, and stories about youth empowerment and community work in Uganda.',
+'charity:opportunities': {
+            'page_title': 'Opportunities — Jobs, Scholarships, Grants | YCBN Uganda',
+            'meta_description': 'Curated jobs, scholarships, internships and grants for YCBN youth community in Uganda.',
             'og_image': og('assets/img/hero3.jpg'),
         },
         'charity:articles': {

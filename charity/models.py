@@ -98,6 +98,62 @@ class ProjectDetails(models.Model):
 
 
 # Memberships: students/partners can join a project
+class ProjectMembershipRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    
+    ROLE_CHOICES = [
+        ('student', 'Student'),
+        ('partner', 'Partner'),
+    ]
+    
+    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='membership_requests')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='project_requests')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='student')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    message = models.TextField(blank=True, help_text='Why do you want to join this project?')
+    requested_at = models.DateTimeField(auto_now_add=True)
+    processed_at = models.DateTimeField(null=True, blank=True)
+    processed_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='processed_requests')
+    admin_notes = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['-requested_at']
+        unique_together = ['project', 'user']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.project.title} ({self.get_status_display()})"
+
+    def approve(self, admin_user):
+        if self.status == 'pending':
+            self.status = 'approved'
+            self.processed_at = timezone.now()
+            self.processed_by = admin_user
+            self.save()
+            
+            # Create the actual membership if approved
+            ProjectMembership.objects.get_or_create(
+                project=self.project,
+                user=self.user,
+                defaults={'role': self.role}
+            )
+            return True
+        return False
+
+    def reject(self, admin_user, notes=''):
+        if self.status == 'pending':
+            self.status = 'rejected'
+            self.processed_at = timezone.now()
+            self.processed_by = admin_user
+            self.admin_notes = notes
+            self.save()
+            return True
+        return False
+
+
 class ProjectMembership(models.Model):
     ROLE_CHOICES = [
         ("student", "Student"),
@@ -180,29 +236,45 @@ class Club(models.Model):
         return self.description
 
 
-# 3. Blogs (Admin only)
-class BlogPost(models.Model):
+# 3. Opportunities (Admin only)
+class Opportunity(models.Model):
+    class OpportunityType(models.TextChoices):
+        JOB = 'job', 'Job'
+        SCHOLARSHIP = 'scholarship', 'Scholarship'
+        GRANT = 'grant', 'Grant'
+        INTERNSHIP = 'internship', 'Internship'
+        VOLUNTEER = 'volunteer', 'Volunteer'
+        OTHER = 'other', 'Other'
+
     title = models.CharField(max_length=250)
-    image = models.ImageField(upload_to="blogs/images/", blank=True, null=True)
-    author = models.CharField(max_length=150, help_text="Admin author name")
-    date = models.DateField(default=timezone.now)
-    content = models.TextField(help_text="Blog post content")
+    organization = models.CharField(max_length=200, blank=True)
+    opportunity_type = models.CharField(max_length=20, choices=OpportunityType.choices, default=OpportunityType.JOB)
+    description = models.TextField()
+    image = models.ImageField(upload_to="opportunities/images/", blank=True, null=True)
+    location = models.CharField(max_length=150, blank=True)
+    application_url = models.URLField(blank=True)
+    contact_email = models.EmailField(blank=True)
+    deadline = models.DateField(null=True, blank=True)
     is_published = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    posted_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-date", "-created_at"]
-        verbose_name = "Blog Post (Admin)"
-        verbose_name_plural = "Blog Posts (Admin)"
+        ordering = ["-posted_at", "title"]
+        verbose_name = "Opportunity"
+        verbose_name_plural = "Opportunities"
 
     def __str__(self) -> str:
         return self.title
 
     @property
-    def details(self):
-        """Backward compatibility property"""
-        return self.content
+    def is_open(self) -> bool:
+        if self.deadline:
+            try:
+                return timezone.now().date() <= self.deadline
+            except Exception:
+                return True
+        return True
 
 
 # 3b. Articles (Member articles)
@@ -568,6 +640,25 @@ class SpotlightStats(models.Model):
 
 
 # 15. Newsletter Subscription
+# Applications for Opportunities
+class OpportunityApplication(models.Model):
+    opportunity = models.ForeignKey('Opportunity', on_delete=models.CASCADE, related_name='applications')
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30, blank=True)
+    message = models.TextField(blank=True)
+    cv_file = models.FileField(upload_to='opportunities/applications/cv/', blank=True, null=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted_at']
+        verbose_name = 'Opportunity Application'
+        verbose_name_plural = 'Opportunity Applications'
+
+    def __str__(self):
+        return f"{self.full_name} -> {self.opportunity.title}"
+
+
 class NewsletterSubscription(models.Model):
     email = models.EmailField(unique=True, help_text="Subscriber's email address")
     name = models.CharField(max_length=150, blank=True, help_text="Optional subscriber name")

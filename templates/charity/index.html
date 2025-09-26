@@ -8,12 +8,44 @@
 <link rel="stylesheet" href="{% static 'assets/css/resources-styles.css' %}">
 <link rel="stylesheet" href="{% static 'assets/css/clubs-custom.css' %}">
 <link rel="stylesheet" href="{% static 'assets/css/custom-index.css' %}">
+<style>
+  /* Magnific Popup title/description styled to match theme */
+  .mfp-title-wrap { text-align: left; }
+  .mfp-title-text { color: #FFAC00; font-weight: 700; margin-bottom: 4px; }
+  .mfp-desc-text { color: #ffffff; opacity: .95; font-size: 0.95rem; }
+  .mfp-bg { opacity: .98; }
+</style>
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'assets/js/impact-animations.js' %}"></script>
 <script src="{% static 'assets/js/spotlight-animations.js' %}"></script>
 <script src="{% static 'assets/js/sdg-animations.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var $ = window.jQuery || window.$;
+    if (!$ || !$.fn || !$.fn.magnificPopup) return;
+    var $container = $('.home-gallery');
+    if ($container.length) {
+      $container.magnificPopup({
+        delegate: 'a.popup-image',
+        type: 'image',
+        gallery: { enabled: true },
+        mainClass: 'mfp-zoom-in',
+        removalDelay: 260,
+        image: {
+          titleSrc: function(item) {
+            var t = item.el.attr('data-mfp-title') || '';
+            var d = item.el.attr('data-mfp-desc') || '';
+            var titleHtml = t ? '<div class="mfp-title-text">' + t + '</div>' : '';
+            var descHtml = d ? '<div class="mfp-desc-text">' + d + '</div>' : '';
+            return '<div class="mfp-title-wrap">' + titleHtml + descHtml + '</div>';
+          }
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}
 
 {% block title %}YCBN{% endblock %}
@@ -281,8 +313,8 @@ Our Achievements - Matching Impact Page Design
                         <i class="fas fa-chart-line me-2"></i>
                         Our Numbers
                     </span>
-                    <h2 class="sec-title">Impact by the Numbers</h2>
-                    <p class="sec-text">Every number represents lives touched, communities strengthened, and hope restored through your generous support.</p>
+                    <h2 class="sec-title">Measured Impact</h2>
+                    <p class="sec-text">Key performance indicators reflecting outcomes from our programs and partnerships across Uganda.</p>
                 </div>
             </div>
         </div>
@@ -862,15 +894,15 @@ UN SDG Commitment Section (inline goals with scrolling animation)
                 <h2 class="sec-title">Our Latest News & Articles</h2>
             </div>
             
-            {% if posts %}
+            {% if articles %}
             <div class="slider-area">
                 <div class="swiper th-slider has-shadow" id="blogSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}, "autoHeight": "true"}'>
                     <div class="swiper-wrapper">
-                        {% for post in posts %}
+                        {% for post in articles %}
                         <div class="swiper-slide">
                             <div class="blog-card">
                                 <div class="blog-img">
-                                    <a href="{% url 'charity:blog_details' post.id %}">
+                                    <a href="{% url 'charity:article_details' post.id %}">
                                         <div class="blog-img-shape1" data-mask-src="{% static 'assets/img/blog/blog-card-bg-shape1-2.png' %}"></div>
                                         {% if post.image %}
                                             <img src="{{ post.image.url }}" alt="{{ post.title }}" onerror="this.src='{% static 'assets/img/blog/blog_1_1.jpg' %}'">
@@ -882,11 +914,11 @@ UN SDG Commitment Section (inline goals with scrolling animation)
                                 <div class="blog-content">
                                     <div class="blog-card-shape" data-mask-src="{% static 'assets/img/blog/blog-card-bg-shape1-1.png' %}"></div>
                                     <div class="blog-meta">
-                                        <a href="{% url 'charity:blog' %}"><i class="fas fa-calendar"></i>{{ post.date|date:"F j, Y" }}</a>
-                                        <a href="{% url 'charity:blog' %}"><i class="fas fa-user"></i>{{ post.author|default:"YCBN Team" }}</a>
+                                        <a href="{% url 'charity:articles' %}"><i class="fas fa-calendar"></i>{{ post.date|date:"F j, Y" }}</a>
+                                        <a href="{% url 'charity:articles' %}"><i class="fas fa-user"></i>{{ post.author_name|default:"YCBN Member" }}</a>
                                     </div>
-                                    <h3 class="box-title"><a href="{% url 'charity:blog_details' post.id %}">{{ post.title|truncatewords:8 }}</a></h3>
-                                    <a href="{% url 'charity:blog_details' post.id %}" class="th-btn">Read More <i class="fas fa-arrow-up-right ms-2"></i></a>
+                                    <h3 class="box-title"><a href="{% url 'charity:article_details' post.id %}">{{ post.title|truncatewords:8 }}</a></h3>
+                                    <a href="{% url 'charity:article_details' post.id %}" class="th-btn">Read Article <i class="fas fa-arrow-up-right ms-2"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -899,7 +931,7 @@ UN SDG Commitment Section (inline goals with scrolling animation)
             
             <!-- View All Articles Button -->
             <div class="text-center mt-50">
-                <a href="{% url 'charity:blog' %}" class="th-btn">View All Articles <i class="fas fa-arrow-up-right ms-2"></i></a>
+                <a href="{% url 'charity:articles' %}" class="th-btn">View All Articles <i class="fas fa-arrow-up-right ms-2"></i></a>
             </div>
             
             {% else %}
@@ -919,6 +951,64 @@ UN SDG Commitment Section (inline goals with scrolling animation)
             {% endif %}
         </div>
     </section>
+
+<!-- Opportunities Section -->
+<section class="space" id="opportunities-sec">
+  <div class="container">
+    <div class="title-area text-center">
+      <span class="sub-title">Opportunities</span>
+      <h2 class="sec-title">Jobs, Scholarships, Grants & Internships</h2>
+    </div>
+
+    {% if opportunities %}
+    <div class="row gx-40 justify-content-center">
+      <div class="col-xl-10">
+        {% for opp in opportunities %}
+        <div class="th-blog blog-single opp-card">
+          {% if opp.image %}
+          <div class="blog-img">
+            <a href="{% url 'charity:opportunity_detail' opp.id %}"><img src="{{ opp.image.url }}" alt="{{ opp.title }}"></a>
+          </div>
+          {% endif %}
+          <div class="blog-content">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="opp-badge">{{ opp.get_opportunity_type_display }}</span>
+              {% if opp.deadline %}
+              <span class="small {% if opp.is_open %}text-success{% else %}text-danger{% endif %}">
+                <i class="far fa-clock me-1"></i>
+                {% if opp.is_open %}Deadline: {{ opp.deadline|date:"M d, Y" }}{% else %}Closed{% endif %}
+              </span>
+              {% endif %}
+            </div>
+            <h3 class="h5">
+              <a href="{% url 'charity:opportunity_detail' opp.id %}">{{ opp.title }}</a>
+            </h3>
+            <div class="opp-meta">
+              {% if opp.organization %}<span class="item"><i class="fas fa-building"></i>{{ opp.organization }}</span>{% endif %}
+              {% if opp.location %}<span class="item"><i class="fas fa-map-marker-alt"></i>{{ opp.location }}</span>{% endif %}
+              <span class="item"><i class="fas fa-calendar-day"></i>Posted {{ opp.posted_at|date:"M d, Y" }}</span>
+            </div>
+            <p class="mb-2">{{ opp.description|striptags|truncatechars:180 }}</p>
+            <a href="{% url 'charity:opportunity_apply' opp.id %}" class="th-btn btn-sm">Apply Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+            {% if opp.application_url %}
+            <a href="{{ opp.application_url }}" target="_blank" rel="noopener" class="th-btn btn-sm style4">External Application <i class="fas fa-external-link-alt ms-2"></i></a>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+        <div class="text-center mt-30">
+          <a href="{% url 'charity:opportunities' %}" class="th-btn">View All Opportunities <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+      <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+      <p class="text-muted">New opportunities will appear here soon.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
 
 <!-- Downloadable Resources Section -->
 {% if donations %}
@@ -979,19 +1069,64 @@ Gallery Area (edge-to-edge)
 ==============================-->
 <section class="space overflow-hidden" id="gallery-sec">
   <div class="container-fluid px-0">
-    <div class="title-area text-center">
+<div class="title-area text-center">
       <span class="sub-title">Gallery</span>
       <h2 class="sec-title">Moments From Our Work</h2>
     </div>
-    <div class="row g-2 mx-0">
-      {% for photo in photos %}
-      <div class="col-6 col-md-3">
-        <div class="card border-0">
-          <img src="{{ photo.image.url }}" alt="{{ photo.title }}" style="width:100%;height:220px;object-fit:cover;display:block;" onerror="this.style.display='none'">
+
+    <div class="row g-3 mx-0 home-gallery">
+      {% if photos %}
+        {% for photo in photos %}
+        <div class="col-6 col-md-3">
+          <div class="ycbn-card">
+            <a href="{{ photo.image.url }}"
+               class="popup-image"
+               data-mfp-title="{{ photo.title|default:'Moment' }}"
+               data-mfp-desc="{{ photo.description|default:'' }}">
+              <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="card-img-top">
+            </a>
+            <div class="ycbn-card-body py-2">
+              <h3 class="h6 mb-1">{{ photo.title }}</h3>
+              {% if photo.description %}
+              <p class="small text-muted mb-0">{{ photo.description|truncatechars:80 }}</p>
+              {% endif %}
+            </div>
+          </div>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
+      {% else %}
+        <!-- Fallback static examples to verify gallery is active -->
+        <div class="col-6 col-md-3">
+          <div class="ycbn-card">
+            <a href="{% static 'assets/img/ycbn5.jpeg' %}"
+               class="popup-image"
+               data-mfp-title="Community Work"
+               data-mfp-desc="A recent moment from our youth programs.">
+              <img src="{% static 'assets/img/ycbn5.jpeg' %}" alt="YCBN5" class="card-img-top">
+            </a>
+            <div class="ycbn-card-body py-2">
+              <h3 class="h6 mb-1">Community Work</h3>
+              <p class="small text-muted mb-0">A recent moment from our youth programs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="ycbn-card">
+            <a href="{% static 'assets/img/gallery/gallery_1_6.png' %}"
+               class="popup-image"
+               data-mfp-title="Youth Engagement"
+               data-mfp-desc="Highlights from our field activities.">
+              <img src="{% static 'assets/img/gallery/gallery_1_6.png' %}" alt="Gallery 1-6" class="card-img-top">
+            </a>
+            <div class="ycbn-card-body py-2">
+              <h3 class="h6 mb-1">Youth Engagement</h3>
+              <p class="small text-muted mb-0">Highlights from our field activities.</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
     </div>
+
     <div class="text-center mt-40">
       <a href="{% url 'charity:gallery' %}" class="th-btn">View Full Gallery <i class="fas fa-arrow-up-right ms-2"></i></a>
     </div>

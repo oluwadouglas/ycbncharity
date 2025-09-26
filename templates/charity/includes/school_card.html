@@ -1,0 +1,75 @@
+{% load static %}
+<div class="school-card-wrapper">
+  <div class="school-card">
+    <!-- School Image Section -->
+    <div class="school-image-section">
+      {% if school.image and school.image.url %}
+        <img src="{{ school.image.url }}" alt="{{ school.name }}" class="school-main-image" />
+      {% else %}
+        <div class="school-image-placeholder">
+          <i class="fas fa-school"></i>
+        </div>
+      {% endif %}
+      
+      <!-- School Badge Overlay -->
+      <div class="school-badge-overlay">
+        {% if school.badge and school.badge.url %}
+          <img src="{{ school.badge.url }}" alt="{{ school.name }} badge" />
+        {% else %}
+          <div class="school-badge-text">{{ school.name|truncatechars:3|upper }}</div>
+        {% endif %}
+      </div>
+      
+      <div class="school-location">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ school.location|default:"Uganda" }}</span>
+      </div>
+    </div>
+    
+    <div class="school-card-body">
+      <h3 class="school-title">
+        {% if url %}
+          <a href="{{ url }}">{{ school.name }}</a>
+        {% else %}
+          {{ school.name }}
+        {% endif %}
+      </h3>
+      
+      {% if school.description %}
+        <p class="school-description">{{ school.description|truncatewords:15 }}</p>
+      {% endif %}
+      
+      <div class="school-stats">
+        {% if school.student_population %}
+        <div class="school-stat-item">
+          <i class="fas fa-users"></i>
+          <span>{{ school.student_population }} students</span>
+        </div>
+        {% endif %}
+        
+        {% if school.clubs_count %}
+        <div class="school-stat-item">
+          <i class="fas fa-star"></i>
+          <span>{{ school.clubs_count }} active clubs</span>
+        </div>
+        {% endif %}
+        
+        {% if school.partnership_date %}
+        <div class="school-stat-item">
+          <i class="fas fa-handshake"></i>
+          <span>Partner since {{ school.partnership_date.year }}</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="school-card-footer">
+      {% if url %}
+        <a href="{{ url }}" class="school-learn-more">
+          <span>Learn More</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

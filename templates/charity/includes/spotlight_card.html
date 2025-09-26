@@ -1,0 +1,105 @@
+{% load static %}
+<div class="spotlight-card-wrapper">
+  <div class="spotlight-card">
+    {% if item.is_featured %}
+    <div class="spotlight-featured-badge">
+      <i class="fas fa-crown"></i>
+      <span>Featured</span>
+    </div>
+    {% endif %}
+    
+    <!-- Spotlight Image Section -->
+    <div class="spotlight-image-section">
+      {% if item.image and item.image.url %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="spotlight-main-image" />
+      {% else %}
+        <div class="spotlight-image-placeholder">
+          {% if item.category.name == 'clubs' %}
+            <i class="fas fa-users"></i>
+          {% elif item.category.name == 'projects' %}
+            <i class="fas fa-project-diagram"></i>
+          {% elif item.category.name == 'mentors' %}
+            <i class="fas fa-user-tie"></i>
+          {% else %}
+            <i class="fas fa-star"></i>
+          {% endif %}
+        </div>
+      {% endif %}
+      
+      <!-- Performance Badge -->
+      <div class="spotlight-performance-badge">
+        <span class="performance-text">{{ item.get_performance_level_display }}</span>
+      </div>
+      
+      <!-- Achievement Score -->
+      <div class="spotlight-score-badge">
+        <span class="score-number">{{ item.achievement_score }}</span>
+        <span class="score-label">/100</span>
+      </div>
+    </div>
+    
+    <div class="spotlight-card-body">
+      <h3 class="spotlight-title">{{ item.title }}</h3>
+      
+      {% if item.subtitle %}
+        <p class="spotlight-subtitle">{{ item.subtitle }}</p>
+      {% endif %}
+      
+      {% if item.location %}
+      <div class="spotlight-location">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ item.location }}</span>
+      </div>
+      {% endif %}
+      
+      {% if item.description %}
+        <p class="spotlight-description">{{ item.description|truncatewords:18 }}</p>
+      {% endif %}
+      
+      <!-- Key Achievements -->
+      {% if item.key_achievements %}
+      <div class="spotlight-achievements">
+        <h6>Key Highlights:</h6>
+        <ul class="achievements-list">
+          {% for achievement in item.achievements_list|slice:":2" %}
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span>{{ achievement }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    
+    <div class="spotlight-card-footer">
+      {% if item.contact_info %}
+      <div class="spotlight-contact">
+        {% for key, value in item.contact_info.items %}
+          {% if key == 'email' %}
+            <a href="mailto:{{ value }}" class="spotlight-contact-link" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          {% elif key == 'phone' %}
+            <a href="tel:{{ value }}" class="spotlight-contact-link" title="Phone">
+              <i class="fas fa-phone"></i>
+            </a>
+          {% elif key == 'linkedin' %}
+            <a href="{{ value }}" target="_blank" class="spotlight-contact-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          {% elif key == 'facebook' %}
+            <a href="{{ value }}" target="_blank" class="spotlight-contact-link" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="spotlight-card-accent" style="background: {{ item.category.background_color }}20;"></div>
+    <div class="spotlight-card-glow"></div>
+  </div>
+</div>

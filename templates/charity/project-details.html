@@ -1,181 +1,598 @@
 {% extends 'charity/base.html' %}
 {% load static %}
-{% block title %}{{ page_title|default:project.title }}{% endblock %}
+
+{% block title %}{{ page_title|default:project.title }} | YCBN Uganda{% endblock %}
 
 {% block extra_css %}
 <style>
-  .project-hero { aspect-ratio: 16/9; background: #f5f5f5; border-radius: 12px; overflow: hidden; }
-  .project-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .section-card { border: 0; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
-  .badge-rounded { border-radius: 999px; padding: .4rem .7rem; font-weight: 600; }
-  .member-chip { display:inline-flex; align-items:center; background:#f3f6f5; border-radius:999px; padding:4px 10px; margin:4px 6px 0 0; font-size:.85rem; }
-  .member-chip i { color:#1A685B; margin-right:6px; }
-  .gallery-thumb { aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; background:#eef2f1; }
-  .gallery-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-  .table-achv th { background:#1A685B; color:#fff; }
+/* Project Detail Hero Section */
+.project-detail-hero {
+    background: linear-gradient(135deg, #1A685B, #145143);
+    color: white;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.project-detail-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("{% static 'assets/img/bg/pattern-overlay.png' %}") repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.project-category-badge {
+    display: inline-block;
+    background: #FBBF24;
+    color: #1A685B;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.project-hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: white;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 18px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.meta-item i {
+    color: #FBBF24;
+    font-size: 16px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .project-hero-title {
+        font-size: 2rem;
+    }
+    
+    .project-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .meta-item {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+  /* Section Cards */
+  .section-card {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    padding: 15px 20px;
+    border-radius: 0 !important;
+    border: none;
+  }
+  
+  .card-body {
+    padding: 25px;
+  }
+  
+  /* Achievements Table */
+  .achievements-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+  }
+  
+  .achievements-table thead th {
+    background: #f8f9fa;
+    border: none;
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .achievements-table tbody tr {
+    background: white;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .achievements-table tbody tr:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  
+  .achievements-table td {
+    padding: 15px;
+    vertical-align: middle;
+    border: none;
+    border-top: 1px solid #f1f1f1;
+  }
+  
+  .achievements-table tbody tr:first-child td {
+    border-top: none;
+  }
+  
+  /* Gallery */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  .gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  /* Member Chips */
+  .member-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .member-chip {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f8ff;
+    color: #1A685B;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid #d1e7ff;
+  }
+  
+  .member-chip:hover {
+    background: #e3f2ff;
+    transform: translateY(-2px);
+  }
+  
+  .member-chip i {
+    margin-right: 6px;
+    color: #1A685B;
+    font-size: 0.8em;
+  }
+  
+  /* Project Info List */
+  .project-info-list {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .project-info-list li {
+    display: flex;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .project-info-list li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .project-info-list strong {
+    flex: 0 0 45%;
+    color: #495057;
+    font-weight: 500;
+  }
+  
+  .project-info-list span {
+    flex: 1;
+    text-align: right;
+    color: #212529;
+  }
+  
+/* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .achievements-table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .project-info-list li {
+      flex-direction: column;
+    }
+    
+    .project-info-list strong,
+    .project-info-list span {
+      flex: 1 0 100%;
+      text-align: left;
+    }
+    
+    .project-info-list strong {
+      margin-bottom: 5px;
+    }
+  }
+
+  /* Hard-disable any breadcrumb wrappers from theme on this page (mobile-safe) */
+  .breadcumb-wrapper,
+  .breadcumb-content,
+  .breadcumb-menu,
+  .th-breadcrumb,
+  .breadcrumb,
+  .breadcrumbs,
+  .page-breadcrumb,
+  nav[aria-label="breadcrumb"] {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Ensure hero sits flush on mobile */
+  @media (max-width: 575px) {
+    .project-detail-hero { padding: 60px 0 50px; }
+  }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="py-5">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <div class="project-hero mb-3">
-          {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }}">
-          {% endif %}
-        </div>
-        <h1 class="h3 mb-2">{{ project.title }}</h1>
-  <!-- Breadcrumb removed as requested -->
-        <div class="mb-3 text-muted small">
-          {% if project.category %}<i class="fas fa-folder me-1"></i>{{ project.category.name }} · {% endif %}
-          <i class="fas fa-users me-1"></i>{{ members|length }} members
-        </div>
-
-        {% if project.description %}
-        <div class="card section-card mb-4">
-          <div class="card-body">
-            <h5 class="mb-2"><i class="fas fa-info-circle me-2 text-success"></i>Overview</h5>
-            <p class="mb-0">{{ project.description }}</p>
-          </div>
+<!-- Hero Section -->
+<section class="project-detail-hero">
+    <div class="hero-content-wrapper">
+        {% if project.category %}
+        <div class="project-category-badge">
+            {{ project.category.name }}
         </div>
         {% endif %}
-
-        {% if details %}
-          {% if details.challenge %}
-          <div class="card section-card mb-4">
-            <div class="card-body">
-              <h5 class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-danger"></i>Challenge</h5>
-              <p class="mb-0">{{ details.challenge }}</p>
+        
+        <h1 class="project-hero-title">{{ project.title }}</h1>
+        
+        <div class="project-meta">
+            <div class="meta-item">
+                <i class="fas fa-users"></i>
+                <span>{{ members|length }} Team Members</span>
             </div>
-          </div>
-          {% endif %}
-
-          {% if details.solution %}
-          <div class="card section-card mb-4">
-            <div class="card-body">
-              <h5 class="mb-2"><i class="fas fa-lightbulb me-2 text-warning"></i>Solution</h5>
-              <p class="mb-0">{{ details.solution }}</p>
+            <div class="meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>Started {{ project.created_at|date:"F Y" }}</span>
             </div>
-          </div>
-          {% endif %}
-
-          {% if details.key_objectives %}
-          <div class="card section-card mb-4">
-            <div class="card-body">
-              <h5 class="mb-2"><i class="fas fa-bullseye me-2 text-primary"></i>Key Objectives</h5>
-              <p class="mb-0">{{ details.key_objectives }}</p>
+            {% if project.updated_at %}
+            <div class="meta-item">
+                <i class="fas fa-sync-alt"></i>
+                <span>Updated {{ project.updated_at|timesince }} ago</span>
             </div>
-          </div>
-          {% endif %}
-        {% endif %}
-
-        <div class="card section-card mb-4">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h5 class="mb-0"><i class="fas fa-medal me-2 text-success"></i>Achievements</h5>
-              <span class="badge bg-success badge-rounded">{{ achievements|length }} items</span>
-            </div>
-            {% if achievements %}
-            <div class="table-responsive">
-              <table class="table table-sm align-middle table-achv">
-                <thead>
-                  <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Value</th>
-                    <th scope="col">Achieved On</th>
-                    <th scope="col">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for a in achievements %}
-                  <tr>
-                    <td>{{ a.title }}</td>
-                    <td>{{ a.value|default:'—' }}</td>
-                    <td>{% if a.achieved_on %}{{ a.achieved_on|date:'M d, Y' }}{% else %}—{% endif %}</td>
-                    <td class="small text-muted">{{ a.description|default:'—' }}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            {% else %}
-              <p class="text-muted mb-0">No achievements added yet.</p>
             {% endif %}
-          </div>
         </div>
+    </div>
+</section>
 
-        <div class="card section-card mb-4">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h5 class="mb-0"><i class="fas fa-images me-2 text-info"></i>Project Pictures</h5>
-              <span class="badge bg-info text-dark badge-rounded">{{ photos|length }} photos</span>
-            </div>
-            {% if photos %}
-            <div class="row g-3">
-              {% for p in photos %}
-              <div class="col-6 col-md-4">
-                <div class="gallery-thumb">
-                  <img src="{{ p.image.url }}" alt="{{ p.caption|default:project.title }}">
+<!-- Main Content -->
+<section class="project-content-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8">
+
+                <!-- Project Overview -->
+                {% if project.description %}
+                <div class="section-card">
+                    <div class="card-body">
+                        <h5><i class="fas fa-info-circle"></i> Project Overview</h5>
+                        <div class="project-description">
+                            {{ project.description|linebreaks }}
+                        </div>
+                    </div>
                 </div>
-                {% if p.caption %}<div class="small text-muted mt-1">{{ p.caption }}</div>{% endif %}
-              </div>
-              {% endfor %}
-            </div>
-            {% else %}
-              <p class="text-muted mb-0">No pictures uploaded yet.</p>
-            {% endif %}
-          </div>
-        </div>
+                {% endif %}
+
+                <!-- Challenge & Solution -->
+                {% if details %}
+                    {% if details.challenge or details.solution %}
+                    <div class="row">
+                        {% if details.challenge %}
+                        <div class="col-md-6 mb-4">
+                            <div class="section-card h-100">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-exclamation-triangle"></i> The Challenge</h5>
+                                    <div class="project-content">
+                                        {{ details.challenge|linebreaks }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if details.solution %}
+                        <div class="col-md-6 mb-4">
+                            <div class="section-card h-100">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-lightbulb"></i> Our Solution</h5>
+                                    <div class="project-content">
+                                        {{ details.solution|linebreaks }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Key Objectives -->
+                    {% if details.key_objectives %}
+                    <div class="section-card mb-4">
+                        <div class="card-body">
+                            <h5><i class="fas fa-bullseye"></i> Key Objectives</h5>
+                            <div class="project-content">
+                                {{ details.key_objectives|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endif %}
+
+                <!-- Achievements Section -->
+                {% if achievements %}
+                <div class="section-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5><i class="fas fa-medal"></i> Project Achievements</h5>
+                            <span class="badge bg-success rounded-pill px-3 py-2">{{ achievements|length }} Milestones</span>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table achievements-table">
+                                <thead>
+                                    <tr>
+                                        <th>Milestone</th>
+                                        <th>Details</th>
+                                        <th>Date Achieved</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for a in achievements %}
+                                    <tr>
+                                        <td class="fw-semibold">{{ a.title }}</td>
+                                        <td>
+                                            {% if a.value %}
+                                            <span class="badge bg-warning text-dark">{{ a.value }}</span>
+                                            {% else %}—{% endif %}
+                                        </td>
+                                        <td>{% if a.achieved_on %}{{ a.achieved_on|date:'M d, Y' }}{% else %}—{% endif %}</td>
+                                        <td class="text-muted">{{ a.description|default:'—' }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="section-card">
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-trophy display-4 text-muted mb-3"></i>
+                        <h5 class="text-muted">No Achievements Yet</h5>
+                        <p class="text-muted mb-0">Check back later for project milestones and achievements.</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Project Gallery -->
+                <div class="section-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5><i class="fas fa-images"></i> Project Gallery</h5>
+                            {% if photos %}
+                            <span class="badge bg-info text-dark px-3 py-2">{{ photos|length }} Photos</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if photos %}
+                        <div class="gallery-grid">
+                            {% for p in photos %}
+                            <div class="gallery-item">
+                                <img src="{{ p.image.url }}" alt="{{ p.caption|default:project.title }}" class="img-fluid">
+                                {% if p.caption %}
+                                <div class="gallery-caption">{{ p.caption }}</div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-camera fa-3x text-muted mb-3"></i>
+                            <p class="text-muted mb-0">No photos available yet. Check back soon for updates!</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
       </div>
 
-      <div class="col-lg-4">
-        <div class="card section-card mb-4">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title mb-0">Project Members</h5>
-              <span class="badge bg-primary badge-rounded"><i class="fas fa-users me-1"></i>{{ members|length }}</span>
-            </div>
-            <div class="mt-3">
-              {% if members %}
-                {% for m in members %}
-                  <span class="member-chip"><i class="fas fa-user"></i>{{ m.user.get_full_name|default:m.user.username }}</span>
-                {% endfor %}
-              {% else %}
-                <p class="text-muted mb-0">No members yet. Be the first to join!</p>
-              {% endif %}
-            </div>
-            <div class="mt-3">
-              {% if user.is_authenticated %}
-                <form method="post" action="{% if is_member %}{% url 'charity:leave_project' project.id %}{% else %}{% url 'charity:join_project' project.id %}{% endif %}">
-                  {% csrf_token %}
-                  {% if is_member %}
-                  <button class="btn btn-outline-danger btn-sm" type="submit"><i class="fas fa-sign-out-alt me-1"></i>Leave Project</button>
-                  {% else %}
-                  <button class="btn btn-success btn-sm" type="submit"><i class="fas fa-user-plus me-1"></i>Join Project</button>
-                  {% endif %}
-                </form>
-              {% else %}
-                <a class="btn btn-success btn-sm" href="/admin/login/?next={% url 'charity:project_detail' project.id %}"><i class="fas fa-user-plus me-1"></i>Login to Join</a>
-              {% endif %}
-            </div>
-          </div>
-        </div>
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Project Members -->
+<div class="section-card mb-4">
+                    <div class="card-header bg-light">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 text-dark"><i class="fas fa-users me-2 text-muted"></i>Project Team</h5>
+                            <span class="badge bg-secondary">{{ members|length }}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% if members %}
+                            <div class="member-chips">
+                                {% for m in members %}
+                                    <a href="#" class="member-chip">
+                                        <i class="fas fa-user"></i>
+                                        <span>{{ m.user.get_full_name|default:m.user.username }}</span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="text-center py-3">
+                                <i class="fas fa-user-friends fa-2x text-muted mb-2"></i>
+                                <p class="text-muted mb-3">No team members yet</p>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="mt-4 text-center">
+                            {% if user.is_authenticated %}
+                                {% if is_member %}
+                                    <form method="post" action="{% url 'charity:leave_project' project.id %}" class="d-grid mb-3">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-danger" type="submit">
+                                            <i class="fas fa-user-minus me-2"></i>Leave Project
+                                        </button>
+                                    </form>
+                                    <div class="alert alert-success py-2">
+                                        <i class="fas fa-check-circle me-2"></i>You are a member of this project
+                                    </div>
+                                {% elif has_pending_request %}
+                                    <div class="alert alert-warning py-2 mb-3">
+                                        <i class="fas fa-clock me-2"></i>Your request is pending review
+                                    </div>
+                                    <form method="post" action="{% url 'charity:cancel_join_request' membership_request.id %}" class="d-grid">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-secondary" type="submit" onclick="return confirm('Are you sure you want to cancel your join request?')">
+                                            <i class="fas fa-times me-2"></i>Cancel Request
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <a href="{% url 'charity:request_join_project' project.id %}" class="btn btn-primary w-100">
+                                        <i class="fas fa-user-plus me-2"></i>Request to Join Project
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'login' %}?next={% url 'charity:project_detail' project.id %}" class="btn btn-primary w-100">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login to Join Project
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
 
-        <div class="card section-card">
-          <div class="card-body">
-            <h5 class="card-title">Project Info</h5>
-            <ul class="list-unstyled small mb-0">
-              <li><strong>Created:</strong> {{ project.created_at|date:'M d, Y' }}</li>
-              <li><strong>Updated:</strong> {{ project.updated_at|date:'M d, Y' }}</li>
-              {% if project.category %}
-              <li><strong>Category:</strong> {{ project.category.name }}</li>
-              {% endif %}
-            </ul>
-            <a href="{% url 'charity:projects' %}" class="btn btn-outline-primary btn-sm mt-3">Back to Projects</a>
-          </div>
-        </div>
+                <!-- Project Details -->
+                <div class="section-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Project Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled project-info-list">
+                            <li>
+                                <strong><i class="fas fa-calendar-plus me-2 text-muted"></i>Started:</strong>
+                                <span>{{ project.created_at|date:'M d, Y' }}</span>
+                            </li>
+                            {% if project.updated_at %}
+                            <li>
+                                <strong><i class="fas fa-sync-alt me-2 text-muted"></i>Last Updated:</strong>
+                                <span>{{ project.updated_at|timesince }} ago</span>
+                            </li>
+                            {% endif %}
+                            {% if project.category %}
+                            <li>
+                                <strong><i class="fas fa-folder me-2 text-muted"></i>Category:</strong>
+                                <span class="badge bg-light text-dark">{{ project.category.name }}</span>
+                            </li>
+                            {% endif %}
+                            {% if project.status %}
+                            <li>
+                                <strong><i class="fas fa-tasks me-2 text-muted"></i>Status:</strong>
+                                <span class="badge bg-success">{{ project.get_status_display }}</span>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        
+                        <div class="d-grid mt-4">
+                            <a href="{% url 'charity:projects' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Projects
+                            </a>
+                        </div>
+                    </div>
+                </div>
       </div>
     </div>
   </div>

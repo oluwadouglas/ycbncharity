@@ -3,51 +3,36 @@
   <div class="box-thumb">
     {% if item.image %}
       {% if item.image.url %}
-        <img src="{{ item.image.url }}" alt="{{ item.title|default:item.name }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+        <img src="{{ item.image.url }}" alt="{% firstof item.title item.name %}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
       {% else %}
-        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ item.title|default:item.name }}">
+        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
       {% endif %}
     {% elif item.section_image %}
       {% if item.section_image.url %}
-        <img src="{{ item.section_image.url }}" alt="{{ item.title|default:item.name }}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+        <img src="{{ item.section_image.url }}" alt="{% firstof item.title item.name %}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
       {% else %}
-        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ item.title|default:item.name }}">
+        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
       {% endif %}
     {% else %}
-      <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{{ item.title|default:item.name }}">
+      <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
     {% endif %}
   </div>
-  {% with computed_url="" %}
-    {% with _model=item._meta.model_name|default:'' %}
-      {% if _model == 'project' %}
-        {% url 'charity:project_detail' item.id as computed_url %}
-      {% elif _model == 'program' %}
-        {% url 'charity:program_detail' item.id as computed_url %}
-      {% elif _model == 'school' %}
-        {% url 'charity:school_detail' item.id as computed_url %}
-      {% elif _model == 'club' %}
-        {% url 'charity:clubs' as computed_url %}
-      {% elif _model == 'blogpost' %}
-        {% url 'charity:blog_details' item.id as computed_url %}
-      {% endif %}
-    {% endwith %}
-    {% with link_url=url|default:computed_url %}
-      <div class="ycbn-card-body box-content">
-        {% with title=item.title|default:item.name %}
-          <h3 class="box-title">
-            {% if link_url %}
-              <a href="{{ link_url }}">{{ title }}</a>
-            {% else %}
-              {{ title }}
-            {% endif %}
-          </h3>
-        {% endwith %}
-        {% with desc=item.description|default:item.comment|default:item.subtitle %}
-          {% if desc %}
-            <p class="box-text">{{ desc|truncatewords:20 }}</p>
-          {% endif %}
-        {% endwith %}
-      </div>
-    {% endwith %}
+  {% with link_url=url %}
+    <div class="ycbn-card-body box-content">
+      {% with title='' %}{% endwith %}
+      {% comment %} Use firstof for safe selection without exceptions {% endcomment %}
+      <h3 class="box-title">
+        {% if link_url %}
+            <a href="{{ link_url }}">{% firstof item.title item.name %}</a>
+        {% else %}
+            {% firstof item.title item.name %}
+        {% endif %}
+      </h3>
+      {% with text=desc|default:item.description %}
+        {% if text %}
+          <p class="box-text">{{ text|truncatewords:20 }}</p>
+        {% endif %}
+      {% endwith %}
+    </div>
   {% endwith %}
 </div>

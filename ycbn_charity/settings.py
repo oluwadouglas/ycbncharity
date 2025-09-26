@@ -2,15 +2,17 @@
 import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'your-secret-key'
-DEBUG = True
-ALLOWED_HOSTS = ['ycbn.org', 'www.ycbn.org', '54.160.190.234', 'localhost', '127.0.0.1']
+# Environment-driven configuration for production safety
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dev-insecure-secret')
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ('1', 'true', 'yes')
+ALLOWED_HOSTS = [h for h in os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if h]
 
-# CSRF: trust your HTTPS origins
-CSRF_TRUSTED_ORIGINS = ['https://ycbn.org', 'https://www.ycbn.org']
+# CSRF: trusted origins (HTTPS in production; localhost in dev)
+_default_csrf = 'https://ycbn.org,https://www.ycbn.org'
+CSRF_TRUSTED_ORIGINS = [o for o in os.getenv('CSRF_TRUSTED_ORIGINS', _default_csrf).split(',') if o]
 
 # Canonical site base for absolute URLs and SEO (ensure https)
-SITE_BASE_URL = 'https://ycbn.org'
+SITE_BASE_URL = os.getenv('SITE_BASE_URL', 'https://ycbn.org')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,12 +51,19 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'ycbn_charity.wsgi.application'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database: use DATABASE_URL if provided, else fall back to SQLite for local dev
+try:
+    import dj_database_url  # type: ignore
+    DATABASES = {
+        'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
     }
-}
+except Exception:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -93,6 +102,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redirects after auth
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Local development cookie settings (helpful for admin login via proxy)
+# These are safe in development; production-secure equivalents are below when DEBUG=False
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 # Security: Prefer HTTPS in production
 if not DEBUG:

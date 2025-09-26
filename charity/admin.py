@@ -4,11 +4,13 @@ from .models import (
     Project,
     ProjectDetails,
     ProjectMembership,
+    ProjectMembershipRequest,
     ProjectPhoto,
     ProjectAchievement,
     Club,
     School,
-    BlogPost,
+    Opportunity,
+    OpportunityApplication,
     TeamMember,
     VoiceOfChange,
     Mentor,
@@ -57,6 +59,48 @@ class ProjectAdmin(admin.ModelAdmin):
 class ProjectDetailsAdmin(admin.ModelAdmin):
     list_display = ("project", "updated_at")
     search_fields = ("project__title", "challenge", "solution", "key_objectives")
+
+
+@admin.register(ProjectMembershipRequest)
+class ProjectMembershipRequestAdmin(admin.ModelAdmin):
+    list_display = ("project", "user", "role", "status", "requested_at", "processed_at")
+    list_filter = ("status", "role", "requested_at", "processed_at")
+    search_fields = ("project__title", "user__username", "user__email", "message")
+    list_editable = ("status",)
+    readonly_fields = ("requested_at", "processed_at", "processed_by")
+    actions = ["approve_requests", "reject_requests"]
+    
+    fieldsets = (
+        (None, {
+            'fields': ('project', 'user', 'role', 'status')
+        }),
+        ('Request Details', {
+            'fields': ('message', 'admin_notes', 'requested_at', 'processed_at', 'processed_by')
+        }),
+    )
+    
+    def save_model(self, request, obj, form, change):
+        if 'status' in form.changed_data and obj.status == 'approved':
+            obj.approve(request.user)
+        elif 'status' in form.changed_data and obj.status == 'rejected' and not obj.processed_at:
+            obj.reject(request.user)
+        super().save_model(request, obj, form, change)
+    
+    def approve_requests(self, request, queryset):
+        count = 0
+        for req in queryset.filter(status='pending'):
+            if req.approve(request.user):
+                count += 1
+        self.message_user(request, f"Approved {count} request(s).")
+    approve_requests.short_description = "Approve selected requests"
+    
+    def reject_requests(self, request, queryset):
+        count = 0
+        for req in queryset.filter(status='pending'):
+            if req.reject(request.user):
+                count += 1
+        self.message_user(request, f"Rejected {count} request(s).")
+    reject_requests.short_description = "Reject selected requests"
 
 
 @admin.register(ProjectMembership)
@@ -153,11 +197,19 @@ class ClubAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ("title", "author", "date", "created_at")
-    list_filter = ("date",)
-    search_fields = ("title", "author", "details")
+@admin.register(Opportunity)
+class OpportunityAdmin(admin.ModelAdmin):
+    list_display = ("title", "opportunity_type", "organization", "deadline", "is_published", "posted_at")
+    list_filter = ("opportunity_type", "is_published", "posted_at", "deadline")
+    search_fields = ("title", "organization", "description", "location")
+    list_editable = ("is_published",)
+
+@admin.register(OpportunityApplication)
+class OpportunityApplicationAdmin(admin.ModelAdmin):
+    list_display = ("opportunity", "full_name", "email", "submitted_at")
+    list_filter = ("submitted_at",)
+    search_fields = ("opportunity__title", "full_name", "email", "phone")
+    readonly_fields = ("submitted_at",)
 
 
 @admin.register(TeamMember)

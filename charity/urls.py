@@ -14,10 +14,13 @@ urlpatterns = [
     path('about-us/', views.about_us, name='about_us'),
     path('projects/', views.projects, name='projects'),
     path('projects/<int:project_id>/', views.project_detail, name='project_detail'),
-    path('projects/<int:project_id>/join/', views.join_project, name='join_project'),
+    # Project membership request endpoints
+    path('projects/<int:project_id>/request-join/', views.request_join_project, name='request_join_project'),
+    path('projects/request/<int:request_id>/cancel/', views.cancel_join_request, name='cancel_join_request'),
     path('projects/<int:project_id>/leave/', views.leave_project, name='leave_project'),
     path('projects/add/', views.add_project, name='add_project'),
     path('clubs/', views.clubs, name='clubs'),
+    path('clubs/<int:club_id>/', views.club_detail, name='club_detail'),
     path('clubs/add/', views.add_club, name='add_club'),
     path('programs/', views.programs, name='programs'),
     path('programs/<int:program_id>/', views.program_detail, name='program_detail'),
@@ -32,7 +35,12 @@ urlpatterns = [
     path('impact/', views.impact, name='impact'),
     path('spotlight/', views.spotlight, name='spotlight'),
     
-    # Blog pages (Admin posts)
+    # Opportunities (Admin managed)
+    path('opportunities/', views.opportunities, name='opportunities'),
+    path('opportunities/<int:opp_id>/', views.opportunity_detail, name='opportunity_detail'),
+    path('opportunities/<int:opp_id>/apply/', views.opportunity_apply, name='opportunity_apply'),
+
+    # Blog pages (legacy -> redirect to opportunities)
     path('blog/', views.blog, name='blog'),
     path('blog/<int:post_id>/', views.blog_details, name='blog_details'),
     

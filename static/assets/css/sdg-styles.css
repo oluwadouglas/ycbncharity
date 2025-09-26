@@ -16,8 +16,8 @@
     width: 100%;
 }
 .sdg-marquee-track {
-    display: inline-flex;
-    flex-wrap: nowrap;
+    display: flex; /* ensure a single row */
+    flex-wrap: nowrap !important; /* never wrap to a second line */
     align-items: center;
     gap: 24px;
     white-space: nowrap;
@@ -32,14 +32,14 @@
 /* Inside marquee, ensure inline goals are in a row and visible */
 .sdg-marquee .sdg-goals-inline {
     display: inline-flex;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important; /* never wrap within a group */
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start; /* do not stretch across width */
     gap: 24px;
     padding: 8px 16px;
-    overflow: visible; /* override generic scrollbars for inline goals */
-    flex: 0 0 auto; /* prevent stretching */
-    width: auto;
+    overflow: visible !important; /* override generic scrollbars for inline goals */
+    flex: 0 0 auto !important; /* prevent stretching */
+    width: auto !important;
 }
 
 @keyframes sdg-marquee-scroll {
@@ -57,15 +57,17 @@
     }
     .sdg-marquee[data-force-animate="1"] { overflow: hidden; }
 }
+/* Generic inline goals (outside marquee contexts) */
 .sdg-goals-inline {
     display: flex;
     flex-wrap: nowrap; /* no wrapping */
-    justify-content: space-between; /* even spacing across width */
     align-items: center;
     gap: 12px;
     padding: 8px 0;
     overflow-x: auto; /* allow scroll if too many on small screens */
     scrollbar-width: thin;
+    flex: 0 0 auto;
+    width: auto;
 }
 .sdg-goals-inline::-webkit-scrollbar {
     height: 6px;
@@ -84,7 +86,7 @@
     padding: 4px 6px;
     color: #1A685B;
     font-weight: 600;
-    flex: 0 0 auto; /* don't shrink */
+    flex: 0 0 auto !important; /* don't shrink */
 }
 .sdg-goal-icon {
     font-size: 20px;

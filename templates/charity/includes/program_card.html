@@ -1,0 +1,101 @@
+{% load static %}
+<div class="program-card-wrapper">
+  {% if url %}
+  <a href="{{ url }}" class="program-card-link">
+  {% endif %}
+  <div class="program-card">
+    <!-- Program Image Section -->
+    <div class="program-image-section">
+      {% if program.image and program.image.url %}
+        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-main-image" />
+      {% elif program.section_image and program.section_image.url %}
+        <img src="{{ program.section_image.url }}" alt="{{ program.title }}" class="program-main-image" />
+      {% else %}
+        <div class="program-image-placeholder">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+      {% endif %}
+      
+      <!-- Program Category Badge -->
+      {% if program.category %}
+      <div class="program-category-badge">
+        <span>{{ program.category.name }}</span>
+      </div>
+      {% endif %}
+      
+      <!-- Program Status Indicator -->
+      <div class="program-status-indicator">
+        <div class="status-dot active"></div>
+        <span class="status-text">Active</span>
+      </div>
+    </div>
+    
+    <!-- Program Content Section -->
+    <div class="program-card-body">
+      <div class="program-header">
+        <h3 class="program-title">{{ program.title }}</h3>
+        {% if program.duration %}
+        <div class="program-duration">
+          <i class="fas fa-clock"></i>
+          <span>{{ program.duration }}</span>
+        </div>
+        {% endif %}
+      </div>
+      
+      {% if program.description %}
+        <p class="program-description">{{ program.description|truncatewords:25 }}</p>
+      {% endif %}
+      
+      <!-- Program Features -->
+      <div class="program-features">
+        {% if program.target_audience %}
+        <div class="program-feature">
+          <i class="fas fa-users"></i>
+          <span>{{ program.target_audience }}</span>
+        </div>
+        {% endif %}
+        
+        {% if program.location %}
+        <div class="program-feature">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ program.location }}</span>
+        </div>
+        {% endif %}
+        
+        {% if program.category %}
+        <div class="program-feature">
+          {% if "Education" in program.category.name or "Skills" in program.category.name %}
+            <i class="fas fa-book-open"></i>
+          {% elif "Health" in program.category.name or "Wellness" in program.category.name %}
+            <i class="fas fa-heartbeat"></i>
+          {% elif "Community" in program.category.name %}
+            <i class="fas fa-users"></i>
+          {% elif "Impact" in program.category.name %}
+            <i class="fas fa-chart-line"></i>
+          {% elif "Development" in program.category.name %}
+            <i class="fas fa-seedling"></i>
+          {% else %}
+            <i class="fas fa-graduation-cap"></i>
+          {% endif %}
+          <span>{{ program.category.name }}</span>
+        </div>
+        {% endif %}
+      </div>
+      
+      <!-- Program Action -->
+      <div class="program-action">
+        <div class="program-learn-more">
+          <span>Learn More</span>
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="program-card-accent"></div>
+    <div class="program-card-glow"></div>
+  </div>
+  {% if url %}
+  </a>
+  {% endif %}
+</div>

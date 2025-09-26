@@ -19,7 +19,7 @@
     </li>
     <li class="{% if url_name == 'articles' or url_name == 'article_details' or url_name == 'add_article' or url_name == 'edit_article' %}current-menu-item{% endif %}"><a href="{% url 'charity:articles' %}">Articles</a></li>
     <li class="{% if url_name == 'spotlight' %}current-menu-item{% endif %}"><a href="{% url 'charity:spotlight' %}">Spotlight</a></li>
-    <li class="{% if url_name == 'blog' %}current-menu-item{% endif %}"><a href="{% url 'charity:blog' %}">Blog</a></li>
+    <li class="{% if url_name == 'opportunities' %}current-menu-item{% endif %}"><a href="{% url 'charity:opportunities' %}">Opportunities</a></li>
     {% if user.is_authenticated %}
     <li><a href="{% url 'charity:profile' %}"><i class="fas fa-user me-2"></i>{{ user.get_short_name|default:user.username }}</a></li>
     <li>

@@ -1,0 +1,60 @@
+{% load static %}
+<div class="team-member-card">
+  <div class="team-card-inner">
+    <!-- Circular Photo Section -->
+    <div class="team-photo-container">
+      <div class="team-photo-circle">
+        {% if member.image and member.image.url %}
+          <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-member-photo" />
+        {% else %}
+          <div class="team-photo-placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+        {% endif %}
+      </div>
+      <div class="team-photo-ring"></div>
+    </div>
+    
+    <!-- Member Information -->
+    <div class="team-member-info">
+      <h3 class="team-member-name">{{ member.name }}</h3>
+      {% if member.title %}
+        <p class="team-member-title">{{ member.title }}</p>
+      {% endif %}
+      
+      {% if member.description %}
+        <p class="team-member-description">{{ member.description|truncatewords:15 }}</p>
+      {% endif %}
+      
+      <!-- Social Links -->
+      {% if member.social_links %}
+      <div class="team-social-container">
+        {% for key, url in member.social_links.items %}
+          <a href="{{ url }}" target="_blank" class="team-social-link" title="{{ key|title }}">
+            {% if key == 'linkedin' %}
+              <i class="fab fa-linkedin-in"></i>
+            {% elif key == 'twitter' %}
+              <i class="fab fa-twitter"></i>
+            {% elif key == 'facebook' %}
+              <i class="fab fa-facebook-f"></i>
+            {% elif key == 'instagram' %}
+              <i class="fab fa-instagram"></i>
+            {% elif key == 'whatsapp' %}
+              <i class="fab fa-whatsapp"></i>
+            {% elif key == 'email' %}
+              <i class="fas fa-envelope"></i>
+            {% elif key == 'phone' %}
+              <i class="fas fa-phone"></i>
+            {% else %}
+              <i class="fab fa-{{ key }}"></i>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="team-card-accent"></div>
+  </div>
+</div>

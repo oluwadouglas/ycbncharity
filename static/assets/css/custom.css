@@ -7,16 +7,19 @@
 
 .ycbn-card {
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.ycbn-card:hover { transform: translateY(-4px); }
+.ycbn-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
 
 .ycbn-card img {
   width: 100%;
@@ -26,11 +29,1367 @@
 }
 
 .ycbn-card-body {
-  padding: 1rem;
+  padding: 1rem 1rem 1.1rem;
   flex: 1;
 }
 
 .ycbn-card-body h3 {
   font-size: 1.1rem;
+  margin-bottom: 0.45rem;
+}
+
+/* Club enhanced card */
+.club-card2 .club-thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  background: #f2f4f7;
+}
+
+.club-card2 .club-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* When no image, show a soft gradient */
+.club-card2 .club-thumb-empty {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8f3f0, #f3faf8);
+}
+
+/* Larger circular badge holder */
+.club-card2 .club-badge-circle {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  color: #1A685B;
+  overflow: hidden;
+  border: 2px solid rgba(26,104,91,0.12);
+}
+
+.club-card2 .club-badge-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Club card content styling - green background like footer */
+.club-card2 .club-card-content {
+  background: linear-gradient(135deg, #1A685B, #145143) !important;
+  color: white !important;
+  padding: 1.2rem !important;
+}
+
+.club-card2 .box-title {
+  color: #FFAC00 !important;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.club-card2 .box-title a {
+  text-decoration: none;
+  color: #FFAC00 !important;
+}
+
+.club-card2 .box-title a:hover {
+  color: #FFD700 !important;
+}
+
+.club-card2 .box-text {
+  color: white !important;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Club meta info styling */
+.club-card2 .club-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.club-card2 .club-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.club-card2 .club-meta-item i {
+  color: #FFAC00;
+  width: 14px;
+  text-align: center;
+}
+
+/* Schools Grid - Different layout from clubs */
+.schools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* School Card - Unique hexagonal/diamond shape design */
+.school-card-wrapper {
+  perspective: 1000px;
+}
+
+.school-card {
+  background: linear-gradient(135deg, #1A685B, #145143);
+  border-radius: 20px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(26, 104, 91, 0.3);
+}
+
+.school-card:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateY(-10px);
+  box-shadow: 0 20px 40px rgba(26, 104, 91, 0.4);
+}
+
+.school-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FBBF24, #F59E0B, #D97706);
+}
+
+/* School Image Section */
+.school-image-section {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+}
+
+.school-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.school-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 3rem;
+}
+
+/* School Badge Overlay - Houses school name/badge */
+.school-badge-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.school-badge-overlay img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.school-badge-text {
+  color: #1A685B;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.school-location {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.school-location i {
+  color: #FBBF24;
+}
+
+/* School Card Body */
+.school-card-body {
+  padding: 1.2rem 1.5rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.school-title {
+  color: #FFFFFF !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.school-title a {
+  color: #FFFFFF !important;
+  text-decoration: none;
+}
+
+.school-title a:hover {
+  color: #FBBF24 !important;
+}
+
+.school-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+/* School Stats */
+.school-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.school-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0.8rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.school-stat-item i {
+  color: #FBBF24;
+  width: 16px;
+  text-align: center;
+}
+
+/* School Card Footer */
+.school-card-footer {
+  padding: 1rem 1.5rem 1.5rem;
+  margin-top: auto;
+}
+
+.school-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #FBBF24 !important;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  transition: all 0.3s ease;
+}
+
+.school-learn-more:hover {
+  background: rgba(251, 191, 36, 0.2);
+  color: #FFFFFF !important;
+  transform: translateX(5px);
+}
+
+/* Impact Highlight Cards - Matching Impact Page Design */
+.impact-highlight-card {
+  background: linear-gradient(135deg, #1A685B, #145143);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(26, 104, 91, 0.2);
+}
+
+.impact-highlight-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(26, 104, 91, 0.3);
+}
+
+.impact-card-icon {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FBBF24;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.impact-card-content {
+  flex: 1;
+  color: white;
+}
+
+.impact-title {
+  color: #FBBF24 !important;
+  font-size: 1.4rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.impact-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.impact-description {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.impact-card-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 187, 36, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Animation classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.animate-fade-up.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Counter Cards - Matching Impact Page Design */
+.counter-card {
+  background: linear-gradient(135deg, var(--counter-color, #1A685B), #145143);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(26, 104, 91, 0.2);
+}
+
+.counter-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(26, 104, 91, 0.3);
+}
+
+.counter-card-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.counter-card-content {
+  flex: 1;
+  color: white;
+}
+
+.counter-number {
+  color: #FBBF24 !important;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1;
+}
+
+.counter-title {
+  color: white !important;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.counter-type {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.counter-card-bg {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 187, 36, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Projects Grid - Different layout from clubs and schools */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Project Card - Unique angular/diamond shape design */
+.project-card-wrapper {
+  perspective: 1200px;
+}
+
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.project-card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  background: linear-gradient(135deg, #1A685B, #145143, #0F3B34);
+  border-radius: 0 25px 0 25px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(26, 104, 91, 0.3);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.project-card:hover {
+  transform: rotateX(5deg) rotateY(-5deg) translateY(-12px);
+  box-shadow: 0 25px 50px rgba(26, 104, 91, 0.4);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #FBBF24, #F59E0B, #D97706);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 0 100%);
+}
+
+/* Project Image Section - Half of the card */
+.project-image-section {
+  position: relative;
+  height: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0 20px 0 0;
+  overflow: hidden;
+}
+
+.project-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block !important;
+  border-radius: 6px;
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1A685B;
+  font-size: 3rem;
+  border-radius: 8px;
+  border: 2px dashed #1A685B;
+}
+
+/* Project Status Badge */
+.project-status-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(251, 191, 36, 0.95);
+  color: #1F2937;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0 8px 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+}
+
+/* Project Category Tag */
+.project-category-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(10px);
+}
+
+.project-category-tag i {
+  color: #FBBF24;
+}
+
+/* Project Card Body - Other half of the card */
+.project-card-body {
+  padding: 1.2rem 1.5rem 1rem;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: visible;
+}
+
+.project-title {
+  color: #FBBF24 !important;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.3;
+}
+
+.project-title a {
+  color: #FBBF24 !important;
+  text-decoration: none;
+}
+
+.project-title a:hover {
+  color: #FFD700 !important;
+}
+
+.project-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
+/* Project Meta */
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+  margin-bottom: 0.8rem;
+}
+
+.project-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.4rem 0.7rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.project-meta-item i {
+  color: #FBBF24;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Project Card Footer */
+.project-card-footer {
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.project-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #1F2937 !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.4rem;
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  border-radius: 0 15px 0 15px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-learn-more:hover {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #FFFFFF !important;
+  transform: translateX(8px);
+}
+
+/* Decorative Elements */
+.project-card-accent {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), transparent);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.project-card-glow {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Team Member Cards - Professional Design with Circular Photos */
+.team-member-card {
+  background: linear-gradient(135deg, #1A685B, #145143);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 25px rgba(26, 104, 91, 0.3);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.team-member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(26, 104, 91, 0.15);
+}
+
+.team-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+/* Circular Photo Container */
+.team-photo-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.team-photo-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  padding: 5px;
+}
+
+.team-member-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.team-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1A685B;
+  font-size: 3.5rem;
+  border-radius: 50%;
+}
+
+.team-photo-ring {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 180px;
+  height: 180px;
+  border: 3px solid rgba(251, 191, 36, 0.4);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* Member Information */
+.team-member-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-member-name {
+  color: #FFFFFF !important;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.team-member-title {
+  color: #FBBF24 !important;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.team-member-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Social Links Container */
+.team-social-container {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.team-social-link {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+}
+
+.team-social-link:hover {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  color: #1F2937 !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.4);
+}
+
+.team-social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.team-social-link:hover::before {
+  left: 100%;
+}
+
+/* Decorative Accent */
+.team-card-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), transparent);
+  border-radius: 0 20px 0 60px;
+}
+
+/* Team Grid Layout */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Spotlight Cards */
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.spotlight-card {
+  background: #ffffff;
+  border-radius: 16px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(26, 104, 91, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 50px rgba(26, 104, 91, 0.2);
+}
+
+.spotlight-image-section {
+  height: 180px;
+  background: linear-gradient(135deg, #1A685B, #145143);
+  position: relative;
+}
+
+.spotlight-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 4rem;
+}
+
+.spotlight-card-body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.spotlight-title {
+  color: #1A685B !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Pagination Styles */
+.pagination-nav {
+  margin: 3rem 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pagination-info {
+  color: rgba(26, 104, 91, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.page-item {
+  display: flex;
+}
+
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0.5rem 0.75rem;
+  color: #1A685B;
+  background: #ffffff;
+  border: 2px solid rgba(26, 104, 91, 0.2);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-link:hover {
+  color: #ffffff;
+  background: #1A685B;
+  border-color: #1A685B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(26, 104, 91, 0.2);
+}
+
+.page-item.active .page-link {
+  color: #ffffff;
+  background: linear-gradient(135deg, #1A685B, #145143);
+  border-color: #1A685B;
+  box-shadow: 0 4px 12px rgba(26, 104, 91, 0.3);
+}
+
+.page-item.active .page-link.current {
+  cursor: default;
+  transform: none;
+}
+
+.page-link i {
+  font-size: 0.8rem;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+  .pagination-wrapper {
+    gap: 0.8rem;
+  }
+  
+  .pagination {
+    gap: 0.3rem;
+  }
+  
+  .page-link {
+    min-width: 36px;
+    height: 36px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .pagination-info {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
+/* Program Cards - Modern hexagonal design */
+.program-card-wrapper {
+  perspective: 1000px;
+}
+
+.program-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.program-card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.program-card {
+  background: linear-gradient(135deg, #1A685B, #145143);
+  border-radius: 20px 20px 0 20px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 25px rgba(26, 104, 91, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.program-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(26, 104, 91, 0.35);
+}
+
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FBBF24, #F59E0B, #FBBF24);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Program Image Section */
+.program-image-section {
+  position: relative;
+  height: 45%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.program-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+
+.program-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FBBF24;
+  font-size: 3rem;
+  border-radius: 0;
+  border: none;
+}
+
+/* Program Category Badge */
+.program-category-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(251, 191, 36, 0.95);
+  color: #1F2937;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+}
+
+/* Program Status Indicator */
+.program-status-indicator {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  backdrop-filter: blur(10px);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Program Card Body */
+.program-card-body {
+  padding: 1.5rem;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.program-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.program-title {
+  color: #FBBF24 !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.program-duration {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.program-duration i {
+  color: #FBBF24;
+}
+
+.program-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+/* Program Features */
+.program-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.program-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 0.7rem;
+  border-radius: 12px;
+}
+
+.program-feature i {
+  color: #FBBF24;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Program Action */
+.program-action {
+  margin-top: auto;
+}
+
+.program-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1F2937 !important;
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  padding: 0.7rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.program-learn-more:hover {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  transform: translateX(5px);
+}
+
+.program-learn-more i {
+  transition: transform 0.3s ease;
+}
+
+.program-learn-more:hover i {
+  transform: translateX(3px);
+}
+
+/* Decorative Elements */
+.program-card-accent {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), transparent);
+  border-radius: 50% 0 0 0;
+}
+
+.program-card-glow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Programs Grid */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .program-card {
+    height: 380px;
+  }
+  
+  .program-title {
+    font-size: 1.1rem;
+  }
+  
+  .program-description {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+  
+  .programs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Empty State for Programs */
+.empty-state-program {
+  background: rgba(26, 104, 91, 0.05);
+  border: 2px dashed rgba(26, 104, 91, 0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-state-program i {
+  color: rgba(26, 104, 91, 0.4) !important;
+}
+
+.empty-state-program h4 {
+  color: #1A685B !important;
+  font-weight: 600;
+}
+
+.empty-state-program p {
+  color: rgba(26, 104, 91, 0.7) !important;
 }

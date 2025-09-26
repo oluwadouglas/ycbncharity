@@ -1,0 +1,118 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:"Opportunities - YCBN" }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .opp-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--smoke-color);
+    color: var(--title-color);
+    text-transform: uppercase;
+  }
+  .opp-card .opp-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+  .opp-card .opp-meta .item { font-size: 14px; color: var(--body-color); }
+  .opp-card .opp-meta .item i { color: var(--theme-color2); margin-right: 6px; }
+  .opp-filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
+  .opp-filters .th-btn { padding: 10px 16px; min-width: auto; border-radius: 6px; }
+  .opp-empty { text-align: center; padding: 40px; color: #666; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="space-top space-extra-bottom" style="margin-top: 20px;">
+  <div class="container">
+    <div class="title-area text-center">
+      <span class="sub-title">Grow Your Career</span>
+      <h2 class="sec-title">Jobs, Scholarships, and Opportunities</h2>
+      <p class="sec-text">Curated by YCBN admins for our community. Apply and take the next step in your journey.</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="opp-filters">
+      {% with request.GET.type as active_type %}
+      <a href="{% url 'charity:opportunities' %}" class="th-btn {% if not active_type %}active{% endif %}">All</a>
+      <a href="{% url 'charity:opportunities' %}?type=job" class="th-btn {% if active_type == 'job' %}active{% endif %}"><i class="fas fa-briefcase me-2"></i>Jobs</a>
+      <a href="{% url 'charity:opportunities' %}?type=scholarship" class="th-btn {% if active_type == 'scholarship' %}active{% endif %}"><i class="fas fa-graduation-cap me-2"></i>Scholarships</a>
+      <a href="{% url 'charity:opportunities' %}?type=grant" class="th-btn {% if active_type == 'grant' %}active{% endif %}"><i class="fas fa-hand-holding-usd me-2"></i>Grants</a>
+      <a href="{% url 'charity:opportunities' %}?type=internship" class="th-btn {% if active_type == 'internship' %}active{% endif %}"><i class="fas fa-user-graduate me-2"></i>Internships</a>
+      <a href="{% url 'charity:opportunities' %}?type=volunteer" class="th-btn {% if active_type == 'volunteer' %}active{% endif %}"><i class="fas fa-hands-helping me-2"></i>Volunteer</a>
+      {% endwith %}
+    </div>
+
+    <div class="row gx-40">
+      <div class="col-xxl-8 col-lg-7">
+        {% if opportunities %}
+          {% for opp in opportunities %}
+          <div class="th-blog blog-single opp-card">
+            {% if opp.image %}
+            <div class="blog-img">
+              <a href="{% url 'charity:opportunity_detail' opp.id %}">
+                <img src="{{ opp.image.url }}" alt="{{ opp.title }}">
+              </a>
+            </div>
+            {% endif %}
+            <div class="blog-content">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="opp-badge">{{ opp.get_opportunity_type_display }}</span>
+                {% if opp.deadline %}
+                <span class="small {% if opp.is_open %}text-success{% else %}text-danger{% endif %}">
+                  <i class="far fa-clock me-1"></i>
+                  {% if opp.is_open %}Deadline: {{ opp.deadline|date:"M d, Y" }}{% else %}Closed{% endif %}
+                </span>
+                {% endif %}
+              </div>
+              <h2 class="blog-title">
+                <a href="{% url 'charity:opportunity_detail' opp.id %}">{{ opp.title }}</a>
+              </h2>
+              <div class="opp-meta">
+                {% if opp.organization %}<span class="item"><i class="fas fa-building"></i>{{ opp.organization }}</span>{% endif %}
+                {% if opp.location %}<span class="item"><i class="fas fa-map-marker-alt"></i>{{ opp.location }}</span>{% endif %}
+                <span class="item"><i class="fas fa-calendar-day"></i>Posted {{ opp.posted_at|date:"M d, Y" }}</span>
+              </div>
+              <p class="blog-text">{{ opp.description|striptags|truncatechars:220 }}</p>
+              <div class="d-flex gap-2">
+                <a href="{% url 'charity:opportunity_apply' opp.id %}" class="th-btn btn-sm">Apply Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+                {% if opp.application_url %}
+                <a href="{{ opp.application_url }}" target="_blank" rel="noopener" class="th-btn btn-sm style4">External Application <i class="fas fa-external-link-alt ms-2"></i></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="opp-empty">
+            <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+            <h3>No opportunities yet</h3>
+            <p class="mb-0">Please check back soon—our team is curating new opportunities for you.</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-xxl-4 col-lg-5">
+        <aside class="sidebar-area">
+          <div class="widget widget_search">
+            <form class="search-form" action="{% url 'charity:opportunities' %}" method="get">
+              <input type="text" name="q" placeholder="Search opportunities..." disabled>
+              <button type="submit" disabled><i class="far fa-search"></i></button>
+            </form>
+          </div>
+          <div class="widget">
+            <h3 class="widget_title">Tips</h3>
+            <ul class="list-unstyled mb-0" style="padding-left: 1rem;">
+              <li>Prepare your resume or CV</li>
+              <li>Check deadlines carefully</li>
+              <li>Verify eligibility before applying</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

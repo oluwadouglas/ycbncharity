@@ -1,7 +1,44 @@
 {% extends 'charity/base.html' %}
 {% load static %}
 
-{% block title %}{{ page_title|default:"YCBN Insights & Stories" }}{% endblock %}
+{% block title %}{{ post.title|default:page_title|default:"YCBN Insights & Stories" }}{% endblock %}
+{% block og_title %}{{ post.title|default:page_title|default:"YCBN Insights & Stories" }}{% endblock %}
+{% block og_description %}{{ post.details|default:post.content|default:''|striptags|truncatechars:160 }}{% endblock %}
+{% block twitter_title %}{{ post.title|default:page_title|default:"YCBN Insights & Stories" }}{% endblock %}
+{% block twitter_description %}{{ post.details|default:post.content|default:''|striptags|truncatechars:200 }}{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.build_absolute_uri }}">{% endblock %}
+{% block jsonld %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title|default:page_title|escapejs }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri }}"
+  },
+  {% if post.image %}
+  "image": ["{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}"],
+  {% endif %}
+  "datePublished": "{{ post.date|date:'c' }}",
+  "dateModified": "{{ post.date|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ post.author|default:post.author_name|default:'YCBN'|escapejs }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "YCBN Uganda",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'assets/img/ycbn-logo.png' %}"
+    }
+  },
+  "description": "{{ post.details|default:post.content|default:''|striptags|truncatechars:220|escapejs }}"
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <style>
