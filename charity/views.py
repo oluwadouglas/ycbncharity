@@ -1,6 +1,6 @@
 # --- New Views for Navigation Pages ---
-from .models import Project, Club, Category, Program, School, VoiceOfChange, TeamMember, Donation, Mentor, Impact, ImpactCounter, ContactMessage, BlogPost, Article, SpotlightCategory, SpotlightItem, SpotlightStats, ProjectMembership, ProjectPhoto, ProjectAchievement, NewsletterSubscription, Resource, Photo
-from .forms import ProjectForm, ClubForm, ProgramForm, SchoolForm, NewsletterSubscriptionForm
+from .models import Project, Club, Category, Program, School, VoiceOfChange, TeamMember, Donation, Mentor, Impact, ImpactCounter, ContactMessage, Article, Opportunity, SpotlightCategory, SpotlightItem, SpotlightStats, ProjectMembership, ProjectPhoto, ProjectAchievement, NewsletterSubscription, Resource, Photo
+from .forms import ProjectForm, ClubForm, ProgramForm, SchoolForm, NewsletterSubscriptionForm, OpportunityApplicationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth import login as auth_login
 from .forms import RegistrationForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def _is_member(user) -> bool:
     """Return True if user belongs to 'member' group."""
@@ -25,7 +26,21 @@ def about_us(request):
     return render(request, 'charity/about_us.html', context)
 
 def projects(request):
-    projects = Project.objects.all().prefetch_related('memberships')
+    projects_list = Project.objects.all().prefetch_related('memberships').order_by('-created_at', 'title')
+    
+    # Pagination - 6 projects per page
+    paginator = Paginator(projects_list, 6)
+    page = request.GET.get('page')
+    
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        projects = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page
+        projects = paginator.page(paginator.num_pages)
+    
     context = {
         'projects': projects,
         'page_title': 'Projects | YCBF',
@@ -37,22 +52,37 @@ def project_detail(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     # Access optional one-to-one details if present
     details = getattr(project, 'details', None)
-    # Membership status and related objects
-    is_member = False
-    if request.user.is_authenticated:
-        is_member = ProjectMembership.objects.filter(project=project, user=request.user).exists()
-    members = ProjectMembership.objects.filter(project=project).select_related('user')
-    photos = ProjectPhoto.objects.filter(project=project)
-    achievements = ProjectAchievement.objects.filter(project=project)
+    
+    # Initialize context with common data
     context = {
         'page_title': f'{project.title} | Project - YCBF',
         'project': project,
         'details': details,
-        'members': members,
-        'photos': photos,
-        'achievements': achievements,
-        'is_member': is_member,
+        'members': ProjectMembership.objects.filter(project=project).select_related('user'),
+        'photos': ProjectPhoto.objects.filter(project=project),
+        'achievements': ProjectAchievement.objects.filter(project=project),
+        'is_member': False,
+        'has_pending_request': False,
+        'membership_request': None,
     }
+    
+    # Check membership and request status for authenticated users
+    if request.user.is_authenticated:
+        context['is_member'] = ProjectMembership.objects.filter(
+            project=project, 
+            user=request.user
+        ).exists()
+        
+        # Check for pending requests
+        pending_request = ProjectMembershipRequest.objects.filter(
+            project=project, 
+            user=request.user,
+            status='pending'
+        ).first()
+        
+        if pending_request:
+            context['has_pending_request'] = True
+            context['membership_request'] = pending_request
     return render(request, 'charity/project-details.html', context)
 
 def add_project(request):
@@ -66,7 +96,21 @@ def add_project(request):
     return render(request, 'charity/add_project.html', {'form': form})
 
 def clubs(request):
-    clubs = Club.objects.all()
+    clubs_list = Club.objects.all().order_by('title')
+    
+    # Pagination - 6 clubs per page
+    paginator = Paginator(clubs_list, 6)
+    page = request.GET.get('page')
+    
+    try:
+        clubs = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        clubs = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page
+        clubs = paginator.page(paginator.num_pages)
+    
     context = {
         'clubs': clubs,
         'page_title': 'Clubs | YCBF',
@@ -82,6 +126,15 @@ def add_club(request):
     else:
         form = ClubForm()
     return render(request, 'charity/add_club.html', {'form': form})
+
+
+def club_detail(request, club_id):
+    club = get_object_or_404(Club, id=club_id)
+    context = {
+        'page_title': f"{club.title} | Club - YCBF",
+        'club': club,
+    }
+    return render(request, 'charity/club-details.html', context)
 
 def programs(request):
     cat_id = request.GET.get('category')
@@ -121,7 +174,21 @@ def program_detail(request, program_id):
     return render(request, 'charity/program-details.html', context)
 
 def partner_schools(request):
-    schools = School.objects.all()
+    schools_list = School.objects.all().order_by('name')
+    
+    # Pagination - 4 schools per page
+    paginator = Paginator(schools_list, 4)
+    page = request.GET.get('page')
+    
+    try:
+        schools = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        schools = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page
+        schools = paginator.page(paginator.num_pages)
+    
     context = {
         'schools': schools,
         'page_title': 'Partner Schools | YCBF',
@@ -175,11 +242,13 @@ def home(request):
         'spotlight_categories': spotlight_categories,
         'spotlight_stats': spotlight_stats,
         # Blog (latest admin posts for News & Articles)
-        'posts': BlogPost.objects.filter(is_published=True).order_by('-date', '-created_at')[:6],
+'articles': Article.objects.filter(is_published=True).order_by('-date', '-created_at')[:6],
         # Downloadable resources
         'downloadable_resources': Resource.objects.all()[:6],  # Limit to 6 for home page
         # Gallery
-        'photos': Photo.objects.all()[:8],
+'photos': Photo.objects.all()[:8],
+        # Opportunities (latest)
+        'opportunities': Opportunity.objects.filter(is_published=True).order_by('-posted_at')[:4],
     }
     return render(request, 'charity/index.html', context)
 
@@ -189,6 +258,11 @@ def about(request):
     """About us page"""
     # Spotlight metrics and donations to support dynamic sections
     spotlight_stats = SpotlightStats.objects.filter(is_active=True).order_by('order', 'title')
+    
+    # Impact data
+    impact_sections = Impact.objects.filter(is_active=True).order_by('order', 'title')
+    impact_counters = ImpactCounter.objects.filter(is_active=True).order_by('order', 'title')
+    
     context = {
         'page_title': 'About Us - YCBF Charity',
         'youth_leaders': TeamMember.objects.all(),
@@ -206,6 +280,9 @@ def about(request):
         # Donations and Spotlight
         'donations': Donation.objects.all(),
         'spotlight_stats': spotlight_stats,
+        # Impact context
+        'impact': impact_sections,
+        'impact_counter': impact_counters,
     }
     return render(request, 'charity/about.html', context)
 
@@ -274,27 +351,57 @@ def impact(request):
     }
     return render(request, 'charity/impact.html', context)
 
-# Blog pages (Admin posts)
-def blog(request):
-    """Blog listing page - Admin posts only"""
-    posts = BlogPost.objects.filter(is_published=True).order_by('-date', '-created_at')
+# Opportunities pages (Admin managed)
+def opportunities(request):
+    """Opportunities listing page - Admin managed (jobs, scholarships, etc.)"""
+    opp_type = request.GET.get('type')
+    qs = Opportunity.objects.filter(is_published=True)
+    if opp_type:
+        qs = qs.filter(opportunity_type=opp_type)
+    opportunities = qs.order_by('-posted_at')
     context = {
-        'page_title': 'Blog - YCBF Charity',
-        'posts': posts,
-        'is_member': _is_member(request.user),
+        'page_title': 'Opportunities - YCBF Charity',
+        'opportunities': opportunities,
     }
-    return render(request, 'charity/blog.html', context)
+    return render(request, 'charity/opportunities.html', context)
+
+
+def opportunity_detail(request, opp_id: int):
+    opp = get_object_or_404(Opportunity, id=opp_id, is_published=True)
+    return render(request, 'charity/opportunity_detail.html', {
+        'page_title': f'{opp.title} | Opportunity - YCBF',
+        'opportunity': opp,
+    })
+
+
+def opportunity_apply(request, opp_id: int):
+    opp = get_object_or_404(Opportunity, id=opp_id, is_published=True)
+    if request.method == 'POST':
+        form = OpportunityApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            app = form.save(commit=False)
+            app.opportunity = opp
+            app.save()
+            messages.success(request, 'Application submitted successfully. We will get back to you soon.')
+            return redirect('charity:opportunity_detail', opp_id=opp.id)
+    else:
+        form = OpportunityApplicationForm()
+    return render(request, 'charity/opportunity_apply.html', {
+        'page_title': f'Apply: {opp.title} | Opportunity - YCBF',
+        'opportunity': opp,
+        'form': form,
+    })
+
+
+# Backward compatibility routes for old blog URLs
+def blog(request):
+    from django.shortcuts import redirect
+    return redirect('charity:opportunities')
+
 
 def blog_details(request, post_id):
-    """Blog post details - Admin post"""
-    post = get_object_or_404(BlogPost, id=post_id, is_published=True)
-    context = {
-        'page_title': f'{post.title} - YCBF Charity',
-        'post': post,
-        'is_member': _is_member(request.user),
-    }
-    return render(request, 'charity/blog-details.html', context)
-
+    from django.shortcuts import redirect
+    return redirect('charity:opportunities')
 # Article pages (Member articles)
 def articles(request):
     """Article listing page - Member articles"""
@@ -517,20 +624,68 @@ def register(request):
     })
 
 # ---- Project membership actions ----
-@login_required(login_url='/admin/login/')
-def join_project(request, project_id):
+@login_required(login_url='/login/')
+def request_join_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
+    
     if request.method == 'POST':
-        _, created = ProjectMembership.objects.get_or_create(project=project, user=request.user, defaults={'role': 'student'})
-        if created:
-            messages.success(request, 'You have joined this project.')
+        role = request.POST.get('role', 'student')
+        message = request.POST.get('message', '')
+        
+        # Check if user already has a pending request
+        existing_request = ProjectMembershipRequest.objects.filter(
+            project=project, 
+            user=request.user,
+            status='pending'
+        ).exists()
+        
+        if existing_request:
+            messages.info(request, 'You already have a pending request to join this project.')
         else:
-            messages.info(request, 'You are already a member of this project.')
-    else:
-        messages.error(request, 'Invalid request method.')
-    return redirect('charity:project_detail', project_id=project.id)
+            # Check if user is already a member
+            is_member = ProjectMembership.objects.filter(
+                project=project, 
+                user=request.user
+            ).exists()
+            
+            if is_member:
+                messages.info(request, 'You are already a member of this project.')
+            else:
+                # Create new request
+                ProjectMembershipRequest.objects.create(
+                    project=project,
+                    user=request.user,
+                    role=role,
+                    message=message
+                )
+                messages.success(request, 'Your request to join this project has been submitted for review.')
+        
+        return redirect('charity:project_detail', project_id=project.id)
+    
+    # GET request - show request form
+    return render(request, 'charity/project_request_join.html', {
+        'project': project,
+        'role_choices': dict(ProjectMembership.ROLE_CHOICES)
+    })
 
-@login_required(login_url='/admin/login/')
+@login_required(login_url='/login/')
+def cancel_join_request(request, request_id):
+    join_request = get_object_or_404(
+        ProjectMembershipRequest, 
+        id=request_id, 
+        user=request.user,
+        status='pending'  # Can only cancel pending requests
+    )
+    
+    if request.method == 'POST':
+        project_id = join_request.project.id
+        join_request.delete()
+        messages.success(request, 'Your join request has been cancelled.')
+        return redirect('charity:project_detail', project_id=project_id)
+    
+    return redirect('charity:project_detail', project_id=join_request.project.id)
+
+@login_required(login_url='/login/')
 def leave_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
@@ -538,9 +693,7 @@ def leave_project(request, project_id):
         if deleted:
             messages.success(request, 'You have left this project.')
         else:
-            messages.info(request, 'You are not a member of this project.')
-    else:
-        messages.error(request, 'Invalid request method.')
+            messages.info(request, 'You were not a member of this project.')
     return redirect('charity:project_detail', project_id=project.id)
 
 # ---- Member management ----

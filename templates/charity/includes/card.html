@@ -1,0 +1,38 @@
+{% load static %}
+<div class="ycbn-card service-card style3 club-card">
+  <div class="box-thumb">
+    {% if item.image %}
+      {% if item.image.url %}
+        <img src="{{ item.image.url }}" alt="{% firstof item.title item.name %}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+      {% else %}
+        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
+      {% endif %}
+    {% elif item.section_image %}
+      {% if item.section_image.url %}
+        <img src="{{ item.section_image.url }}" alt="{% firstof item.title item.name %}" onerror="this.src='{% static 'assets/img/service/service_card_3_1.png' %}'">
+      {% else %}
+        <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
+      {% endif %}
+    {% else %}
+      <img src="{% static 'assets/img/service/service_card_3_1.png' %}" alt="{% firstof item.title item.name %}">
+    {% endif %}
+  </div>
+  {% with link_url=url %}
+    <div class="ycbn-card-body box-content">
+      {% with title='' %}{% endwith %}
+      {% comment %} Use firstof for safe selection without exceptions {% endcomment %}
+      <h3 class="box-title">
+        {% if link_url %}
+            <a href="{{ link_url }}">{% firstof item.title item.name %}</a>
+        {% else %}
+            {% firstof item.title item.name %}
+        {% endif %}
+      </h3>
+      {% with text=desc|default:item.description %}
+        {% if text %}
+          <p class="box-text">{{ text|truncatewords:20 }}</p>
+        {% endif %}
+      {% endwith %}
+    </div>
+  {% endwith %}
+</div>

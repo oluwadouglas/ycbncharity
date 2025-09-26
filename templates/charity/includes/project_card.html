@@ -1,0 +1,54 @@
+{% load static %}
+<div class="project-card-wrapper">
+  {% if url %}
+  <a href="{{ url }}" class="project-card-link">
+  {% endif %}
+  <div class="project-card">
+    <!-- Project Image Section with Overlay -->
+    <div class="project-image-section">
+      {% if project.image and project.image.url %}
+        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-main-image" />
+      {% else %}
+        <div class="project-image-placeholder">
+          <i class="fas fa-project-diagram"></i>
+        </div>
+      {% endif %}
+      
+      <!-- Project Status Badge -->
+      <div class="project-status-badge">
+        <span class="status-text">Active</span>
+      </div>
+      
+      <!-- Project Category Tag -->
+      {% if project.category %}
+      <div class="project-category-tag">
+        <i class="fas fa-tag"></i>
+        <span>{{ project.category.name }}</span>
+      </div>
+      {% endif %}
+    </div>
+    
+    <div class="project-card-body">
+      <h3 class="project-title">
+        {{ project.title }}
+      </h3>
+      
+      {% if project.description %}
+        <p class="project-description">{{ project.description|truncatewords:30 }}</p>
+      {% endif %}
+      
+      <!-- Meta tags removed to show full description -->
+      
+      <!-- View Project Button Removed -->
+    </div>
+    
+    <!-- Footer moved into card body for better space usage -->
+    
+    <!-- Decorative Elements -->
+    <div class="project-card-accent"></div>
+    <div class="project-card-glow"></div>
+  </div>
+  {% if url %}
+  </a>
+  {% endif %}
+</div>

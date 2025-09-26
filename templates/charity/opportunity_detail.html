@@ -1,0 +1,66 @@
+{% extends 'charity/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title|default:opportunity.title }}{% endblock %}
+
+{% block content %}
+<section class="space-top space-extra-bottom" style="margin-top: 20px;">
+  <div class="container">
+    <div class="row gx-40">
+      <div class="col-lg-8">
+        <div class="th-blog blog-single">
+          {% if opportunity.image %}
+          <div class="blog-img mb-4">
+            <img src="{{ opportunity.image.url }}" alt="{{ opportunity.title }}">
+          </div>
+          {% endif %}
+          <div class="blog-content">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="opp-badge">{{ opportunity.get_opportunity_type_display }}</span>
+              {% if opportunity.deadline %}
+              <span class="small {% if opportunity.is_open %}text-success{% else %}text-danger{% endif %}">
+                <i class="far fa-clock me-1"></i>
+                {% if opportunity.is_open %}Deadline: {{ opportunity.deadline|date:"M d, Y" }}{% else %}Closed{% endif %}
+              </span>
+              {% endif %}
+            </div>
+            <h2 class="blog-title">{{ opportunity.title }}</h2>
+            <div class="opp-meta mb-3" style="display:flex;gap:12px;flex-wrap:wrap;">
+              {% if opportunity.organization %}<span class="item"><i class="fas fa-building me-1"></i>{{ opportunity.organization }}</span>{% endif %}
+              {% if opportunity.location %}<span class="item"><i class="fas fa-map-marker-alt me-1"></i>{{ opportunity.location }}</span>{% endif %}
+              <span class="item"><i class="fas fa-calendar-day me-1"></i>Posted {{ opportunity.posted_at|date:"M d, Y" }}</span>
+            </div>
+            <div class="article-content">
+              {{ opportunity.description|linebreaks }}
+            </div>
+            <div class="mt-3 d-flex gap-2">
+              <a href="{% url 'charity:opportunity_apply' opportunity.id %}" class="th-btn btn-sm">Apply Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+              {% if opportunity.application_url %}
+              <a href="{{ opportunity.application_url }}" target="_blank" rel="noopener" class="th-btn btn-sm style4">External Application <i class="fas fa-external-link-alt ms-2"></i></a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <aside class="sidebar-area">
+          <div class="widget">
+            <h3 class="widget_title">How to Apply</h3>
+            <ul class="list-unstyled mb-0" style="padding-left:1rem;">
+              <li>Prepare your CV</li>
+              <li>Write a short message</li>
+              <li>Submit via our form</li>
+            </ul>
+          </div>
+          {% if opportunity.applications.all %}
+          <div class="widget">
+            <h3 class="widget_title">Applications</h3>
+            <p class="text-muted small">Submitted: {{ opportunity.applications.count }}</p>
+          </div>
+          {% endif %}
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

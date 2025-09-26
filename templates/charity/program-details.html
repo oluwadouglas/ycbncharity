@@ -1,90 +1,544 @@
 {% extends 'charity/base.html' %}
 {% load static %}
 
-{% block title %}{{ page_title|default:program.title }}{% endblock %}
+{% block title %}{{ page_title|default:program.title }} | YCBN Uganda{% endblock %}
 
 {% block extra_css %}
 <style>
-  .program-hero{background:linear-gradient(135deg,#f8fafc,#eef2ff);border-radius:12px}
-  .program-hero .lead{color:#475569}
-  @media (prefers-color-scheme: dark){.program-hero{background:linear-gradient(135deg,#0b1220,#131c2b)}.program-hero .lead{color:#cbd5e1}}
-  .page-img{aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#f5f5f5}
-  .page-img img{width:100%;height:100%;object-fit:cover;display:block}
-  .meta{color:#64748b}
-  @media (prefers-color-scheme: dark){.meta{color:#94a3b8}}
-  .program-card img{aspect-ratio:16/10;object-fit:cover}
-  .program-card .card-title{font-weight:700}
-  .program-badge{position:absolute;top:.5rem;left:.5rem}
-  .btn-soft{background:#f1f5f9;color:#0f172a}
-  .btn-soft:hover{background:#e2e8f0}
-  @media (prefers-color-scheme: dark){.btn-soft{background:#0f172a;color:#e2e8f0}.btn-soft:hover{background:#111827}}
+/* Program Detail Page Professional Styling */
+.program-detail-hero {
+    background: linear-gradient(135deg, #1A685B, #145143);
+    color: white;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.program-detail-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("{% static 'assets/img/bg/pattern-overlay.png' %}") repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.program-detail-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.program-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.program-category-badge {
+    display: inline-block;
+    background: #FBBF24;
+    color: #1A685B;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.program-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.program-hero-description {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.program-meta-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.meta-item i {
+    color: #FBBF24;
+    font-size: 16px;
+}
+
+.program-content-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.program-image-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.program-main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.program-content-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.section-title {
+    color: #1A685B;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    border-radius: 2px;
+}
+
+.program-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #374151;
+    margin-bottom: 30px;
+}
+
+.program-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-item {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    border-color: #1A685B;
+    box-shadow: 0 15px 30px rgba(26, 104, 91, 0.15);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #1A685B, #145143);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: white;
+    font-size: 24px;
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1A685B;
+    margin-bottom: 10px;
+}
+
+.feature-description {
+    color: #6B7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.program-sidebar {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.sidebar-title {
+    color: #1A685B;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.info-value {
+    color: #1A685B;
+    font-weight: 600;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #1A685B, #145143);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    width: 100%;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    color: #1A685B;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+}
+
+.back-button {
+    background: transparent;
+    color: #1A685B;
+    border: 2px solid #1A685B;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #1A685B;
+    color: white;
+    text-decoration: none;
+}
+
+.related-programs-section {
+    background: white;
+    padding: 60px 0;
+}
+
+.related-program-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.related-program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.related-program-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.related-program-content {
+    padding: 20px;
+}
+
+.related-program-title {
+    color: #1A685B;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.related-program-description {
+    color: #6B7280;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.learn-more-btn {
+    background: #1A685B;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    background: #FBBF24;
+    color: #1A685B;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Hide hero entirely on mobile per request */
+    .program-detail-hero { display: none !important; }
+    /* Pull content up slightly */
+    .program-content-section { padding-top: 20px; }
+
+    .program-hero-title { font-size: 2rem; }
+    .program-hero-description { font-size: 1rem; }
+    .program-meta-info { gap: 15px; }
+    .meta-item { padding: 8px 15px; font-size: 14px; }
+    .program-content-card { padding: 25px; }
+    .section-title { font-size: 1.5rem; }
+    .program-features-grid { grid-template-columns: 1fr; gap: 15px; }
+    .program-sidebar { position: static; margin-top: 30px; }
+}
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="space-top space-extra2-bottom">
+<!-- Hero Section -->
+<section class="program-detail-hero">
   <div class="container">
-    <div class="program-hero p-4 p-md-5 mb-5 text-center">
-      <h1 class="h3 mb-2">{{ program.title }}</h1>
-      <p class="meta mb-0">Category: {{ program.category.name }}</p>
-    </div>
-
-    <div class="row gx-40">
-      <div class="col-xxl-8 col-lg-7">
-        {% if program.image %}
-        <div class="page-img position-relative mb-3">
-          <img src="{{ program.image.url }}" alt="{{ program.title }}">
+    <div class="program-hero-content">
+      {% if program.category %}
+      <div class="program-category-badge">{{ program.category.name }}</div>
+      {% endif %}
+      
+      <h1 class="program-hero-title">{{ program.title }}</h1>
+      
+      {% if program.description %}
+      <p class="program-hero-description">{{ program.description|truncatewords:30 }}</p>
+      {% else %}
+      <p class="program-hero-description">Empowering Uganda's youth through comprehensive development and skill-building initiatives.</p>
+      {% endif %}
+      
+      <!-- Program Meta Information -->
+      <div class="program-meta-info">
+        {% if program.duration %}
+        <div class="meta-item">
+          <i class="fas fa-clock"></i>
+          <span>{{ program.duration }}</span>
         </div>
         {% endif %}
-
-        <div class="blog-content">
-          {% if program.description %}
-            <p class="mb-45">{{ program.description }}</p>
-          {% else %}
-            <p class="mb-45">Details coming soon. Check back later for more information about this program.</p>
-          {% endif %}
-
-          <a href="{% url 'charity:programs' %}" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i>Back to Programs</a>
+        
+        {% if program.target_audience %}
+        <div class="meta-item">
+          <i class="fas fa-users"></i>
+          <span>{{ program.target_audience }}</span>
         </div>
-
-        {% if related_programs %}
-        <hr class="my-5"/>
-        <div class="mb-4 d-flex align-items-center justify-content-between">
-          <h4 class="mb-0">Related Programs</h4>
-          <a href="{% url 'charity:programs' %}?category={{ program.category.id }}" class="btn btn-sm btn-soft">View all in {{ program.category.name }}</a>
+        {% endif %}
+        
+        {% if program.location %}
+        <div class="meta-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>{{ program.location }}</span>
         </div>
-        <div class="row">
-          {% for rel in related_programs %}
-          <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm program-card position-relative">
-              <span class="badge bg-primary program-badge">{{ program.category.name }}</span>
-              {% if rel.image %}
-                <img src="{{ rel.image.url }}" class="card-img-top" alt="{{ rel.title }}">
-              {% else %}
-                <img src="{% static 'assets/img/placeholder/placeholder-16x10.png' %}" class="card-img-top" alt="{{ rel.title }}">
-              {% endif %}
-              <div class="card-body">
-                <h6 class="card-title mb-2">{{ rel.title }}</h6>
-                <p class="card-text mb-0">{{ rel.description|default:"No description yet."|truncatewords:18 }}</p>
+        {% endif %}
+        
+        <div class="meta-item">
+          <i class="fas fa-calendar-check"></i>
+          <span>Active Program</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content Section -->
+<section class="program-content-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- Program Image -->
+        {% if program.image %}
+        <div class="program-image-container">
+          <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-main-image">
+        </div>
+        {% endif %}
+        
+        <!-- Program Description -->
+        <div class="program-content-card">
+          <h2 class="section-title">About This Program</h2>
+          <div class="program-description">
+            {% if program.description %}
+              {{ program.description|linebreaks }}
+            {% else %}
+              <p>This comprehensive youth development program is designed to empower young people in Uganda through skill-building, mentorship, and community engagement opportunities.</p>
+              
+              <p>Our program focuses on creating sustainable impact by providing participants with the tools, knowledge, and support they need to become leaders in their communities and drive positive change.</p>
+              
+              <p>Through a combination of practical workshops, peer learning, and real-world application, participants will develop both personal and professional skills that will serve them throughout their lives.</p>
+            {% endif %}
+          </div>
+          
+          <!-- Program Features -->
+          <h3 class="section-title">Program Features</h3>
+          <div class="program-features-grid">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-graduation-cap"></i>
               </div>
-              <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="{% url 'charity:program_detail' rel.id %}" class="btn btn-sm btn-primary">Learn more</a>
-                <a href="{% url 'charity:programs' %}?category={{ rel.category.id }}" class="btn btn-sm btn-soft">Category</a>
+              <h4 class="feature-title">Skill Development</h4>
+              <p class="feature-description">Comprehensive training in essential life and professional skills</p>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
               </div>
+              <h4 class="feature-title">Mentorship</h4>
+              <p class="feature-description">One-on-one guidance from experienced professionals and leaders</p>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h4 class="feature-title">Community Impact</h4>
+              <p class="feature-description">Opportunities to create positive change in local communities</p>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h4 class="feature-title">Certification</h4>
+              <p class="feature-description">Official recognition and certificates upon program completion</p>
             </div>
           </div>
-          {% endfor %}
+          
+          <!-- Back Button -->
+          <div class="mt-4">
+            <a href="{% url 'charity:programs' %}" class="back-button">
+              <i class="fas fa-arrow-left"></i>
+              Back to Programs
+            </a>
+          </div>
         </div>
-        {% endif %}
       </div>
-
-      <div class="col-xxl-4 col-lg-5 mt-5 mt-lg-0">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="mb-3">Explore Categories</h5>
+      
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="program-sidebar">
+          <!-- Quick Info -->
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Program Information</h3>
+            
+            {% if program.category %}
+            <div class="info-item">
+              <span class="info-label">Category</span>
+              <span class="info-value">{{ program.category.name }}</span>
+            </div>
+            {% endif %}
+            
+            {% if program.duration %}
+            <div class="info-item">
+              <span class="info-label">Duration</span>
+              <span class="info-value">{{ program.duration }}</span>
+            </div>
+            {% endif %}
+            
+            {% if program.target_audience %}
+            <div class="info-item">
+              <span class="info-label">Target Audience</span>
+              <span class="info-value">{{ program.target_audience }}</span>
+            </div>
+            {% endif %}
+            
+            {% if program.location %}
+            <div class="info-item">
+              <span class="info-label">Location</span>
+              <span class="info-value">{{ program.location }}</span>
+            </div>
+            {% endif %}
+            
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value">Active</span>
+            </div>
+          </div>
+          
+          <!-- Call to Action -->
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Get Involved</h3>
+            <button class="cta-button">Apply Now</button>
+            <button class="cta-button" style="background: transparent; color: #1A685B; border: 2px solid #1A685B;">Learn More</button>
+          </div>
+          
+          <!-- Categories -->
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Explore Categories</h3>
             <div class="d-flex flex-wrap gap-2">
               {% for cat in categories %}
-              <a class="btn btn-sm btn-soft" href="{% url 'charity:programs' %}?category={{ cat.id }}">{{ cat.name }}</a>
+              <a class="btn btn-sm" href="{% url 'charity:programs' %}?category={{ cat.id }}" 
+                 style="background: rgba(26, 104, 91, 0.1); color: #1A685B; border: 1px solid rgba(26, 104, 91, 0.2); border-radius: 15px; font-size: 12px; padding: 5px 12px;">
+                {{ cat.name }}
+              </a>
               {% empty %}
               <span class="text-muted">No categories available.</span>
               {% endfor %}
@@ -95,4 +549,39 @@
     </div>
   </div>
 </section>
+
+<!-- Related Programs Section -->
+{% if related_programs %}
+<section class="space overflow-hidden" data-bg-src="{% static 'assets/img/bg/gray-bg3.png' %}" id="related-programs-sec">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="title-area text-center">
+          <span class="sub-title">Related Programs</span>
+          <h2 class="sec-title">Explore More {{ program.category.name }} Programs</h2>
+          <p class="sec-text">Discover other programs in the {{ program.category.name }} category that might interest you.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-fluid px-0">
+      <div class="programs-grid px-3">
+        {% for rel in related_programs %}
+          {% url 'charity:program_detail' rel.id as program_url %}
+          {% include 'charity/includes/program_card.html' with program=rel url=program_url %}
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="text-center mt-5">
+      <a href="{% url 'charity:programs' %}?category={{ program.category.id }}" 
+         class="th-btn" 
+         style="background: #1A685B; color: white; padding: 12px 30px; border-radius: 25px; font-weight: 600;">
+        View All {{ program.category.name }} Programs
+        <i class="fa-solid fa-arrow-up-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}

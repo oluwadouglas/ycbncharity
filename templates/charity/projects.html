@@ -1,54 +1,34 @@
 {% extends 'charity/base.html' %}
 {% load static %}
 {% block title %}Projects | YCBN{% endblock %}
-{% block extra_css %}
-<style>
-  /* Project grid and cards */
-  .project-card { border: 0; border-radius: 14px; overflow: hidden; background: #fff; transition: transform .2s ease, box-shadow .2s ease; }
-  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
-  .project-thumb { position: relative; aspect-ratio: 16/9; background: #f3f6f5; }
-  .project-thumb img { width:100%; height:100%; object-fit: cover; display:block; }
-  .project-badge { position: absolute; top: 12px; left: 12px; background: #1A685B; color: #fff; border-radius: 999px; padding: 6px 12px; font-size: .78rem; font-weight: 600; box-shadow: 0 6px 18px rgba(26,104,91,.28); }
-  .project-body { padding: 16px 16px 18px; }
-  .project-title { font-size: 1.05rem; margin: 0 0 6px; color: #122; font-weight: 700; }
-  .project-desc { color: #556; font-size: .92rem; margin-bottom: 12px; }
-  .project-meta { display:flex; justify-content: space-between; align-items: center; }
-  .project-link { color: #1A685B; text-decoration: none; font-weight: 600; }
-  .project-link:hover { text-decoration: underline; }
-</style>
-{% endblock %}
 {% block content %}
-<section class="py-5">
+<section class="space" id="projects-page">
   <div class="container">
-    <h2 class="mb-4 text-center">Our Projects</h2>
-    <div class="row g-4">
-      {% for project in projects %}
-      <div class="col-md-6 col-lg-4">
-        <div class="card project-card h-100">
-          <a href="{% url 'charity:project_detail' project.id %}" class="project-thumb">
-            {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }}">
-            {% endif %}
-            <span class="project-badge">
-              <i class="fas fa-users me-1"></i>{{ project.memberships.count }} members
-            </span>
-          </a>
-          <div class="project-body">
-            <h5 class="project-title">{{ project.title }}</h5>
-            <p class="project-desc mb-0">{{ project.description|truncatewords:22 }}</p>
-            <div class="project-meta mt-3">
-              <span class="text-muted small">{% if project.category %}<i class="fas fa-folder me-1"></i>{{ project.category.name }}{% endif %}</span>
-              <a class="project-link" href="{% url 'charity:project_detail' project.id %}">View details <i class="fas fa-arrow-right ms-1"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      <div class="col-12">
-        <p class="text-center">No projects available at the moment.</p>
-      </div>
-      {% endfor %}
+    <div class="title-area text-center mb-40">
+      <span class="sub-title">Projects</span>
+      <h2 class="sec-title">Our Projects</h2>
+      <p class="sec-text">Explore community and innovation projects led by youth.</p>
     </div>
   </div>
+
+  {% if projects %}
+  <div class="container-fluid px-0">
+    <div class="projects-grid px-3">
+      {% for project in projects %}
+        {% url 'charity:project_detail' project.id as project_url %}
+        {% include 'charity/includes/project_card.html' with project=project url=project_url %}
+      {% endfor %}
+    </div>
+    
+    <!-- Pagination -->
+    <div class="container">
+      {% include 'charity/includes/pagination.html' with page_obj=projects %}
+    </div>
+  </div>
+  {% else %}
+  <div class="container">
+    <p class="text-center">No projects available at the moment.</p>
+  </div>
+  {% endif %}
 </section>
 {% endblock %}

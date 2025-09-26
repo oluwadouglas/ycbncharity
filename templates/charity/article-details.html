@@ -2,6 +2,43 @@
 {% load static %}
 
 {% block title %}{{ post.title }} - YCBN Articles{% endblock %}
+{% block og_title %}{{ post.title }} - YCBN Articles{% endblock %}
+{% block og_description %}{{ post.content|striptags|truncatechars:160 }}{% endblock %}
+{% block twitter_title %}{{ post.title }} - YCBN Articles{% endblock %}
+{% block twitter_description %}{{ post.content|striptags|truncatechars:200 }}{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.build_absolute_uri }}">{% endblock %}
+{% block jsonld %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ post.title|escapejs }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri }}"
+  },
+  {% if post.image %}
+  "image": ["{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}"],
+  {% endif %}
+  "datePublished": "{{ post.date|date:'c' }}",
+  "dateModified": "{{ post.date|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ post.author_name|default:'YCBN Member'|escapejs }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "YCBN Uganda",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'assets/img/ycbn-logo.png' %}"
+    }
+  },
+  "description": "{{ post.content|striptags|truncatechars:220|escapejs }}"
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <style>

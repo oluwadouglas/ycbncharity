@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Club, Program, BlogPost, Article, NewsletterSubscription, School
+from .models import Project, Club, Program, Article, NewsletterSubscription, School
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -47,6 +47,18 @@ class ProgramForm(forms.ModelForm):
     class Meta:
         model = Program
         fields = ['category', 'image', 'title', 'description']
+
+class OpportunityApplicationForm(forms.ModelForm):
+    class Meta:
+        from .models import OpportunityApplication
+        model = OpportunityApplication
+        fields = ['full_name', 'email', 'phone', 'message', 'cv_file']
+        widgets = {
+            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your full name', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email address', 'required': True}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone (optional)'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Brief message (optional)'}),
+        }
 
 class ArticleForm(forms.ModelForm):
     class Meta:

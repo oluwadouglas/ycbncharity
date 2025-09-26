@@ -188,13 +188,18 @@
     opacity: 1;
 }
 
-.counter-card:hover {
+.counter-card:hover,
+.counter-card:nth-child(1):hover,
+.counter-card:nth-child(2):hover,
+.counter-card:nth-child(3):hover,
+.counter-card:nth-child(4):hover {
     transform: translateY(-15px) scale(1.03);
     box-shadow: 
         0 35px 80px rgba(26, 104, 91, 0.25),
-        0 15px 40px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
+        0 0 0 1px rgba(26, 104, 91, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
     border-color: rgba(26, 104, 91, 0.25);
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%) !important;
 }
 
 .counter-card-icon {
@@ -251,44 +256,49 @@
 .counter-number {
     font-size: 3.5rem;
     font-weight: 900;
-    color: #1A685B;
+    color: #1A685B !important;
     margin-bottom: 15px;
-    line-height: 1;
-    background: linear-gradient(135deg, #1A685B 0%, #0f4a42 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     transition: all 0.4s ease;
-    text-shadow: 0 2px 20px rgba(26, 104, 91, 0.1);
+    text-shadow: 0 2px 8px rgba(26, 104, 91, 0.2);
     position: relative;
     z-index: 1;
 }
 
-.counter-card:hover .counter-number {
+.counter-card:hover .counter-number,
+.counter-card:nth-child(1):hover .counter-number,
+.counter-card:nth-child(2):hover .counter-number,
+.counter-card:nth-child(3):hover .counter-number,
+.counter-card:nth-child(4):hover .counter-number {
     transform: scale(1.08);
-    background: linear-gradient(135deg, var(--counter-color, #1A685B) 0%, #0f4a42 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #0F3B34 !important;
+    text-shadow: 0 2px 8px rgba(15, 59, 52, 0.4);
+    font-weight: 900;
 }
 
 .counter-title {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #333;
+    color: #1A685B !important;
     margin-bottom: 12px;
     transition: color 0.4s ease;
     position: relative;
     z-index: 1;
+    text-shadow: 0 2px 4px rgba(26, 104, 91, 0.3);
 }
 
-.counter-card:hover .counter-title {
-    color: #1A685B;
+.counter-card:hover .counter-title,
+.counter-card:nth-child(1):hover .counter-title,
+.counter-card:nth-child(2):hover .counter-title,
+.counter-card:nth-child(3):hover .counter-title,
+.counter-card:nth-child(4):hover .counter-title {
+    color: #0F3B34 !important;
+    text-shadow: 0 2px 6px rgba(15, 59, 52, 0.4);
+    font-weight: 800;
 }
 
 .counter-type {
     font-size: 0.9rem;
-    color: #666;
+    color: #666 !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
@@ -299,12 +309,19 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.counter-card:hover .counter-type {
+.counter-card:hover .counter-type,
+.counter-card:nth-child(1):hover .counter-type,
+.counter-card:nth-child(2):hover .counter-type,
+.counter-card:nth-child(3):hover .counter-type,
+.counter-card:nth-child(4):hover .counter-type {
     background: var(--counter-color, linear-gradient(90deg, rgba(26, 104, 91, 0.15) 0%, rgba(255, 172, 0, 0.15) 100%));
-    color: #333;
+    color: #0F3B34 !important;
     transform: translateY(-2px);
+    text-shadow: 0 1px 3px rgba(15, 59, 52, 0.3);
+    font-weight: 700;
 }
 
 .counter-card-bg {

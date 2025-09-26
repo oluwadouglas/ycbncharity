@@ -1,0 +1,6 @@
+# Production deployment helper requirements
+# Includes your base requirements and adds gunicorn for WSGI
+-r ../requirements.txt
+gunicorn==21.2.0
+# Optional: uncomment to serve static via app (not necessary if Nginx serves static)
+# whitenoise==6.7.0
