@@ -26,7 +26,7 @@ Hero Area
     <div class="swiper th-slider hero-slider4" id="heroSlider4" data-slider-options='{"effect":"fade","autoHeight": "true"}'>
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="hero-inner" data-bg-src="{% static 'assets/img/hero1.jpg' %}">
+                <div class="hero-inner" data-bg-src="{% static 'assets/img/ycbn6.jpeg' %}">
                     <div class="hero-bg-shape4-1">
                         <img src="{% static 'assets/img/hero/hero-bg-shape4-1.png' %}" alt="img">
                     </div>
@@ -146,7 +146,7 @@ Hero Area
     </div>
     <div class="hero-thumb-tab" data-slider-tab=".hero-slider4">
         <div class="tab-btn active">
-            <img src="{% static 'assets/img/hero1.jpg' %}" alt="thumb">
+            <img src="{% static 'assets/img/ycbn6.jpeg' %}" alt="thumb">
         </div>
         <div class="tab-btn">
             <img src="{% static 'assets/img/hero2.jpg' %}" alt="thumb">
@@ -251,9 +251,10 @@ Hero Area
       <h2 class="sec-title">Partner Schools Across Uganda</h2>
       <p class="sec-text">We partner with schools to build youth capacity through clubs, mentorship, and skills programs.</p>
     </div>
-    <div class="cards-grid px-3">
+    <div class="schools-grid px-3">
       {% for school in schools|slice:":6" %}
-        {% include 'charity/includes/card.html' with item=school %}
+        {% url 'charity:school_detail' school.id as school_url %}
+        {% include 'charity/includes/school_card.html' with school=school url=school_url %}
       {% empty %}
         <p class="text-center text-muted">Partner schools will appear here soon.</p>
       {% endfor %}
@@ -264,73 +265,173 @@ Hero Area
   </div>
 </section>
 
-<!-- Impact Highlights Section -->
-{% include 'charity/components/impact_highlights.html' with impact_highlights=impact %}
 
-<!-- Impact Cards (uniform with other sections) -->
-<section class="space" id="impact-cards">
-  <div class="container-fluid px-0">
-    <div class="title-area text-center">
-      <span class="sub-title">Impact</span>
-      <h2 class="sec-title">Highlights From Our Work</h2>
-    </div>
-    <div class="cards-grid px-3">
-      {% for imp in impact %}
-        {% include 'charity/includes/card.html' with item=imp %}
-      {% empty %}
-        <p class="text-center text-muted">Impact highlights coming soon.</p>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+
 
 <!--==============================
-About Area
+Our Achievements - Matching Impact Page Design
 ==============================-->
-<section class="space-top space-extra-bottom" id="spotlight-stats">
+<!-- Impact Statistics Section -->
+<section class="space" id="impact-stats">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8 col-lg-10 col-md-12">
                 <div class="title-area text-center">
                     <span class="sub-title">
-                        <i class="fas fa-trophy me-2"></i>
-                        Excellence Metrics
+                        <i class="fas fa-chart-line me-2"></i>
+                        Our Numbers
                     </span>
-                    <h2 class="sec-title">Performance at a Glance</h2>
-                    <p class="sec-text">These indicators highlight outcomes achieved across our programs.</p>
+                    <h2 class="sec-title">Impact by the Numbers</h2>
+                    <p class="sec-text">Every number represents lives touched, communities strengthened, and hope restored through your generous support.</p>
                 </div>
             </div>
         </div>
         
-        {% if spotlight_stats %}
-        <div class="row gy-2 gx-3 justify-content-center" id="spotlight-counters">
-            {% for stat in spotlight_stats %}
-            <div class="col-md-4 col-sm-6">
-                <div class="sdg-card sdg-compact shadow-sm h-100 text-center animate-on-scroll animate-fade-up">
-                    <div class="sdg-icon mb-2">
-                        <i class="{{ stat.icon_class|default:'fas fa-trophy' }}" style="font-size: 2rem; color: {{ stat.color|default:'#1A685B' }};"></i>
+        {% if impact_counter %}
+        <div class="row gy-4 justify-content-center" id="impact-counters">
+            {% for counter in impact_counter %}
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="counter-card animate-on-scroll animate-fade-up" data-color="{{ counter.display_color }}" style="--counter-color: {{ counter.display_color }};">
+                    <div class="counter-card-icon">
+                        {% if counter.counter_type == 'people' %}
+                            <i class="fas fa-users" style="color: white; font-size: 2.8rem;"></i>
+                        {% elif counter.counter_type == 'projects' %}
+                            <i class="fas fa-project-diagram" style="color: white; font-size: 2.8rem;"></i>
+                        {% elif counter.counter_type == 'schools' %}
+                            <i class="fas fa-school" style="color: white; font-size: 2.8rem;"></i>
+                        {% elif counter.counter_type == 'communities' %}
+                            <i class="fas fa-home" style="color: white; font-size: 2.8rem;"></i>
+                        {% elif counter.counter_type == 'volunteers' %}
+                            <i class="fas fa-hands-helping" style="color: white; font-size: 2.8rem;"></i>
+                        {% elif counter.counter_type == 'funds' %}
+                            <i class="fas fa-donate" style="color: white; font-size: 2.8rem;"></i>
+                        {% else %}
+                            <i class="fas fa-heart" style="color: white; font-size: 2.8rem;"></i>
+                        {% endif %}
                     </div>
-                    <h4 class="sdg-title mb-1" style="color: {{ stat.color|default:'#1A685B' }}; font-weight: 700;">{{ stat.title }}</h4>
-                    <p class="sdg-desc mb-1" style="font-weight:600;">{{ stat.value }}</p>
-                    <p class="sdg-desc mb-0">{{ stat.description }}</p>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-12">
-                <div class="text-center py-5">
-                    <div class="empty-state">
-                        <i class="fas fa-trophy fa-3x text-muted mb-3"></i>
-                        <h4 class="text-muted">No Spotlight Stats Available</h4>
-                        <p class="text-muted">We're working on highlighting our achievements. Check back soon for updates!</p>
-                        <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+                    <div class="counter-card-content">
+                        <h3 class="counter-number" data-target="{{ counter.target_number }}" data-prefix="{{ counter.prefix }}" data-suffix="{{ counter.suffix }}">
+                            {{ counter.prefix }}0{{ counter.suffix }}
+                        </h3>
+                        <p class="counter-title">{{ counter.title }}</p>
+                        <div class="counter-type">{{ counter.get_counter_type_display }}</div>
                     </div>
+                    <div class="counter-card-bg"></div>
                 </div>
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="row gy-4 justify-content-center">
+            <div class="col-12 text-center">
+                <div class="empty-state">
+                    <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
+                    <h4>Impact Metrics In Development</h4>
+                    <p class="text-muted">We are currently compiling comprehensive impact data to showcase the meaningful difference your support creates in our communities.</p>
+                </div>
+            </div>
+        </div>
         {% endif %}
     </div>
 </section>
+
+<!-- Impact Sections -->
+{% if impact %}
+{% for section in impact %}
+<section class="space{% if forloop.counter0|divisibleby:2 %} bg-smoke{% endif %}" id="impact-section-{{ forloop.counter }}">
+    <div class="container">
+        <div class="row align-items-center {% if forloop.counter0|divisibleby:2 %}flex-row-reverse{% endif %}">
+            <div class="col-xl-6 col-lg-6">
+                <div class="impact-content">
+                    <div class="title-area mb-35">
+                        <span class="sub-title">
+                            Impact Story #{{ forloop.counter }}
+                        </span>
+                        <h2 class="sec-title">{{ section.title }}</h2>
+                        {% if section.subtitle %}
+                        <h4 class="impact-subtitle">{{ section.subtitle }}</h4>
+                        {% endif %}
+                    </div>
+                    <div class="impact-description">
+                        {{ section.description|linebreaks }}
+                    </div>
+                    
+                    <!-- Key Highlights -->
+                    {% if section.highlight_1_number or section.highlight_2_number or section.highlight_3_number %}
+                    <div class="impact-highlights mt-4">
+                        <div class="row gy-3">
+                            {% if section.highlight_1_number %}
+                            <div class="col-12">
+                                <div class="highlight-item animate-on-scroll animate-fade-up">
+                                    <div class="highlight-number">{{ section.highlight_1_number }}</div>
+                                    <div class="highlight-description">{{ section.highlight_1_description }}</div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if section.highlight_2_number %}
+                            <div class="col-12">
+                                <div class="highlight-item animate-on-scroll animate-fade-up" style="animation-delay: 0.2s;">
+                                    <div class="highlight-number">{{ section.highlight_2_number }}</div>
+                                    <div class="highlight-description">{{ section.highlight_2_description }}</div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if section.highlight_3_number %}
+                            <div class="col-12">
+                                <div class="highlight-item animate-on-scroll animate-fade-up" style="animation-delay: 0.4s;">
+                                    <div class="highlight-number">{{ section.highlight_3_number }}</div>
+                                    <div class="highlight-description">{{ section.highlight_3_description }}</div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="impact-actions mt-4">
+                        <a href="{% url 'charity:donate_now' %}" class="th-btn">Support This Cause<i class="fas fa-heart ms-2"></i></a>
+                        <a href="{% url 'charity:contact' %}" class="th-btn style3 ms-3">Learn More<i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+                <div class="impact-img">
+                    {% if section.section_image %}
+                    <img src="{{ section.section_image.url }}" alt="{{ section.title }}" class="w-100">
+                    {% else %}
+                    <div class="placeholder-img">
+                        <i class="fas fa-image fa-3x text-muted"></i>
+                        <p class="text-muted mt-2">Image coming soon</p>
+                    </div>
+                    {% endif %}
+                    <div class="impact-shape">
+                        <img src="{% static 'assets/img/shape/about_shape_1.png' %}" alt="shape">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+{% else %}
+<section class="space">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="empty-state text-center">
+                    <i Our Numbers  class="fas fa-hands-helping fa-4x text-muted mb-4"></i>
+                    <h3>Impact Stories Coming Soon</h3>
+                    <p class="text-muted mb-4">We're working on showcasing the amazing impact your support creates. Check back soon to see the stories of transformation and hope.</p>
+                    <div class="btn-group">
+                        <a href="{% url 'charity:donate_now' %}" class="th-btn">Make an Impact<i class="fas fa-heart ms-2"></i></a>
+                        <a href="{% url 'charity:contact' %}" class="th-btn style3 ms-3">Get Involved<i class="fas fa-users ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 <!--==============================
 Projects Area (edge-to-edge)
 ==============================-->
@@ -340,15 +441,16 @@ Projects Area (edge-to-edge)
       <span class="sub-title">Projects</span>
       <h2 class="sec-title">Recent Community & Innovation Projects</h2>
     </div>
-    <div class="cards-grid px-3">
-      {% for project in projects|slice:":6" %}
-        {% include 'charity/includes/card.html' with item=project %}
+    <div class="projects-grid px-3">
+      {% for project in projects|slice:":5" %}
+        {% url 'charity:project_detail' project.id as project_url %}
+        {% include 'charity/includes/project_card.html' with project=project url=project_url %}
       {% empty %}
         <p class="text-center text-muted">Projects will be published here soon.</p>
       {% endfor %}
     </div>
     <div class="text-center mt-40">
-      <a href="{% url 'charity:projects' %}" class="th-btn">View All Projects <i class="fas fa-arrow-up-right ms-2"></i></a>
+      <a href="{% url 'charity:projects' %}" class="th-btn">View More Projects <i class="fas fa-arrow-up-right ms-2"></i></a>
     </div>
   </div>
 </section>
@@ -381,7 +483,8 @@ Clubs Area
 {% if clubs %}
         <div class="cards-grid px-3">
             {% for club in clubs %}
-              {% include 'charity/includes/card.html' with item=club %}
+              {% url 'charity:clubs' as clubs_url %}
+              {% include 'charity/includes/club_card.html' with club=club url=clubs_url %}
             {% endfor %}
         </div>
         
@@ -412,88 +515,13 @@ Clubs Area
             <span class="sub-title after-none before-none"><i class="far fa-heart text-theme"></i> Our Volunteers</span>
             <h2 class="sec-title">Meet Our Dedicated Team</h2>
         </div>
-        <div class="row gy-40">
+    </div>
+    <div class="container-fluid px-0">
+        <div class="team-grid px-3">
             {% for member in youth_leaders %}
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="th-team team-card3">
-                    <div class="team-img team-img-custom">
-                        {% if member.image %}
-                            <img src="{{ member.image.url }}" alt="{{ member.name }}" class="team-img-main" />
-                        {% else %}
-                            <img src="{% static 'assets/img/team/default.png' %}" alt="{{ member.name }}" class="team-img-main" />
-                        {% endif %}
-                    </div>
-                    <div class="team-card-content team-card-content-custom">
-                        <h3 class="box-title"><a href="#" class="team-name-link">{{ member.name }}</a></h3>
-                        <span class="team-desig team-desig-custom">{{ member.title|default:'Volunteer' }}</span>
-                        {% if member.social_links %}
-                        <div class="th-social team-social-icons">
-                            {% for key, url in member.social_links.items %}
-                                <a target="_blank" href="{{ url }}" class="team-social-link">
-                                    <i class="fab fa-{{ key }}"></i>
-                                </a>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+                {% include 'charity/includes/team_card.html' with member=member %}
             {% endfor %}
         </div>
-        <style>
-        /* Volunteer card social icons - green, no background, no shadow */
-        .team-social-icons .team-social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #1A685B !important;
-            font-size: 1.3rem;
-            background: transparent !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            width: auto !important;
-            height: auto !important;
-            padding: 0 !important;
-            margin: 0 2px !important;
-            transition: transform 0.2s, color 0.2s;
-        }
-        .team-social-icons .team-social-link:hover {
-            transform: scale(1.18);
-            color: #145143 !important;
-            background: transparent !important;
-        }
-        .team-social-icons .team-social-link i {
-            color: #1A685B !important;
-            background: transparent !important;
-            transition: color 0.2s;
-        }
-        .team-social-icons .team-social-link:hover i {
-            color: #145143 !important;
-            background: transparent !important;
-        }
-        /* Responsive fix for volunteer cards */
-        @media (max-width: 991.98px) {
-            .th-team.team-card3 .team-img img {
-                height: 220px !important;
-            }
-        }
-        @media (max-width: 767.98px) {
-            .th-team.team-card3 .team-card-content {
-                padding: 12px 8px 10px 8px !important;
-            }
-            .th-team.team-card3 .box-title {
-                font-size: 1.1rem !important;
-                margin-bottom: 2px !important;
-            }
-            .th-team.team-card3 .team-desig {
-                font-size: 0.95rem !important;
-                margin-top: 0 !important;
-            }
-            .th-team.team-card3 .team-img img {
-                height: 160px !important;
-            }
-        }
-        </style>
     </div>
 </section>
 <!--==============================
@@ -512,13 +540,22 @@ Programs Area
         </div>
     </div>
     
-    <div class="container th-container2">
-        <div class="cards-grid px-3">
+    <div class="container-fluid px-0">
+        <div class="programs-grid px-3">
             {% for category in categories %}
-                {% for program in category.programs.all %}
-                    {% include 'charity/includes/card.html' with item=program %}
+                {% for program in category.programs.all|slice:":2" %}
+                    {% url 'charity:program_detail' program.id as program_url %}
+                    {% include 'charity/includes/program_card.html' with program=program url=program_url %}
                 {% empty %}
-                    <p class="text-center text-muted">No programs available yet. Stay tuned.</p>
+                    {% if forloop.first %}
+                    <div class="text-center py-5 col-span-full">
+                        <div class="empty-state-program">
+                            <i class="fas fa-graduation-cap fa-4x text-muted mb-3"></i>
+                            <h4 class="text-muted">Featured Programs Coming Soon</h4>
+                            <p class="text-muted">We're developing comprehensive youth development programs. Stay tuned for exciting opportunities!</p>
+                        </div>
+                    </div>
+                    {% endif %}
                 {% endfor %}
             {% endfor %}
         </div>
@@ -533,28 +570,159 @@ Programs Area
 <!--==============================
 Spotlight Area (edge-to-edge)
 ==============================-->
-<section class="space overflow-hidden" id="spotlight-sec">
-  <div class="container-fluid px-0">
-    <div class="title-area text-center">
-      <span class="sub-title">Spotlight</span>
-      <h2 class="sec-title">Top‑Performing Clubs, Projects, and Mentors</h2>
+<!-- Spotlight Categories -->
+{% if spotlight_categories %}
+{% for category in spotlight_categories %}
+<section class="space{% if forloop.counter0|divisibleby:2 %} bg-smoke{% endif %}" id="spotlight-{{ category.name }}">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="title-area text-center">
+                    <span class="sub-title" style="color: {{ category.background_color }};">
+                        <i class="{{ category.icon_class }} me-2"></i>
+                        {{ category.get_name_display }}
+                    </span>
+                    <h2 class="sec-title">{{ category.title }}</h2>
+                    {% if category.subtitle %}
+                    <p class="sec-text">{{ category.subtitle }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if category.active_items %}
+        <div class="row gy-4">
+            {% for item in category.active_items %}
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="spotlight-item-card animate-on-scroll animate-fade-up{% if item.is_featured %} featured-item{% endif %}" style="animation-delay: {{ forloop.counter0|floatformat:1|add:'0.1' }}s;">
+                    {% if item.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Featured</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="item-image">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% else %}
+                        <div class="placeholder-img" style="background: {{ category.background_color }}15;">
+                            <i class="{{ category.icon_class }} fa-3x" style="color: {{ category.background_color }};"></i>
+                        </div>
+                        {% endif %}
+                        <div class="performance-badge" style="background: {{ item.performance_badge_color }};">
+                            {{ item.get_performance_level_display }}
+                        </div>
+                    </div>
+                    
+                    <div class="item-content">
+                        <div class="item-header">
+                            <h4 class="item-title">{{ item.title }}</h4>
+                            {% if item.subtitle %}
+                            <p class="item-subtitle">{{ item.subtitle }}</p>
+                            {% endif %}
+                            {% if item.location %}
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                {{ item.location }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="item-description">
+                            {{ item.description|truncatewords:25 }}
+                        </div>
+                        
+                        {% if item.achievements_list %}
+                        <div class="item-achievements">
+                            <h6>Key Achievements:</h6>
+                            <ul class="achievement-list">
+                                {% for achievement in item.achievements_list|slice:":3" %}
+                                <li><i class="fas fa-check-circle me-2" style="color: {{ category.background_color }};"></i>{{ achievement }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="item-footer">
+                            <div class="achievement-score">
+                                <span class="score-label">Performance Score:</span>
+                                <span class="score-value" style="color: {{ category.background_color }};">{{ item.achievement_score }}/100</span>
+                            </div>
+                            
+                            {% if item.contact_info %}
+                            <div class="item-contact">
+                                {% for key, value in item.contact_info.items %}
+                                {% if key == 'email' %}
+                                <a href="mailto:{{ value }}" class="contact-link" title="Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                {% elif key == 'phone' %}
+                                <a href="tel:{{ value }}" class="contact-link" title="Phone">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                {% elif key == 'website' %}
+                                <a href="{{ value }}" target="_blank" class="contact-link" title="Website">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Button -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <a href="{% url 'charity:contact' %}" class="th-btn" style="background: {{ category.background_color }};">
+                    Learn More About {{ category.get_name_display }}
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="empty-state">
+                    <i class="{{ category.icon_class }} fa-4x text-muted mb-3"></i>
+                    <h4>{{ category.get_name_display }} Coming Soon</h4>
+                    <p class="text-muted">We're currently evaluating and selecting the best performers in this category. Check back soon!</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
-{% for cat in spotlight_categories %}
-    <div class="mb-3 px-3">
-      <h3 class="h4" style="color:#1A685B;">{{ cat.title }}</h3>
-    </div>
-    <div class="cards-grid px-3">
-      {% for item in cat.active_items|slice:":3" %}
-        {% include 'charity/includes/card.html' with item=item %}
-      {% empty %}
-        <p class="text-center text-muted">No spotlight items for this category yet.</p>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
 </section>
+{% endfor %}
+{% else %}
+<section class="space">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+                <div class="empty-state text-center">
+                    <i class="fas fa-star fa-4x text-muted mb-4"></i>
+                    <h3>Spotlight Categories Coming Soon</h3>
+                    <p class="text-muted mb-4">We're setting up our excellence recognition system. Soon you'll be able to see our top performing clubs, mentors, projects, and programs.</p>
+                    <div class="btn-group">
+                        <a href="{% url 'charity:about' %}" class="th-btn">Learn About Us<i class="fas fa-info-circle ms-2"></i></a>
+                        <a href="{% url 'charity:contact' %}" class="th-btn style3 ms-3">Get Involved<i class="fas fa-users ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
-<!-- UN SDG Commitment Section (inline goals with scrolling animation) -->
+
+<!--==============================
+UN SDG Commitment Section (inline goals with scrolling animation)
+==============================-->
 <section class="sdg-section space" id="sdg-commitment">
     <div class="container-fluid px-0">
         <div class="row justify-content-center mx-0">

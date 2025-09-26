@@ -1,0 +1,53 @@
+{% load static %}
+<div class="ycbn-card club-card2">
+  <div class="club-thumb">
+    {% if club.image and club.image.url %}
+      <img src="{{ club.image.url }}" alt="{{ club.title }}" />
+    {% else %}
+      <div class="club-thumb-empty" aria-hidden="true"></div>
+    {% endif %}
+    <div class="club-badge-circle">
+      {% if club.icon and club.icon.url %}
+        <img src="{{ club.icon.url }}" alt="{{ club.title }} badge" />
+      {% else %}
+        <i class="fas fa-users"></i>
+      {% endif %}
+    </div>
+  </div>
+  <div class="ycbn-card-body club-card-content">
+    <h3 class="box-title">
+      {% if url %}
+        <a href="{{ url }}">{{ club.title }}</a>
+      {% else %}
+        {{ club.title }}
+      {% endif %}
+    </h3>
+    {% if club.description %}
+      <p class="box-text">{{ club.description|truncatewords:20 }}</p>
+    {% endif %}
+    
+    <!-- Club Meta Info -->
+    <div class="club-meta">
+      {% if club.school %}
+      <div class="club-meta-item">
+        <i class="fas fa-school"></i>
+        <span>{{ club.school.name }}</span>
+      </div>
+      {% endif %}
+      
+      {% if club.member_count %}
+      <div class="club-meta-item">
+        <i class="fas fa-users"></i>
+        <span>{{ club.member_count }} members</span>
+      </div>
+      {% endif %}
+      
+      {% if club.meeting_schedule %}
+      <div class="club-meta-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>{{ club.meeting_schedule }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
