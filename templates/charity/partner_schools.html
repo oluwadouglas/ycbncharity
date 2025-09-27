@@ -2,38 +2,44 @@
 {% load static %}
 {% block title %}Partner Schools | YCBN Uganda{% endblock %}
 
+{% block extra_css %}
+<style>
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<section class="space" id="partner-schools">
+<section class="space" id="partner-schools-page">
     <div class="container">
-        <div class="title-area text-center mb-40">
-            <span class="sub-title">Our Network</span>
-            <h2 class="sec-title">Partner Schools Across Uganda</h2>
+        <div class="title-area text-center">
+            <span class="sub-title">Partner Schools</span>
+            <h2 class="sec-title">Our Partner Schools</h2>
             <p class="sec-text">Proudly partnering with schools across Uganda to empower and inspire youth for a brighter future.</p>
         </div>
-    </div>
 
-    {% if schools %}
-    <div class="container-fluid px-0">
-        <div class="schools-grid px-3">
+        <div class="schools-grid">
             {% for school in schools %}
-                {% url 'charity:school_detail' school.id as school_url %}
-                {% include 'charity/includes/school_card.html' with school=school url=school_url %}
+              {% url 'charity:school_detail' school.id as school_url %}
+              {% include 'charity/includes/school_card.html' with school=school url=school_url %}
+            {% empty %}
+            <div class="text-center py-5 col-span-full">
+                <i class="fas fa-school fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No partner schools available</h4>
+                <p class="text-muted">Schools are managed through the admin panel. Contact administrators to add partner schools.</p>
+            </div>
             {% endfor %}
         </div>
-        
-        <!-- Pagination -->
-        <div class="container">
+
+        <!-- Keep pagination visible and functional -->
+        <div class="mt-4">
             {% include 'charity/includes/pagination.html' with page_obj=schools %}
         </div>
     </div>
-    {% else %}
-    <div class="container">
-        <div class="text-center py-5 bg-light rounded">
-            <i class="fas fa-school fa-3x text-muted mb-3"></i>
-            <h4 class="text-muted">No partner schools available</h4>
-            <p class="text-muted">Schools are managed through the admin panel. Contact administrators to add partner schools.</p>
-        </div>
-    </div>
-    {% endif %}
 </section>
 {% endblock %}

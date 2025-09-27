@@ -9,6 +9,14 @@
 <link rel="stylesheet" href="{% static 'assets/css/clubs-custom.css' %}">
 <link rel="stylesheet" href="{% static 'assets/css/custom-index.css' %}">
 <style>
+  /* Keep hero slider tidy inside page width (override full-bleed tweaks) */
+  .th-hero-wrapper,
+  .th-hero-wrapper .hero-inner { width: auto !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+  .th-hero-wrapper .container,
+  .th-hero-wrapper .container-fluid,
+  .th-hero-wrapper .row,
+  .th-hero-wrapper [class^="col-"] { margin: initial !important; padding: initial !important; }
+
   /* Magnific Popup title/description styled to match theme */
   .mfp-title-wrap { text-align: left; }
   .mfp-title-text { color: #FFAC00; font-weight: 700; margin-bottom: 4px; }
@@ -548,10 +556,12 @@ Clubs Area
             <h2 class="sec-title">Meet Our Dedicated Team</h2>
         </div>
     </div>
-    <div class="container-fluid px-0">
-        <div class="team-grid px-3">
+    <div class="container">
+        <div class="row g-4">
             {% for member in youth_leaders %}
+            <div class="col-sm-6 col-lg-4">
                 {% include 'charity/includes/team_card.html' with member=member %}
+            </div>
             {% endfor %}
         </div>
     </div>

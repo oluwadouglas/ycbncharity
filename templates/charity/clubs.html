@@ -4,43 +4,46 @@
 {% block content %}
 
 <!--==============================
-Clubs Area  
+Clubs Area
 ==============================-->
-<section class="space" id="club-sec">
-    <div class="container">
+<section class="space" id="clubs-page">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
         <div class="title-area text-center mb-60">
-            <span class="sub-title">Youth Clubs</span>
-            <h2 class="sec-title">Empowering Communities Through School-Based Clubs</h2>
-            <p class="sec-text">Our school-based clubs are at the heart of youth development, providing platforms for leadership, skill-building, and community engagement across Uganda.</p>
+          <span class="sub-title">Youth Clubs</span>
+          <h2 class="sec-title">Empowering Communities Through School-Based Clubs</h2>
+          <p class="sec-text">Our school-based clubs are at the heart of youth development, providing platforms for leadership, skill-building, and community engagement across Uganda.</p>
         </div>
+      </div>
     </div>
-    
+
     {% if clubs %}
-    <div class="container-fluid px-0">
-        <div class="cards-grid px-3">
-            {% for club in clubs %}
-                {% url 'charity:club_detail' club.id as club_url %}
-                {% include 'charity/includes/club_card.html' with club=club url=club_url %}
-            {% endfor %}
-        </div>
-        
-        <!-- Pagination -->
-        <div class="container">
-            {% include 'charity/includes/pagination.html' with page_obj=clubs %}
-        </div>
+    <div class="cards-grid px-3">
+      {% for club in clubs %}
+        {% include 'charity/includes/club_card.html' with club=club %}
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4">
+      {% include 'charity/includes/pagination.html' with page_obj=clubs %}
     </div>
     {% else %}
     <!-- No Clubs Message -->
-    <div class="container">
+    <div class="row">
+      <div class="col-12">
         <div class="text-center py-5">
-            <div class="empty-state">
-                <i class="fas fa-users fa-3x text-muted mb-3"></i>
-                <h4 class="text-muted">No Clubs Available</h4>
-                <p class="text-muted">We're working on establishing more youth clubs. Check back soon for updates!</p>
-                <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
-            </div>
+          <div class="empty-state">
+            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+            <h4 class="text-muted">No Clubs Available</h4>
+            <p class="text-muted">We're working on establishing more youth clubs. Check back soon for updates!</p>
+            <a href="{% url 'charity:contact' %}" class="th-btn mt-3">Contact Us <i class="fas fa-arrow-up-right ms-2"></i></a>
+          </div>
         </div>
+      </div>
     </div>
     {% endif %}
+  </div>
 </section>
 {% endblock %}

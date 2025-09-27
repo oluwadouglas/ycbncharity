@@ -1,34 +1,29 @@
 {% extends 'charity/base.html' %}
 {% load static %}
 {% block title %}Projects | YCBN{% endblock %}
+{% block extra_css %}{% endblock %}
 {% block content %}
 <section class="space" id="projects-page">
   <div class="container">
-    <div class="title-area text-center mb-40">
+    <div class="title-area text-center">
       <span class="sub-title">Projects</span>
       <h2 class="sec-title">Our Projects</h2>
-      <p class="sec-text">Explore community and innovation projects led by youth.</p>
     </div>
-  </div>
-
-  {% if projects %}
-  <div class="container-fluid px-0">
     <div class="projects-grid px-3">
       {% for project in projects %}
         {% url 'charity:project_detail' project.id as project_url %}
         {% include 'charity/includes/project_card.html' with project=project url=project_url %}
+      {% empty %}
+        <div class="text-center py-5 col-span-full">
+          <p class="text-muted">No projects available at the moment.</p>
+        </div>
       {% endfor %}
     </div>
-    
-    <!-- Pagination -->
-    <div class="container">
+
+    <!-- Keep pagination visible and functional -->
+    <div class="mt-4">
       {% include 'charity/includes/pagination.html' with page_obj=projects %}
     </div>
   </div>
-  {% else %}
-  <div class="container">
-    <p class="text-center">No projects available at the moment.</p>
-  </div>
-  {% endif %}
 </section>
 {% endblock %}
